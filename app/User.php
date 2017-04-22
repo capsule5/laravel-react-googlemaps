@@ -60,4 +60,13 @@ class User extends Authenticatable
             $q->where('name','owner');
         });
     }
+
+    public function scopeGardeners($query) 
+    {
+        //$query->whereRole('owner');
+
+        $query->whereHas('roles', function ($q) {
+            $q->where('name','gardener');
+        });
+    }
 }

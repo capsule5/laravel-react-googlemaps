@@ -28,7 +28,6 @@ Route::get('/', function () {
         'name' => 'owner',
         'password' => bcrypt('pass')
     ]);
-
     $owner->assignRole('owner');
 
     // create potager
@@ -45,13 +44,38 @@ Route::get('/', function () {
 
     $owner->potagers()->attach($potager);
 
+    // create gardeners
+    $gardener1 = User::create([
+        'email' => 'gardener1@test.com',
+        'name' => 'gardener1',
+        'password' => bcrypt('pass')
+    ]);
+    $gardener1->assignRole('gardener');
+    $gardener1->potagers()->attach($potager);
 
-    $users = User::with('roles', 'potagers')->get();
+    $gardener2 = User::create([
+        'email' => 'gardener2@test.com',
+        'name' => 'gardener2',
+        'password' => bcrypt('pass')
+    ]);
+    $gardener2->assignRole('gardener');
+    $gardener2->potagers()->attach($potager);
+
+
+
+
+    $potager_owner = $potager->owner()->get();
+    $potager_gardener = $potager->gardeners()->get();
+
+
     $roles = Role::all();
+    $users = User::with('roles', 'potagers')->get();
+    $potagers = Potager::with('users')->get();
     $owners = User::owners()->get();
+    $gardeners = User::gardeners()->get();
 
     // return response(view('welcome',array('roles'=>$roles)),200, ['Content-TYpe' => 'application/json']);
-    return Response::json(compact('users', 'roles', 'owners'));
+    return Response::json(compact('roles', 'users', 'potagers', 'owners', 'gardeners', 'potager_owner', 'potager_gardener'));
     
     return view('welcome', compact('users', 'roles'));
 });

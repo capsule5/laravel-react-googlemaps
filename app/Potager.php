@@ -16,9 +16,19 @@ class Potager extends Model
         'name', 'description', 'is_validate', 'latitude', 'longitude', 'address', 'surface', 'nb_users_max'
     ];
 
-    public function user() 
+    public function users() 
     {
         return $this->belongsToMany('App\User')->withTimestamps();
+    }
+
+    public function owner() 
+    {
+        return $this->users()->owners();
+    }
+
+    public function gardeners() 
+    {
+        return $this->users()->gardeners();
     }
 
 }
