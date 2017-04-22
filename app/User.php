@@ -51,6 +51,12 @@ class User extends Authenticatable
         return $this->roles->contains('name', $role);
     }
 
+    public function isAdmin()
+    {
+        return $this->hasRole('admin');
+    }
+
+
 
     public function scopeOwners($query) 
     {
@@ -69,4 +75,11 @@ class User extends Authenticatable
             $q->where('name','gardener');
         });
     }
+
+    public function hasPotager() 
+    {
+        return $this->potagers->count() > 0;
+    }
+
+
 }

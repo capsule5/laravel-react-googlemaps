@@ -21,7 +21,7 @@ class Potager extends Model
         return $this->belongsToMany('App\User')->withTimestamps();
     }
 
-    public function owner() 
+    public function owners() 
     {
         return $this->users()->owners();
     }
@@ -29,6 +29,16 @@ class Potager extends Model
     public function gardeners() 
     {
         return $this->users()->gardeners();
+    }
+
+    public function nbGardeners() 
+    {
+        return $this->users()->gardeners()->count();
+    }
+
+    public function remainingGardeners() 
+    {
+        return $this->nb_users_max - $this->nbGardeners();
     }
 
 }

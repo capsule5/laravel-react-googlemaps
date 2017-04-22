@@ -13,10 +13,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Potagers</a></li>
-                <li><a href="#">Jardiniers</a></li>
-                <li><a href="#">Help</a></li>
+                <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ route('potagers.index') }}">Potagers</a></li>
+                <li><a href="{{ route('owners') }}">Propriétaires</a></li>
+                <li><a href="{{ route('gardeners') }}">Jardiniers</a></li>
                 <li>
                     <!-- Authentication Links -->
                     @if (Auth::guest())

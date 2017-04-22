@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Potager;
 
-class DashboardController extends Controller
+class UserController extends Controller
 {
     /**
      * Show the application dashboard.
@@ -23,9 +23,28 @@ class DashboardController extends Controller
 
         $owners = User::owners()->get();
         $gardeners = User::gardeners()->get();
-
         $potagers = Potager::all();		
 
         return view('admin.dashboard',  compact('users', 'potagers', 'owners', 'gardeners'));
     }
+
+    public function owners(){
+        $users = User::with('potagers')
+        ->owners()
+        ->orderBy('id', 'desc')
+        ->paginate(100);
+
+        return view('admin.owners',  compact('users'));
+    }
+
+    public function gardeners(){
+        $users = User::with('potagers')
+        ->gardeners()
+        ->orderBy('id', 'desc')
+        ->paginate(100);
+
+        return view('admin.gardeners',  compact('users'));
+    }
+
+    
 }

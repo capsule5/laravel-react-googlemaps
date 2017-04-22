@@ -6,24 +6,16 @@
 
 <div class="row placeholders">
   <div class="col-xs-6 col-sm-3 placeholder">
-    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-    <h4>Label</h4>
-    <span class="text-muted">Something else</span>
+    <img src="http://fakeimg.pl/400x400/?text={{$potagers->count()}}" width="200" height="200" class="img-responsive">
+    <h4>Potagers</h4>
   </div>
   <div class="col-xs-6 col-sm-3 placeholder">
-    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-    <h4>Label</h4>
-    <span class="text-muted">Something else</span>
+    <img src="http://fakeimg.pl/400x400/?text={{$owners->count()}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+    <h4>Propriétaires</h4>
   </div>
   <div class="col-xs-6 col-sm-3 placeholder">
-    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-    <h4>Label</h4>
-    <span class="text-muted">Something else</span>
-  </div>
-  <div class="col-xs-6 col-sm-3 placeholder">
-    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-    <h4>Label</h4>
-    <span class="text-muted">Something else</span>
+    <img src="http://fakeimg.pl/400x400/?text={{$gardeners->count()}}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+    <h4>Jardiniers</h4>
   </div>
 </div>
 
@@ -35,6 +27,9 @@
         <th>#</th>
         <th>Name</th>
         <th>Email</th>
+        <th>Phone</th>
+        <th>Role</th>
+        <th>Potager</th>
         <th>Date</th>
         <th></th>
       </tr>
@@ -45,6 +40,9 @@
         <td>{{ $user->id }}</td>
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
+        <td>{{ $user->phone }}</td>
+        <td>{{ $user->roles->first()->name }}</td>
+        <td>{{ $user->hasPotager() ? $user->potagers->first()->name : '' }}</td>
         <td>{{ $user->created_at }}</td>
         <td></td>
       </tr>
