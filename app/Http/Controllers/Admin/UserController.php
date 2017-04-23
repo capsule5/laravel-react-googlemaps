@@ -67,6 +67,21 @@ class UserController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     * 
+     */
+    public function update(UserRequest $request, $id)
+    {   
+        $input = $request->all();
+        $user = User::findOrFail($id);
+        $user->update($input);
+
+        //return redirect()->action('UserController@show', [$item->slug]);
+        $route = 'admin/'.$request->input('role').'s';
+        return redirect($route);
+    }
+
+    /**
      * Remove the specified resource from storage.
      * 
      */

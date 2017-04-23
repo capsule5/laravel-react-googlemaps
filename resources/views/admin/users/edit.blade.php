@@ -1,29 +1,37 @@
-
-@extends('template')
-
-@section('title'){{ trans('app.update_debate') }} @stop
-@section('description'){{ trans('app.update_debate') }} @stop
-@section('keywords')keywords @stop
-@section('image')img/logo.png @stop
+@extends('admin.layout')
 
 @section('content')
-  <div class="page container-fluid" zum-waypoint="waypoints" down="wp_container.down" up="wp_container.up" ng-class="{fixednav : waypoints.wp_container.down}">  
-    <div class="row" ng-controller="ItemFormCtrl">
-      <div class="col-md-8 col-md-offset-2 xs-pdin-lr-0">
-        <div class="panel panel-default">
-          <div class="panel-heading">{{ trans('app.update_debate') }}</div>
-          <div class="panel-body">        
-            {!! Form::model($item, ['method' => 'PATCH','action' => ['ItemController@update',$item->id],'class' => 'form-horizontal','files' => true, 'id' => 'itemform']) !!}
-            
-              @include('items.partials.form', ['submitButtonText' => trans('app.update')])
 
-            {!! Form::close() !!}
+<h1 class="page-header">
+  Editer un
+  @php ($role = app('request')->input('role'))
+  @if ($role === 'owner')
+      propriétaire
+  @elseif ($role === 'gardener')
+      jardinier
+  @else
+      ?
+  @endif
+</h1>
 
-            @include('errors.list')
-          </div>
-        </div>
+<div class="container-fluid">  
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{ $user->name }}</div>
+        <div class="panel-body">
+          {!! Form::model($user, ['method' => 'PATCH','action' => ['Admin\UserController@update',$user->id],'class' => 'form-horizontal','files' => true, 'id' => 'userform']) !!}
+          
+            @include('admin.users.partials.form', ['submitButtonText' => 'Valider', 'role'])
+
+          {!! Form::close() !!}
+
+          @include('errors.list')
+        </div>  
       </div>
     </div>
   </div>
-@stop
+</div>
+
+@endsection
 

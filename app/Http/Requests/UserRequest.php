@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Input;
+
+use Auth;
 
 class UserRequest extends FormRequest
 {
@@ -13,7 +16,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::user()->isAdmin();
     }
 
     /**
@@ -25,7 +28,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:20',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users,id,'.Input::get('id'),
         ];
     }
 }

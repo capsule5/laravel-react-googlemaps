@@ -24,7 +24,7 @@
         <td>{{ $user->hasPotager() ? $user->potagers->first()->name : '' }}</td>
         <td>{{ $user->created_at }}</td>
         <td>
-          {!! link_to_route('admin.users.index', 'update', array($user->id), array('class' => 'btn btn-warning btn-block')) !!}
+          {!! link_to_route('admin.users.edit', 'update', array($user->id,'role'=>$user->roles->first()->name), array('class' => 'btn btn-warning btn-block')) !!}
         </td>
         <td>
           {!! Form::open(array('method' => 'DELETE', 'route' => array('admin.users.destroy', $user->id))) !!}
