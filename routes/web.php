@@ -17,7 +17,7 @@ use App\Potager;
 
 Route::get('/', function () {
 
-    /*// create roles
+    // create roles
     $admin = Role::create(['name' => 'admin']);
     $owner = Role::create(['name' => 'owner']);
     $gardener = Role::create(['name' => 'gardener']);
@@ -83,7 +83,7 @@ Route::get('/', function () {
     $gardeners = User::gardeners()->get();
 
     return Response::json(compact('roles', 'users', 'potagers', 'owners', 'gardeners', 'potager_owner', 'potager_gardener', 'potagerRemaining'));
-    */
+    
     return view('welcome', compact('users', 'roles'));
 });
 
