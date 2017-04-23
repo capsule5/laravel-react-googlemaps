@@ -1,29 +1,37 @@
-
-@extends('template')
-
-@section('title'){{ trans('app.add_debate') }} @stop
-@section('description'){{ trans('app.add_debate') }} @stop
-@section('keywords')keywords @stop
-@section('image')img/logo.png @stop
+@extends('admin.layout')
 
 @section('content')
-  <div class="page container-fluid" zum-waypoint="waypoints" down="wp_container.down" up="wp_container.up" ng-class="{fixednav : waypoints.wp_container.down}">  
-    <div class="row" ng-controller="ItemFormCtrl">
-      <div class="col-md-8 col-md-offset-2 xs-pdin-lr-0">
-        <div class="panel panel-default">
-          <div class="panel-heading">{{ trans('app.add_debate') }}</div>
-          <div class="panel-body">
-            {!! Form::model($item = new \App\Item, ['url' => 'debats','class' => 'form-horizontal','files' => true, 'id' => 'itemform']) !!}
-            
-              @include('items.partials.form', ['submitButtonText' => trans('app.add')])
 
-            {!! Form::close() !!}
+<h1 class="page-header">
+  Ajouter un
+  @php ($role = app('request')->input('role'))
+  @if ($role === 'owner')
+      propriétaire
+  @elseif ($role === 'gardener')
+      jardinier
+  @else
+      ?
+  @endif
+</h1>
 
-            @include('errors.list')
-          </div>  
-        </div>
+<div class="container-fluid">  
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+       
+        <div class="panel-body">
+          {!! Form::model($item = new \App\User, ['url' => 'admin/users','class' => 'form-horizontal','files' => true, 'id' => 'userform']) !!}
+          
+            @include('admin.users.partials.form', ['submitButtonText' => 'Ajouter', 'role'])
+
+          {!! Form::close() !!}
+
+          @include('errors.list')
+        </div>  
       </div>
     </div>
   </div>
-@stop
+</div>
+
+@endsection
 
