@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\UserRequest;
+
 use App\User;
 use App\Potager;
 
@@ -42,28 +44,16 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      * 
      */
-    /*public function store(ItemRequest $request)
+    public function store(UserRequest $request)
     {
         $input = $request->all();
-        $input['choices'] = 'oui,non';
 
-        //upload image
-        if($request->file('file')) $input['img_url'] = $this->processImage($request->file('file'));
+        $user = User::create($input);
+        $user->assignRole($request->input('role'));
 
-        //is ip
-        $input['is_ip'] = ($input['is_ip'] == '1') ? 1 : 0;
-
-        //create item
-        //$item = new Item($input);
-        //Auth::user()->items()->save($item);
-        $item = Auth::user()->items()->create($input); //user_id automatically set :)
-        
-        //sync tags
-        $this->syncTags($item,$request->input('tag_list'));
-
-        return response()->json(array('success' => true, 'redirect' => action('ItemController@show', [$item->slug]) ));
-        //return redirect('debats');
-    }*/
+        $route = 'admin/'.$request->input('role').'s';
+        return redirect($route); // ->withInput();
+    }
 	
 	/**
      * Show the form for editing the specified resource.

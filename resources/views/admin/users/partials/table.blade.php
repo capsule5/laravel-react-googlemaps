@@ -6,6 +6,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Phone</th>
+        <th>Address</th>
         <th>Potager</th>
         <th>Date</th>
         <th></th>
@@ -19,6 +20,7 @@
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->phone }}</td>
+        <td>{{ $user->address }}</td>
         <td>{{ $user->hasPotager() ? $user->potagers->first()->name : '' }}</td>
         <td>{{ $user->created_at }}</td>
         <td>

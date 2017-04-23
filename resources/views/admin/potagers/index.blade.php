@@ -26,13 +26,13 @@
         <td>{{ $potager->address }}</td>
         <td>
           @foreach($potager->owners()->get() as $owner)
-            <a href="{{ route('admin.owners') }}">{{$owner->name}}</a>
+            <a href="{{ route('admin.users.owners') }}">{{$owner->name}}</a>
           @endforeach
         </td>
         <td>
           <ul>
           @foreach($potager->gardeners()->get() as $gardener)
-            <li><a href="{{ route('admin.gardeners') }}">{{$gardener->name}}</a></li>
+            <li><a href="{{ route('admin.users.gardeners') }}">{{$gardener->name}}</a></li>
           @endforeach
           </ul>
         </td>
