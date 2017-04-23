@@ -26,6 +26,6 @@ class DashboardController extends Controller
 
         $potagers = Potager::all();		
 
-        return view('admin.dashboard',  compact('users', 'potagers', 'owners', 'gardeners'));
+        return view('admin.dashboard.index',  compact('users', 'potagers', 'owners', 'gardeners'));
     }
 }

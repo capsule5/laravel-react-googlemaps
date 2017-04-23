@@ -22,10 +22,10 @@
         <td>{{ $user->hasPotager() ? $user->potagers->first()->name : '' }}</td>
         <td>{{ $user->created_at }}</td>
         <td>
-          {!! link_to_route('users.index', 'update', array($user->id), array('class' => 'btn btn-warning btn-block')) !!}
+          {!! link_to_route('admin.users.index', 'update', array($user->id), array('class' => 'btn btn-warning btn-block')) !!}
         </td>
         <td>
-          {!! Form::open(array('method' => 'DELETE', 'route' => array('users.destroy', $user->id))) !!}
+          {!! Form::open(array('method' => 'DELETE', 'route' => array('admin.users.destroy', $user->id))) !!}
 						{!! Form::submit('delete', array('class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Sure?\')')) !!}
 					{!! Form::close() !!}
         </td>

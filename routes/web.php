@@ -17,7 +17,7 @@ use App\Potager;
 
 Route::get('/', function () {
 
-    // create roles
+    /*// create roles
     $admin = Role::create(['name' => 'admin']);
     $owner = Role::create(['name' => 'owner']);
     $gardener = Role::create(['name' => 'gardener']);
@@ -83,7 +83,7 @@ Route::get('/', function () {
     $gardeners = User::gardeners()->get();
 
     return Response::json(compact('roles', 'users', 'potagers', 'owners', 'gardeners', 'potager_owner', 'potager_gardener', 'potagerRemaining'));
-    
+    */
     return view('welcome', compact('users', 'roles'));
 });
 
@@ -91,11 +91,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(array('prefix' => 'admin', 'middleware' => ['auth', 'admin']), function() {	
+Route::group(array('prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin']), function() {	
     Route::resource('users', 'Admin\UserController');
     Route::resource('potagers', 'Admin\PotagerController');
-	Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');
-    Route::get('gardeners', 'Admin\UserController@gardeners')->name('gardeners');
-    Route::get('owners', 'Admin\UserController@owners')->name('owners');
+	Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard.index');
+    Route::get('gardeners', 'Admin\UserController@gardeners')->name('users.gardeners');
+    Route::get('owners', 'Admin\UserController@owners')->name('users.owners');
     
 });

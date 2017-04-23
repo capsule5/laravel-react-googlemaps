@@ -73,7 +73,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);  
 
-        return view('users.edit',compact('user'));
+        return view('admin.users.edit',compact('user'));
     }
 
     /**
@@ -100,7 +100,7 @@ class UserController extends Controller
         ->orderBy('id', 'desc')
         ->paginate(100);
 
-        return view('admin.owners',  compact('users'));
+        return view('admin.users.owners',  compact('users'));
     }
 
     public function gardeners(){
@@ -109,7 +109,7 @@ class UserController extends Controller
         ->orderBy('id', 'desc')
         ->paginate(100);
 
-        return view('admin.gardeners',  compact('users'));
+        return view('admin.users.gardeners',  compact('users'));
     }
 
     

@@ -21,6 +21,6 @@ class PotagerController extends Controller
         ->orderBy('id', 'desc')
         ->paginate(100);;
 
-        return view('admin.potagers',  compact('potagers'));
+        return view('admin.potagers.index',  compact('potagers'));
     }
 }
