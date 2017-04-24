@@ -49,7 +49,7 @@ class CreateUsersTable extends Migration
         Schema::create('potagers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->integer('is_validate')->default(0);
             $table->string('latitude',100);
             $table->string('longitude',100);

@@ -12,7 +12,7 @@
       <div class="panel panel-default">
        
         <div class="panel-body">
-          {!! Form::model($item = new \App\Potager, ['url' => 'admin/potagers','class' => 'form-horizontal','files' => true, 'id' => 'potagerform']) !!}
+          {!! Form::model($potager = new \App\Potager, ['url' => 'admin/potagers','class' => 'form-horizontal','files' => true, 'id' => 'potagerform']) !!}
           
             @include('admin.potagers.partials.form', ['submitButtonText' => 'Ajouter'])
 

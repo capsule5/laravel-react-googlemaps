@@ -15,6 +15,8 @@
         <th>Propriétaire</th>
         <th>Jardiniers</th>
         <th>Créé le</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -37,6 +39,14 @@
           </ul>
         </td>
         <td>{{ $potager->created_at }}</td>
+        <td>
+          {!! link_to_route('admin.potagers.edit', 'update', array($potager->id), array('class' => 'btn btn-warning btn-block')) !!}
+        </td>
+        <td>
+          {!! Form::open(array('method' => 'DELETE', 'route' => array('admin.potagers.destroy', $potager->id))) !!}
+						{!! Form::submit('delete', array('class' => 'btn btn-danger btn-block', 'onclick' => 'return confirm(\'Sure?\')')) !!}
+					{!! Form::close() !!}
+        </td>
       </tr>
       @endforeach
     </tbody>
