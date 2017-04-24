@@ -45,7 +45,11 @@ Route::get('/', function () {
         'is_validate' => 1,
         'latitude' => 40,
         'longitude' => 45,
-        'address' => '123 rue de Passy',
+        'address' => '83 Chemin des Mogeons, 74400 Chamonix-Mont-Blanc, France',
+        'type_address' => 'street_address',
+        'city' => 'Chamonix-Mont-Blanc',
+        'country' => 'France',
+        'postal_code' => '74400',
         'surface' => 30,
         'nb_users_max' => 3
     ]);

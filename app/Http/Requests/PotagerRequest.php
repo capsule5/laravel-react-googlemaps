@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rule;
 
 use Auth;
 
@@ -26,8 +27,18 @@ class PotagerRequest extends FormRequest
      */
     public function rules()
     {
+        //'name', 'description', 'is_validate', 'latitude', 'longitude', 'address', 'surface', 'nb_users_max'
         return [
-            'name' => 'required|min:3|max:20'
+            'name' => 'required|min:3|max:20',
+            'address' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'postal_code' => 'required',
+            'type_address' => ['required', Rule::in(['street_address'])],
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'surface' => 'required|integer',
+            'nb_users_max' => 'required|integer',
         ];
     }
 }

@@ -54,6 +54,10 @@ class CreateUsersTable extends Migration
             $table->string('latitude',100);
             $table->string('longitude',100);
             $table->string('address',255);
+            $table->string('city',100);
+            $table->string('country',100);
+            $table->string('postal_code',20);
+            $table->string('type_address',100);
             $table->integer('surface');
             $table->integer('nb_users_max')->default(3);
             $table->timestamps();

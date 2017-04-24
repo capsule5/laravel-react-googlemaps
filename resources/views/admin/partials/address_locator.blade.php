@@ -15,27 +15,31 @@
   </div>
 
   <div class="row">
-    <div class="col-md-4 text-right"><strong>Formated address: </strong></div>
-    <div class="col-md-6">{[{data.formatted_address}]}<input class="hidden" type="text" name="adress" ng-model="data.formatted_address" required></div>
+    <div class="col-md-4 text-right"><small>Formated address: </small></div>
+    <div class="col-md-6">{[{data.formatted_address}]}<input class="hidden" type="text" name="address" ng-model="data.formatted_address" required></div>
   </div>
   <div class="row">
-    <div class="col-md-4 text-right"><strong>Address type: </strong></div>
+    <div class="col-md-4 text-right"><small>Address type: </small></div>
     <div class="col-md-6">{[{data.type_address}]}<input class="hidden" type="text" name="type_address" ng-model="data.type_address" ></div>
   </div>
   <div class="row">
-    <div class="col-md-4 text-right"><strong>City: </strong></div>
+    <div class="col-md-4 text-right"><small>City: </small></div>
     <div class="col-md-6">{[{data.city}]}<input class="hidden" type="text" name="city" ng-model="data.city" ></div>
   </div>
   <div class="row">
-    <div class="col-md-4 text-right"><strong>Country: </strong></div>
+    <div class="col-md-4 text-right"><small>Postal code: </small></div>
+    <div class="col-md-6">{[{data.postal_code}]}<input class="hidden" type="text" name="postal_code" ng-model="data.postal_code" ></div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 text-right"><small>Country: </small></div>
     <div class="col-md-6">{[{data.country}]}<input class="hidden" type="text" name="country" ng-model="data.country" ></div>
   </div>
   <div class="row">
-    <div class="col-md-4 text-right"><strong>Latitude: </strong></div>
+    <div class="col-md-4 text-right"><small>Latitude: </small></div>
     <div class="col-md-6">{[{data.latitude}]}<input class="hidden" type="text" name="latitude" ng-model="data.latitude" ></div>
   </div>
   <div class="row">
-    <div class="col-md-4 text-right"><strong>Longitude: </strong></div>
+    <div class="col-md-4 text-right"><small>Longitude: </small></div>
     <div class="col-md-6">{[{data.longitude}]}<input class="hidden" type="text" name="longitude" ng-model="data.longitude" ></div>
   </div>
   
@@ -71,6 +75,7 @@
 		    latitude:"",
 		    longitude : "",
 		    city: "",
+        postal_code: "",
 		    country: "",
 		  }
 		  
@@ -125,7 +130,7 @@
 			      }
 
 			      if (address_component.types[0] == "postal_code"){ 
-			          $scope.data.zipcode = address_component.long_name;
+			          $scope.data.postal_code = address_component.long_name;
 			      }
 
 			    });
@@ -135,10 +140,11 @@
 		        $scope.is_location_found = false;
 		        $scope.data.formatted_address = ""
 		      	$scope.data.type_address  = ""		      
-			    $scope.data.latitude  = ""
-			    $scope.data.longitude   = ""
-			    $scope.data.city  = ""
-			    $scope.data.country  = ""
+            $scope.data.latitude  = ""
+            $scope.data.longitude   = ""
+            $scope.data.city  = ""
+            $scope.data.postal_code  = ""
+            $scope.data.country  = ""
 		        //console.log("location",data.status);
 		        $scope.map.zoom = 1;
 		        $scope.map.marker.options.visible=false;
