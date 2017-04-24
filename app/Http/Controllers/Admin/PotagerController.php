@@ -20,7 +20,7 @@ class PotagerController extends Controller
     public function index()
     {
         $potagers = Potager::with('users')
-        ->orderBy('id', 'desc')
+        ->orderBy('updated_at', 'desc')
         ->paginate(100);;
 
         return view('admin.potagers.index',  compact('potagers'));

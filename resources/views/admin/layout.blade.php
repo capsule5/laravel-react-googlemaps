@@ -24,18 +24,6 @@
     
 </head>
 <body>
-    <!--<div id="app">
-        
-        <div class="container-fluid">
-            <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-                @include('admin.partials.sidebar')
-            </nav>
-            <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-                @yield('content')
-            </main>
-        </div>
-    </div>-->
-    
     @include('admin.partials.nav')
     <div class="container-fluid">
       <div class="row">
@@ -49,7 +37,7 @@
     </div>
 
     <!-- Scripts -->
-    <!--<script src="{{ asset('js/app.js') }}"></script>-->
+    <script src="{{ asset('js/app.js') }}"></script>
     
 </body>
 </html>

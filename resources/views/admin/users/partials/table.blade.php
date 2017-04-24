@@ -8,7 +8,7 @@
         <th>Phone</th>
         <th>Address</th>
         <th>Potager</th>
-        <th>Date</th>
+        <th>Mis à jour</th>
         <th></th>
         <th></th>
       </tr>

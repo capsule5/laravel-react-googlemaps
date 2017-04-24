@@ -114,7 +114,7 @@ class UserController extends Controller
     public function owners(){
         $users = User::with('potagers')
         ->owners()
-        ->orderBy('id', 'desc')
+        ->orderBy('updated_at', 'desc')
         ->paginate(100);
 
         return view('admin.users.owners',  compact('users'));
@@ -123,7 +123,7 @@ class UserController extends Controller
     public function gardeners(){
         $users = User::with('potagers')
         ->gardeners()
-        ->orderBy('id', 'desc')
+        ->orderBy('updated_at', 'desc')
         ->paginate(100);
 
         return view('admin.users.gardeners',  compact('users'));
