@@ -23,4 +23,63 @@ class PotagerController extends Controller
 
         return view('admin.potagers.index',  compact('potagers'));
     }
+
+    /**
+     * Show the form for creating a new resource.
+     * 
+     */
+    public function create()
+    {   
+        return view('admin.potagers.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * 
+     */
+    public function store(PotagerRequest $request)
+    {
+        $input = $request->all();
+
+        $potager = potager::create($input);
+
+        return redirect('admin/potagers'); // ->withInput();
+    }
+	
+	/**
+     * Show the form for editing the specified resource.
+     * 
+     */
+    public function edit($id)
+    {
+        $potager = Potager::findOrFail($id);  
+
+        return view('admin.potagers.edit',compact('potager'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * 
+     */
+    public function update(PotagerRequest $request, $id)
+    {   
+        $input = $request->all();
+        $potager = Potager::findOrFail($id);
+        $potager->update($input);
+
+        return redirect('admin/potagers');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * 
+     */
+    public function destroy($id)
+    {
+        $potager = Potager::findOrFail($id);
+       
+        $potager->delete();
+
+        return back()->withInput();
+    }
 }

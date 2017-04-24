@@ -10,3 +10,13 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import "admin";
+
+
+// Utils
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+.angular-google-map{height: 200px;} 
+.angular-google-map-container { height: 100%; }
