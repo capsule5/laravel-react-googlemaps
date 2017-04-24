@@ -4,8 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Validation\Rule;
 
 use Auth;
+use App\User;
 
 class UserRequest extends FormRequest
 {
@@ -26,9 +28,28 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:3|max:20',
-            'email' => 'required|email|unique:users,id,'.Input::get('id'),
-        ];
+        //dd($this->route('user'));
+        switch($this->method())
+        {
+            case 'POST':
+            {
+                return [
+                    'name' => 'required|min:3|max:20',
+                    'phone' => 'required',
+                    'address' => 'required',
+                    'email' => 'required|email|unique:users',
+                ];
+            }
+            case 'PATCH':
+            {
+                return [
+                    'name' => 'required|min:3|max:20',
+                    'phone' => 'required',
+                    'address' => 'required',
+                    'email' => ['required','email',Rule::unique('users')->ignore($this->route('user'))],
+                ];
+            }
+            default:break;
+        }
     }
 }

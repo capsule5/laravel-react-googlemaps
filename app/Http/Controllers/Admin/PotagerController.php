@@ -79,7 +79,7 @@ class PotagerController extends Controller
     public function destroy($id)
     {
         $potager = Potager::findOrFail($id);
-       
+        $potager->users()->detach();
         $potager->delete();
 
         return back()->withInput();

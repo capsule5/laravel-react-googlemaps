@@ -21,7 +21,12 @@
         <td>{{ $user->email }}</td>
         <td>{{ $user->phone }}</td>
         <td>{{ $user->address }}</td>
-        <td>{{ $user->hasPotager() ? $user->potagers->first()->name : '' }}</td>
+        <td>
+          @if($user->hasPotager())
+          @php ($potager = $user->potagers->first())
+          <a href="{{ route('admin.potagers.edit', array($potager->id)) }}">{{$potager->name}}</a>
+          @endif
+        </td>
         <td>{{ $user->created_at }}</td>
         <td>
           {!! link_to_route('admin.users.edit', 'update', array($user->id,'role'=>$user->roles->first()->name), array('class' => 'btn btn-warning btn-block')) !!}

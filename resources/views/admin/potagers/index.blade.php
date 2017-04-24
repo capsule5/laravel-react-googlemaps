@@ -17,6 +17,7 @@
         <th>Propriétaire</th>
         <th>Jardiniers</th>
         <th>Créé le</th>
+        <th>Online</th>
         <th></th>
         <th></th>
       </tr>
@@ -43,6 +44,13 @@
           </ul>
         </td>
         <td>{{ $potager->created_at }}</td>
+        <td>
+          @if($potager->is_valid)
+            <div class="status-circle green"></div>
+          @else
+            <div class="status-circle orange"></div>
+          @endif
+        </td>
         <td>
           {!! link_to_route('admin.potagers.edit', 'update', array($potager->id), array('class' => 'btn btn-warning btn-block')) !!}
         </td>

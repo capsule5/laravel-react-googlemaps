@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->string('firstname');
-            $table->string('lastname');
+            $table->string('firstname')->nullable();
+            $table->string('lastname')->nullable();
             $table->string('phone');
             $table->string('address');
             $table->timestamps();
@@ -50,7 +50,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->integer('is_validate')->default(0);
+            $table->integer('is_valid')->default(0);
             $table->string('latitude',100);
             $table->string('longitude',100);
             $table->string('address',255);

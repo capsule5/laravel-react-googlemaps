@@ -13,7 +13,7 @@ class Potager extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'is_validate', 'latitude', 'longitude', 'address', 'city', 'country', 'postal_code', 'type_address', 'surface', 'nb_users_max'
+        'name', 'description', 'is_valid', 'latitude', 'longitude', 'address', 'city', 'country', 'postal_code', 'type_address', 'surface', 'nb_users_max'
     ];
 
     public function users() 
