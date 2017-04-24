@@ -12,6 +12,8 @@
         <th>Name</th>
         <th>Surface</th>
         <th>Address</th>
+        <th>City</th>
+        <th>Status</th>
         <th>Propriétaire</th>
         <th>Jardiniers</th>
         <th>Créé le</th>
@@ -25,16 +27,18 @@
         <td>{{ $potager->id }}</td>
         <td>{{ $potager->name }}</td>
         <td>{{ $potager->surface }}</td>
-        <td>{{ $potager->address }}</td>
+        <td>{{ str_limit($potager->address, $limit = 30, $end = '...') }}</td>
+        <td>{{ $potager->city }}</td>
+        <td>{{ $potager->remainingGardenersText('short') }}</td>
         <td>
           @foreach($potager->owners()->get() as $owner)
-            <a href="{{ route('admin.users.owners') }}">{{$owner->name}}</a>
+            <a href="{{ route('admin.users.edit', array($owner->id,'role'=>$owner->roles->first()->name)) }}">{{$owner->name}}</a>
           @endforeach
         </td>
         <td>
           <ul>
           @foreach($potager->gardeners()->get() as $gardener)
-            <li><a href="{{ route('admin.users.gardeners') }}">{{$gardener->name}}</a></li>
+            <li><a href="{{ route('admin.users.edit', array($gardener->id,'role'=>$gardener->roles->first()->name)) }}">{{$gardener->name}}</a></li>
           @endforeach
           </ul>
         </td>

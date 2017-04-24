@@ -30,7 +30,7 @@ class PotagerRequest extends FormRequest
         //'name', 'description', 'is_validate', 'latitude', 'longitude', 'address', 'surface', 'nb_users_max'
         return [
             'name' => 'required|min:3|max:20',
-            'address' => 'required',
+            'address' => 'required|unique:potagers,id,'.Input::get('id'),
             'city' => 'required',
             'country' => 'required',
             'postal_code' => 'required',

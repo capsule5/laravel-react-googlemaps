@@ -43,6 +43,13 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('Potager:',null,['class' => 'control-label col-md-4']) !!}
+    <div class="col-md-6">
+      {!! Form::select('potager_id', array('0' => 'Please Select') + $potagers->toArray(), ! empty($user) ? $user->potagers->first()->id : null, array('class' => 'form-control')) !!}
+    </div>
+</div>
+
+<div class="form-group">
   <div class="col-md-6 col-md-offset-4">{!! Form::submit($submitButtonText,['class' => 'btn btn-primary']) !!}</div>
 </div>
 

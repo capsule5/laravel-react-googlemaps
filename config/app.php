@@ -181,6 +181,7 @@ return [
         /*
          * Addons providers
          */
+        App\Providers\ViewComposerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
     ],

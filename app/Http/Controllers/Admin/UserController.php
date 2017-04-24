@@ -50,6 +50,7 @@ class UserController extends Controller
 
         $user = User::create($input);
         $user->assignRole($request->input('role'));
+        $user->potagers()->sync($request->input('potager_id'));
 
         $route = 'admin/'.$request->input('role').'s';
         return redirect($route); // ->withInput();
@@ -75,6 +76,7 @@ class UserController extends Controller
         $input = $request->all();
         $user = User::findOrFail($id);
         $user->update($input);
+        $user->potagers()->sync($request->input('potager_id'));
 
         //return redirect()->action('UserController@show', [$item->slug]);
         $route = 'admin/'.$request->input('role').'s';

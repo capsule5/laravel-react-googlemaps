@@ -33,12 +33,24 @@ class Potager extends Model
 
     public function nbGardeners() 
     {
-        return $this->users()->gardeners()->count();
+        return $this->gardeners()->count();
     }
 
     public function remainingGardeners() 
     {
         return $this->nb_users_max - $this->nbGardeners();
+    }
+    public function remainingGardenersText($format) 
+    {
+        $count = $this->nb_users_max - $this->nbGardeners();
+
+        if($count<=0){
+            return 'COMPLET';
+        } else if($count===1 && $format !== 'short'){
+            return '1 place disponible';
+        } 
+        
+       return ($format==='short') ? $count.' pl. disp.' : $count.' places disponibles';
     }
 
 }
