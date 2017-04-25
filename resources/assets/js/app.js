@@ -1,20 +1,33 @@
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import GoogleMapReact from 'google-map-react';
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-require('./bootstrap');
+class SimpleMap extends Component {
+  static defaultProps = {
+    center: {lat: 59.95, lng: 30.33},
+    zoom: 11
+  };
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+  render() {
+    return (
+      <GoogleMapReact
+        defaultCenter={this.props.center}
+        defaultZoom={this.props.zoom}
+      >
+        <AnyReactComponent
+          lat={59.955413}
+          lng={30.337844}
+          text={'Kreyser Avrora'}
+        />
+      </GoogleMapReact>
+    );
+  }
+}
 
-/*Vue.component('example', require('./components/Example.vue'));
 
-const app = new Vue({
-    el: '#app'
-});*/
+ReactDOM.render(
+  <SimpleMap />,
+  document.getElementById('app')
+);
