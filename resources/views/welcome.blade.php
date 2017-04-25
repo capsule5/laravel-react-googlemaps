@@ -35,19 +35,19 @@
                 text-align: center;
             }
 
-            #app { width:100%; height:100%; position: absolute; top:0; left:0}
+            #root { width:100%; height:100%; position: absolute; top:0; left:0}
         </style>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
             <div class="content">
-                <div id="app">
+                <div id="root">
                     hello
                 </div>
             </div>
         </div>
 
    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/index.js') }}"></script>
     </body>
 </html>
