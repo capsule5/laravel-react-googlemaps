@@ -105,5 +105,4 @@ Route::group(array('prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth
 	Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard.index');
     Route::get('gardeners', 'Admin\UserController@gardeners')->name('users.gardeners');
     Route::get('owners', 'Admin\UserController@owners')->name('users.owners');
-    
 });
