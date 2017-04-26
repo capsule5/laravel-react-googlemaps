@@ -22,7 +22,8 @@ function createMapOptions(maps) {
     mapTypeControlOptions: {
       position: maps.ControlPosition.TOP_RIGHT
     },
-    mapTypeControl: true
+    mapTypeControl: true,
+    mapTypeId: google.maps.MapTypeId.SATELLITE
   };
 }
 

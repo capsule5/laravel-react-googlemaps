@@ -9,6 +9,9 @@ const styles = {
     display:'flex',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  text: {
+    color: '#FFFFFF'
   }
 }
 
@@ -16,7 +19,7 @@ const Marker = ({ text }) => {
   return (
     <div style={styles.container}>
       <div style={styles.marker}></div>
-      <div>{text}</div>
+      <div style={styles.text}>{text}</div>
     </div>
   );
 };

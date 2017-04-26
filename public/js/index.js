@@ -25190,6 +25190,9 @@ var styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  text: {
+    color: '#FFFFFF'
   }
 };
 
@@ -25200,22 +25203,21 @@ var Marker = function Marker(_ref) {
     'div',
     { style: styles.container, __source: {
         fileName: _jsxFileName,
-        lineNumber: 17
+        lineNumber: 20
       },
       __self: undefined
     },
     _react2.default.createElement('div', { style: styles.marker, __source: {
         fileName: _jsxFileName,
-        lineNumber: 18
+        lineNumber: 21
       },
       __self: undefined
     }),
     _react2.default.createElement(
       'div',
-      {
-        __source: {
+      { style: styles.text, __source: {
           fileName: _jsxFileName,
-          lineNumber: 19
+          lineNumber: 22
         },
         __self: undefined
       },
@@ -25316,7 +25318,8 @@ function createMapOptions(maps) {
     mapTypeControlOptions: {
       position: maps.ControlPosition.TOP_RIGHT
     },
-    mapTypeControl: true
+    mapTypeControl: true,
+    mapTypeId: google.maps.MapTypeId.SATELLITE
   };
 }
 
@@ -25343,7 +25346,7 @@ var Map = function (_Component) {
           text: potager.name,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 45
+            lineNumber: 46
           },
           __self: _this2
         });
@@ -25360,7 +25363,7 @@ var Map = function (_Component) {
           options: createMapOptions,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 58
+            lineNumber: 59
           },
           __self: this
         },
