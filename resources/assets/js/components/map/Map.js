@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-
 import GoogleMapReact from 'google-map-react';
-
 import Marker from './Marker';
-
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
   flex: 1;
   position: relative;/* need this to position inner content */
+  fontFamily: 'Circular-Black';
 `;
 
 const createMapOptions = function(maps) {

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { api } from './utils/api.js';
-import Map from './components/Map';
+import Map from './components/map/Map';
 import Header from './components/Header';
 import Footer from './components/Footer';
-
 import styled from 'styled-components';
+import '../fonts/fonts.css';
+// import './utils/styles.js';
 
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
-
 
 class App extends Component {
 
