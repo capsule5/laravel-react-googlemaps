@@ -18916,7 +18916,7 @@ var Map = function (_Component) {
           data: potager,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 39
+            lineNumber: 51
           },
           __self: _this2
         });
@@ -18930,7 +18930,7 @@ var Map = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 52
+            lineNumber: 64
           },
           __self: this
         },
@@ -18943,7 +18943,7 @@ var Map = function (_Component) {
             hoverDistance: 20,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 53
+              lineNumber: 65
             },
             __self: this
           },
@@ -18959,15 +18959,13 @@ var Map = function (_Component) {
 Map.defaultProps = {
   potagers: [],
   center: { lat: 45.91, lng: 6.85 },
-  zoom: 13
+  zoom: 12
 };
-
 Map.propTypes = {
   potagers: _react2.default.PropTypes.array,
   center: _react2.default.PropTypes.object,
   zoom: _react2.default.PropTypes.number
 };
-
 exports.default = Map;
 
 /***/ }),
@@ -19022,37 +19020,65 @@ var Icon = _styledComponents2.default.div(_templateObject2, function (props) {
 var Marker = function (_Component) {
   _inherits(Marker, _Component);
 
-  function Marker() {
+  function Marker(props) {
     _classCallCheck(this, Marker);
 
-    return _possibleConstructorReturn(this, (Marker.__proto__ || Object.getPrototypeOf(Marker)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Marker.__proto__ || Object.getPrototypeOf(Marker)).call(this, props));
+
+    _this.state = {
+      isOpen: false
+    };
+
+    _this.handleClick = _this.handleClick.bind(_this);
+    _this.onClose = _this.onClose.bind(_this);
+    return _this;
   }
 
   _createClass(Marker, [{
+    key: 'onClose',
+    value: function onClose() {
+      this.setState({
+        isOpen: false
+      });
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick() {
+      console.log('click', this.props.data.name);
+      this.setState({
+        isOpen: !this.state.isOpen
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _props = this.props,
           $hover = _props.$hover,
           data = _props.data;
+      var isOpen = this.state.isOpen;
 
 
       return _react2.default.createElement(
         Wrapper,
         { $hover: $hover, __source: {
             fileName: _jsxFileName,
-            lineNumber: 40
+            lineNumber: 65
           },
           __self: this
         },
-        _react2.default.createElement(Icon, { $hover: $hover, __source: {
+        _react2.default.createElement(Icon, { $hover: $hover, onClick: this.handleClick, __source: {
             fileName: _jsxFileName,
-            lineNumber: 41
+            lineNumber: 66
           },
           __self: this
         }),
-        $hover && _react2.default.createElement(_InfoWindow2.default, { data: data, __source: {
+        ($hover || isOpen) && _react2.default.createElement(_InfoWindow2.default, {
+          data: data,
+          onClose: this.onClose,
+          isOpen: isOpen,
+          __source: {
             fileName: _jsxFileName,
-            lineNumber: 42
+            lineNumber: 69
           },
           __self: this
         })
@@ -33975,7 +34001,8 @@ var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  bottom: ', 'px;\n  backgroundColor: #000;\n  color: #FFF;\n  width: 300px;\n  padding: 10px;\n'], ['\n  position: absolute;\n  bottom: ', 'px;\n  backgroundColor: #000;\n  color: #FFF;\n  width: 300px;\n  padding: 10px;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  bottom: ', 'px;\n  backgroundColor: ', ';\n  border: 1px solid #333;\n  color: #333;\n  width: ', 'px;\n  padding: 10px;\n  z-index: 999;\n'], ['\n  position: absolute;\n  bottom: ', 'px;\n  backgroundColor: ', ';\n  border: 1px solid #333;\n  color: #333;\n  width: ', 'px;\n  padding: 10px;\n  z-index: 999;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n  right: 0;\n  padding: 5px;\n  color: #333;\n  cursor: pointer;\n  &:hover{\n    opacity:.5;\n  }\n'], ['\n  position: absolute;\n  top: 0;\n  right: 0;\n  padding: 5px;\n  color: #333;\n  cursor: pointer;\n  &:hover{\n    opacity:.5;\n  }\n']);
 
 var _react = __webpack_require__(10);
 
@@ -33998,100 +34025,143 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 var MARKER_SIZE = 20;
 var IW_MARGIN = 10;
 
-var Wrapper = _styledComponents2.default.div(_templateObject, MARKER_SIZE / 2 + IW_MARGIN);
+var Wrapper = _styledComponents2.default.div(_templateObject, MARKER_SIZE / 2 + IW_MARGIN, function (props) {
+  return props.isOpen ? '#FFF' : '#DDD';
+}, function (props) {
+  return props.isOpen ? 300 : 150;
+});
+
+var CloseBtn = _styledComponents2.default.div(_templateObject2);
 
 var InfoWindow = function (_Component) {
   _inherits(InfoWindow, _Component);
 
-  function InfoWindow() {
+  function InfoWindow(props) {
     _classCallCheck(this, InfoWindow);
 
-    return _possibleConstructorReturn(this, (InfoWindow.__proto__ || Object.getPrototypeOf(InfoWindow)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (InfoWindow.__proto__ || Object.getPrototypeOf(InfoWindow)).call(this, props));
+
+    _this.state = {
+      isOpen: false
+    };
+    return _this;
   }
 
   _createClass(InfoWindow, [{
     key: 'render',
     value: function render() {
-      var _props$data = this.props.data,
-          name = _props$data.name,
-          description = _props$data.description,
-          is_valid = _props$data.is_valid,
-          latitude = _props$data.latitude,
-          longitude = _props$data.longitude,
-          address = _props$data.address,
-          city = _props$data.city,
-          country = _props$data.country,
-          postal_code = _props$data.postal_code,
-          type_address = _props$data.type_address,
-          surface = _props$data.surface,
-          nb_users_max = _props$data.nb_users_max;
+      var _props = this.props,
+          onClose = _props.onClose,
+          isOpen = _props.isOpen,
+          data = _props.data;
+      var name = data.name,
+          description = data.description,
+          is_valid = data.is_valid,
+          latitude = data.latitude,
+          longitude = data.longitude,
+          address = data.address,
+          city = data.city,
+          country = data.country,
+          postal_code = data.postal_code,
+          type_address = data.type_address,
+          surface = data.surface,
+          nb_users_max = data.nb_users_max;
 
 
       return _react2.default.createElement(
         Wrapper,
-        {
-          __source: {
+        { isOpen: isOpen, __source: {
             fileName: _jsxFileName,
-            lineNumber: 43
+            lineNumber: 72
           },
           __self: this
         },
+        isOpen && _react2.default.createElement(
+          CloseBtn,
+          { onClick: onClose, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 73
+            },
+            __self: this
+          },
+          'x'
+        ),
         _react2.default.createElement(
           'div',
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 44
+              lineNumber: 74
             },
             __self: this
           },
           name
         ),
-        _react2.default.createElement(
+        !isOpen ? _react2.default.createElement(
           'div',
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 45
+              lineNumber: 77
             },
             __self: this
           },
-          description
-        ),
-        _react2.default.createElement(
+          'cliquer pour plus d\'infos'
+        ) : _react2.default.createElement(
           'div',
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 46
+              lineNumber: 78
             },
             __self: this
           },
-          address
-        ),
-        _react2.default.createElement(
-          'div',
-          {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 47
+          _react2.default.createElement(
+            'div',
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 79
+              },
+              __self: this
             },
-            __self: this
-          },
-          'surface: ',
-          surface
-        ),
-        _react2.default.createElement(
-          'div',
-          {
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 48
+            description
+          ),
+          _react2.default.createElement(
+            'div',
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 80
+              },
+              __self: this
             },
-            __self: this
-          },
-          'Nb de jardiniers: ',
-          nb_users_max
+            address
+          ),
+          _react2.default.createElement(
+            'div',
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 81
+              },
+              __self: this
+            },
+            'surface: ',
+            surface
+          ),
+          _react2.default.createElement(
+            'div',
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 82
+              },
+              __self: this
+            },
+            'Nb de jardiniers: ',
+            nb_users_max
+          )
         )
       );
     }
@@ -34101,7 +34171,9 @@ var InfoWindow = function (_Component) {
 }(_react.Component);
 
 InfoWindow.propTypes = {
-  data: _react2.default.PropTypes.object
+  data: _react2.default.PropTypes.object,
+  onClose: _react2.default.PropTypes.func.isRequired,
+  isOpen: _react2.default.PropTypes.bool.isRequired
 };
 InfoWindow.defaultProps = {
   data: {}

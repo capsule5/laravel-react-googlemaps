@@ -33,13 +33,45 @@ export default class Marker extends Component {
     $hover: false
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOpen: false
+    };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.onClose = this.onClose.bind(this);
+  }
+
+  onClose() {
+    this.setState({
+      isOpen: false
+    });
+  }
+
+  handleClick() {
+    console.log('click', this.props.data.name);
+    this.setState({
+      isOpen: ! this.state.isOpen
+    });
+  }
+
   render() {
     const { $hover, data } = this.props;
+    const { isOpen } = this.state;
 
     return (
       <Wrapper $hover={$hover}>
-        <Icon $hover={$hover}/>
-        {$hover && <InfoWindow data={data}/>}
+        <Icon $hover={$hover} onClick={this.handleClick}/>
+        {
+          ($hover || isOpen) &&
+          <InfoWindow
+            data={data}
+            onClose={this.onClose}
+            isOpen={isOpen}
+          />
+        }
       </Wrapper>
     );
   }
