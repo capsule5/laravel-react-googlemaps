@@ -25181,18 +25181,46 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var styles = {
+  marker: {
+    backgroundColor: '#FFCC00',
+    width: 20,
+    height: 20,
+    borderRadius: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+};
+
 var Marker = function Marker(_ref) {
   var text = _ref.text;
 
   return _react2.default.createElement(
     'div',
-    { style: { backgroundColor: '#FFCC00', width: 100, height: 100, borderRadius: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }, __source: {
+    { style: styles.container, __source: {
         fileName: _jsxFileName,
-        lineNumber: 5
+        lineNumber: 17
       },
       __self: undefined
     },
-    text
+    _react2.default.createElement('div', { style: styles.marker, __source: {
+        fileName: _jsxFileName,
+        lineNumber: 18
+      },
+      __self: undefined
+    }),
+    _react2.default.createElement(
+      'div',
+      {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 19
+        },
+        __self: undefined
+      },
+      text
+    )
   );
 };
 
@@ -25273,6 +25301,25 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function createMapOptions(maps) {
+  // next props are exposed at maps
+  // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
+  // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
+  // "DirectionsStatus", "DirectionsTravelMode", "DirectionsUnitSystem", "DistanceMatrixStatus",
+  // "DistanceMatrixElementStatus", "ElevationStatus", "GeocoderLocationType", "GeocoderStatus", "KmlLayerStatus",
+  // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
+  return {
+    zoomControlOptions: {
+      position: maps.ControlPosition.RIGHT_CENTER,
+      style: maps.ZoomControlStyle.SMALL
+    },
+    mapTypeControlOptions: {
+      position: maps.ControlPosition.TOP_RIGHT
+    },
+    mapTypeControl: true
+  };
+}
+
 var Map = function (_Component) {
   _inherits(Map, _Component);
 
@@ -25296,7 +25343,7 @@ var Map = function (_Component) {
           text: potager.name,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 26
+            lineNumber: 45
           },
           __self: _this2
         });
@@ -25310,9 +25357,10 @@ var Map = function (_Component) {
         {
           defaultCenter: this.props.center,
           defaultZoom: this.props.zoom,
+          options: createMapOptions,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 39
+            lineNumber: 58
           },
           __self: this
         },
