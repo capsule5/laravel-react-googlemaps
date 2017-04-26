@@ -4,6 +4,8 @@ import GoogleMapReact from 'google-map-react';
 
 import Marker from './components/Marker';
 
+import { API } from './utils/api.js'
+
 
 class App extends Component {
 
@@ -25,18 +27,12 @@ class App extends Component {
   }
 
   loadData() {
-    fetch('http://127.0.0.1:8000/api/potagers', {
-      method: 'get'
-    }).then(function(response) {
-      // Convert to JSON
-	    return response.json();
-    }).then(function(data) {
-      // data is a JS object
-      console.log('data', data);
-      this.setPotagers(response)
-    }).catch(function(error) {
-      console.log('error', error);
-    });
+    API('GET','potagers',{},
+      (data) => {
+        this.setPotagers(data);
+      },
+      (error) => {}
+    );
   }
 
   setPotagers(data){

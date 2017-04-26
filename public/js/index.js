@@ -10674,6 +10674,8 @@ var _Marker = __webpack_require__(251);
 
 var _Marker2 = _interopRequireDefault(_Marker);
 
+var _api = __webpack_require__(252);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10704,18 +10706,11 @@ var App = function (_Component) {
   }, {
     key: 'loadData',
     value: function loadData() {
-      fetch('http://127.0.0.1:8000/api/potagers', {
-        method: 'get'
-      }).then(function (response) {
-        // Convert to JSON
-        return response.json();
-      }).then(function (data) {
-        // data is a JS object
-        console.log('data', data);
-        this.setPotagers(response);
-      }).catch(function (error) {
-        console.log('error', error);
-      });
+      var _this2 = this;
+
+      (0, _api.API)('GET', 'potagers', {}, function (data) {
+        _this2.setPotagers(data);
+      }, function (error) {});
     }
   }, {
     key: 'setPotagers',
@@ -10734,7 +10729,7 @@ var App = function (_Component) {
           defaultZoom: this.props.zoom,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 47
           },
           __self: this
         },
@@ -10744,7 +10739,7 @@ var App = function (_Component) {
           text: 'Kreyser Avrora',
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 55
+            lineNumber: 51
           },
           __self: this
         })
@@ -25226,6 +25221,45 @@ var Marker = function Marker(_ref) {
 };
 
 exports.default = Marker;
+
+/***/ }),
+/* 252 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var API_URL = 'http://127.0.0.1:8000/api/';
+
+var API = exports.API = function API(method, path, body, onSuccess, onFailure) {
+
+  console.log('Api', path);
+
+  var reqOpts = {
+    method: method,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  };
+
+  if (method === 'POST' || method === 'PUT') {
+    reqOpts.body = JSON.stringify(body);
+  }
+
+  return fetch('' + API_URL + path, reqOpts).then(function (response) {
+    return response.json();
+  }).then(function (response) {
+    console.log('API Success', path);
+    onSuccess(response);
+  }).catch(function (error) {
+    console.log('Api error', error);
+    onFailure(error);
+  });
+};
 
 /***/ })
 /******/ ]);
