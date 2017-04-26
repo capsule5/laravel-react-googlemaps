@@ -41,7 +41,7 @@
         <td>{{ $user->name }}</td>
         <td>{{ $user->email }}</td>
         <td>{{ $user->phone }}</td>
-        <td>{{ $user->roles->first()->name}}</td>
+        <td>{{ $user->hasRole('owner') || $user->hasRole('gardener') || $user->hasRole('admin') ? $user->roles->first()->name : '' }}</td>
         <td>{{ $user->hasPotager() ? $user->potagers->first()->name : '' }}</td>
         <td>{{ $user->created_at }}</td>
         <td></td>

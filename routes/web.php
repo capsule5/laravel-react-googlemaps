@@ -93,7 +93,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+
+// Route::get('/home', 'HomeController@index');
+Route::get('/admin', function () {
+    return redirect('admin/dashboard');
+});
 
 Route::group(array('prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'admin']), function() {	
     Route::resource('users', 'Admin\UserController');
@@ -101,5 +105,4 @@ Route::group(array('prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth
 	Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard.index');
     Route::get('gardeners', 'Admin\UserController@gardeners')->name('users.gardeners');
     Route::get('owners', 'Admin\UserController@owners')->name('users.owners');
-    
 });
