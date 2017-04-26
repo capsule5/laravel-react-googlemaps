@@ -43,16 +43,33 @@ class Map extends Component {
     zoom: React.PropTypes.number
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activePotager: {}
+    };
+
+    this.setActivePotager = this.setActivePotager.bind(this);
+  }
+
+  setActivePotager(potager) {
+    console.log('setActivePotager', potager);
+    this.setState({ activePotager: potager });
+  }
+
   renderMarkers() {
+    console.log('renderMarkers', this.props.potagers);
     return (
       this.props.potagers.map((potager, index) => {
-        console.log('potager', potager);
         return (
           <Marker
             key={`potager_${potager.id}`}
             lat={potager.latitude}
             lng={potager.longitude}
-            data={potager}
+            potager={potager}
+            activePotager={this.state.activePotager}
+            setActivePotager={this.setActivePotager}
           />
         );
       })

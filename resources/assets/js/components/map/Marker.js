@@ -24,12 +24,14 @@ const Icon = styled.div`
 export default class Marker extends Component {
 
   static propTypes = {
-    data: React.PropTypes.object,
+    potager: React.PropTypes.object,
+    activePotager: React.PropTypes.object.isRequired,
+    setActivePotager: React.PropTypes.func.isRequired,
     $hover: React.PropTypes.bool
   };
 
   static defaultProps = {
-    data: {},
+    potager: {},
     $hover: false
   };
 
@@ -44,6 +46,13 @@ export default class Marker extends Component {
     this.onClose = this.onClose.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    // close IW if another Marker is activated
+    if (nextProps.activePotager.id !== this.props.potager.id && this.state.isOpen) {
+      this.onClose();
+    }
+  }
+
   onClose() {
     this.setState({
       isOpen: false
@@ -51,14 +60,16 @@ export default class Marker extends Component {
   }
 
   handleClick() {
-    console.log('click', this.props.data.name);
+    console.log('click', this.props.potager.name);
     this.setState({
       isOpen: ! this.state.isOpen
+    }, () => {
+      this.props.setActivePotager(this.state.isOpen ? this.props.potager : null);
     });
   }
 
   render() {
-    const { $hover, data } = this.props;
+    const { $hover, potager } = this.props;
     const { isOpen } = this.state;
 
     return (
@@ -67,7 +78,7 @@ export default class Marker extends Component {
         {
           ($hover || isOpen) &&
           <InfoWindow
-            data={data}
+            potager={potager}
             onClose={this.onClose}
             isOpen={isOpen}
           />

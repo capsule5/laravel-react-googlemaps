@@ -30,13 +30,13 @@ const CloseBtn = styled.div`
 export default class InfoWindow extends Component {
 
   static propTypes = {
-    data: React.PropTypes.object,
+    potager: React.PropTypes.object,
     onClose: React.PropTypes.func.isRequired,
     isOpen: React.PropTypes.bool.isRequired
   };
 
   static defaultProps = {
-    data: {}
+    potager: {}
   };
 
   constructor(props) {
@@ -50,7 +50,7 @@ export default class InfoWindow extends Component {
 
   render() {
 
-    const { onClose, isOpen, data } = this.props;
+    const { onClose, isOpen, potager } = this.props;
     const {
       name,
       description,
@@ -64,7 +64,7 @@ export default class InfoWindow extends Component {
       type_address,
       surface,
       nb_users_max
-    } = data;
+    } = potager;
 
 
 

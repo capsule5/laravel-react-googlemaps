@@ -18896,27 +18896,42 @@ var createMapOptions = function createMapOptions(maps) {
 var Map = function (_Component) {
   _inherits(Map, _Component);
 
-  function Map() {
+  function Map(props) {
     _classCallCheck(this, Map);
 
-    return _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
+
+    _this.state = {
+      activePotager: {}
+    };
+
+    _this.setActivePotager = _this.setActivePotager.bind(_this);
+    return _this;
   }
 
   _createClass(Map, [{
+    key: 'setActivePotager',
+    value: function setActivePotager(potager) {
+      console.log('setActivePotager', potager);
+      this.setState({ activePotager: potager });
+    }
+  }, {
     key: 'renderMarkers',
     value: function renderMarkers() {
       var _this2 = this;
 
+      console.log('renderMarkers', this.props.potagers);
       return this.props.potagers.map(function (potager, index) {
-        console.log('potager', potager);
         return _react2.default.createElement(_Marker2.default, {
           key: 'potager_' + potager.id,
           lat: potager.latitude,
           lng: potager.longitude,
-          data: potager,
+          potager: potager,
+          activePotager: _this2.state.activePotager,
+          setActivePotager: _this2.setActivePotager,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 51
+            lineNumber: 66
           },
           __self: _this2
         });
@@ -18930,7 +18945,7 @@ var Map = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 81
           },
           __self: this
         },
@@ -18943,7 +18958,7 @@ var Map = function (_Component) {
             hoverDistance: 20,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 65
+              lineNumber: 82
             },
             __self: this
           },
@@ -19035,6 +19050,14 @@ var Marker = function (_Component) {
   }
 
   _createClass(Marker, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      // close IW if another Marker is activated
+      if (nextProps.activePotager.id !== this.props.potager.id && this.state.isOpen) {
+        this.onClose();
+      }
+    }
+  }, {
     key: 'onClose',
     value: function onClose() {
       this.setState({
@@ -19044,9 +19067,13 @@ var Marker = function (_Component) {
   }, {
     key: 'handleClick',
     value: function handleClick() {
-      console.log('click', this.props.data.name);
+      var _this2 = this;
+
+      console.log('click', this.props.potager.name);
       this.setState({
         isOpen: !this.state.isOpen
+      }, function () {
+        _this2.props.setActivePotager(_this2.state.isOpen ? _this2.props.potager : null);
       });
     }
   }, {
@@ -19054,7 +19081,7 @@ var Marker = function (_Component) {
     value: function render() {
       var _props = this.props,
           $hover = _props.$hover,
-          data = _props.data;
+          potager = _props.potager;
       var isOpen = this.state.isOpen;
 
 
@@ -19062,23 +19089,23 @@ var Marker = function (_Component) {
         Wrapper,
         { $hover: $hover, __source: {
             fileName: _jsxFileName,
-            lineNumber: 65
+            lineNumber: 76
           },
           __self: this
         },
         _react2.default.createElement(Icon, { $hover: $hover, onClick: this.handleClick, __source: {
             fileName: _jsxFileName,
-            lineNumber: 66
+            lineNumber: 77
           },
           __self: this
         }),
         ($hover || isOpen) && _react2.default.createElement(_InfoWindow2.default, {
-          data: data,
+          potager: potager,
           onClose: this.onClose,
           isOpen: isOpen,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 69
+            lineNumber: 80
           },
           __self: this
         })
@@ -19090,11 +19117,13 @@ var Marker = function (_Component) {
 }(_react.Component);
 
 Marker.propTypes = {
-  data: _react2.default.PropTypes.object,
+  potager: _react2.default.PropTypes.object,
+  activePotager: _react2.default.PropTypes.object.isRequired,
+  setActivePotager: _react2.default.PropTypes.func.isRequired,
   $hover: _react2.default.PropTypes.bool
 };
 Marker.defaultProps = {
-  data: {},
+  potager: {},
   $hover: false
 };
 exports.default = Marker;
@@ -34053,19 +34082,19 @@ var InfoWindow = function (_Component) {
       var _props = this.props,
           onClose = _props.onClose,
           isOpen = _props.isOpen,
-          data = _props.data;
-      var name = data.name,
-          description = data.description,
-          is_valid = data.is_valid,
-          latitude = data.latitude,
-          longitude = data.longitude,
-          address = data.address,
-          city = data.city,
-          country = data.country,
-          postal_code = data.postal_code,
-          type_address = data.type_address,
-          surface = data.surface,
-          nb_users_max = data.nb_users_max;
+          potager = _props.potager;
+      var name = potager.name,
+          description = potager.description,
+          is_valid = potager.is_valid,
+          latitude = potager.latitude,
+          longitude = potager.longitude,
+          address = potager.address,
+          city = potager.city,
+          country = potager.country,
+          postal_code = potager.postal_code,
+          type_address = potager.type_address,
+          surface = potager.surface,
+          nb_users_max = potager.nb_users_max;
 
 
       return _react2.default.createElement(
@@ -34171,12 +34200,12 @@ var InfoWindow = function (_Component) {
 }(_react.Component);
 
 InfoWindow.propTypes = {
-  data: _react2.default.PropTypes.object,
+  potager: _react2.default.PropTypes.object,
   onClose: _react2.default.PropTypes.func.isRequired,
   isOpen: _react2.default.PropTypes.bool.isRequired
 };
 InfoWindow.defaultProps = {
-  data: {}
+  potager: {}
 };
 exports.default = InfoWindow;
 
