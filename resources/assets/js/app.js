@@ -30,8 +30,9 @@ class App extends Component {
     }).then(function(response) {
       // Convert to JSON
 	    return response.json();
-    }).then(function(response) {
-      console.log('response', response);
+    }).then(function(data) {
+      // data is a JS object
+      console.log('data', data);
       this.setPotagers(response)
     }).catch(function(error) {
       console.log('error', error);

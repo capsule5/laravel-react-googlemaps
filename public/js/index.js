@@ -10709,8 +10709,9 @@ var App = function (_Component) {
       }).then(function (response) {
         // Convert to JSON
         return response.json();
-      }).then(function (response) {
-        console.log('response', response);
+      }).then(function (data) {
+        // data is a JS object
+        console.log('data', data);
         this.setPotagers(response);
       }).catch(function (error) {
         console.log('error', error);
@@ -10733,7 +10734,7 @@ var App = function (_Component) {
           defaultZoom: this.props.zoom,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 50
+            lineNumber: 51
           },
           __self: this
         },
@@ -10743,7 +10744,7 @@ var App = function (_Component) {
           text: 'Kreyser Avrora',
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 54
+            lineNumber: 55
           },
           __self: this
         })
