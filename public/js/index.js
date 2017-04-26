@@ -10666,15 +10666,11 @@ var _react = __webpack_require__(21);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _googleMapReact = __webpack_require__(138);
-
-var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
-
-var _Marker = __webpack_require__(251);
-
-var _Marker2 = _interopRequireDefault(_Marker);
-
 var _api = __webpack_require__(252);
+
+var _Map = __webpack_require__(253);
+
+var _Map2 = _interopRequireDefault(_Map);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10701,11 +10697,11 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.loadData();
+      this.getPotagers();
     }
   }, {
-    key: 'loadData',
-    value: function loadData() {
+    key: 'getPotagers',
+    value: function getPotagers() {
       var _this2 = this;
 
       (0, _api.API)('GET', 'potagers', {}, function (data) {
@@ -10722,38 +10718,18 @@ var App = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(
-        _googleMapReact2.default,
-        {
-          defaultCenter: this.props.center,
-          defaultZoom: this.props.zoom,
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 47
-          },
-          __self: this
+      return _react2.default.createElement(_Map2.default, { potagers: this.state.potagers, __source: {
+          fileName: _jsxFileName,
+          lineNumber: 36
         },
-        _react2.default.createElement(_Marker2.default, {
-          lat: 59.955413,
-          lng: 30.337844,
-          text: 'Kreyser Avrora',
-          __source: {
-            fileName: _jsxFileName,
-            lineNumber: 51
-          },
-          __self: this
-        })
-      );
+        __self: this
+      });
     }
   }]);
 
   return App;
 }(_react.Component);
 
-App.defaultProps = {
-  center: { lat: 59.95, lng: 30.33 },
-  zoom: 11
-};
 exports.default = App;
 
 /***/ }),
@@ -25260,6 +25236,99 @@ var API = exports.API = function API(method, path, body, onSuccess, onFailure) {
     onFailure(error);
   });
 };
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers/resources/assets/js/components/Map.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(21);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _googleMapReact = __webpack_require__(138);
+
+var _googleMapReact2 = _interopRequireDefault(_googleMapReact);
+
+var _Marker = __webpack_require__(251);
+
+var _Marker2 = _interopRequireDefault(_Marker);
+
+var _api = __webpack_require__(252);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Map = function (_Component) {
+  _inherits(Map, _Component);
+
+  function Map(props) {
+    _classCallCheck(this, Map);
+
+    return _possibleConstructorReturn(this, (Map.__proto__ || Object.getPrototypeOf(Map)).call(this, props));
+  }
+
+  _createClass(Map, [{
+    key: 'renderMarkers',
+    value: function renderMarkers() {
+      var _this2 = this;
+
+      return this.props.potagers.map(function (potager, index) {
+        console.log('potager', potager);
+        return _react2.default.createElement(_Marker2.default, {
+          key: 'potager_' + potager.id,
+          lat: potager.latitude,
+          lng: potager.longitude,
+          text: potager.name,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 26
+          },
+          __self: _this2
+        });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _googleMapReact2.default,
+        {
+          defaultCenter: this.props.center,
+          defaultZoom: this.props.zoom,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 39
+          },
+          __self: this
+        },
+        this.renderMarkers()
+      );
+    }
+  }]);
+
+  return Map;
+}(_react.Component);
+
+Map.defaultProps = {
+  center: { lat: 45.91, lng: 6.85 },
+  zoom: 13
+};
+exports.default = Map;
 
 /***/ })
 /******/ ]);
