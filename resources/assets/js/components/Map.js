@@ -4,8 +4,6 @@ import GoogleMapReact from 'google-map-react';
 
 import Marker from './Marker';
 
-import { API } from '../utils/api.js'
-
 
 function createMapOptions(maps) {
   // next props are exposed at maps
@@ -30,7 +28,7 @@ function createMapOptions(maps) {
 class Map extends Component {
 
   static defaultProps = {
-    center: {lat: 45.91, lng: 6.85},
+    center: { lat: 45.91, lng: 6.85 },
     zoom: 13
   };
 

@@ -14451,7 +14451,7 @@ module.exports = {
 "use strict";
 
 
-//window._ = require('lodash');
+// window._ = require('lodash');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

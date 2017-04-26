@@ -10797,8 +10797,6 @@ var _Marker = __webpack_require__(121);
 
 var _Marker2 = _interopRequireDefault(_Marker);
 
-var _api = __webpack_require__(58);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10850,7 +10848,7 @@ var Map = function (_Component) {
           text: potager.name,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 46
+            lineNumber: 44
           },
           __self: _this2
         });
@@ -10867,7 +10865,7 @@ var Map = function (_Component) {
           options: createMapOptions,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 59
+            lineNumber: 57
           },
           __self: this
         },

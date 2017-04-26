@@ -6,14 +6,14 @@ const styles = {
     width: 20,
     height: 20,
     borderRadius: '100%',
-    display:'flex',
+    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
   },
   text: {
     color: '#FFFFFF'
   }
-}
+};
 
 const Marker = ({ text }) => {
   return (

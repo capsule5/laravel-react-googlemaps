@@ -20,7 +20,10 @@
     "laravel-mix": "0.*",
     "lodash": "^4.17.4",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.15.0",
+    "eslint-plugin-react": "^6.10.0"
   },
   "dependencies": {
     "google-map-react": "^0.24.0"
