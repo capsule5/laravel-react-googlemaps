@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Motion, spring } from 'react-motion';
 import InfoWindow from './InfoWindow';
 
 const MARKER_SIZE = 20;
@@ -19,6 +20,7 @@ const Icon = styled.div`
   left: -${ MARKER_SIZE / 2}px;
   top: -${MARKER_SIZE / 2}px;
   cursor: pointer;
+  transform: scale(${props => props.scale});
 `;
 
 export default class Marker extends Component {
@@ -73,8 +75,15 @@ export default class Marker extends Component {
     const { isOpen } = this.state;
 
     return (
+
       <Wrapper $hover={$hover}>
-        <Icon $hover={$hover} onClick={this.handleClick}/>
+
+        <Motion defaultStyle={{ scale: 1 }} style={{ scale: spring($hover ? 1.5 : 1) }}>
+          { ({ scale }) => (
+            <Icon $hover={$hover} onClick={this.handleClick} scale={scale}/>
+          )}
+        </Motion>
+
         {
           ($hover || isOpen) &&
           <InfoWindow

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Motion, spring } from 'react-motion';
 
 const MARKER_SIZE = 20;
 const IW_MARGIN = 10;
@@ -13,6 +14,7 @@ const Wrapper = styled.div`
   width: ${props => props.isOpen ? 300 : 150}px;
   padding: 10px;
   z-index: 999;
+  transform: var(--transform);
 `;
 
 const CloseBtn = styled.div`
@@ -25,6 +27,10 @@ const CloseBtn = styled.div`
   &:hover{
     opacity:.5;
   }
+`;
+
+const CSSVariables = styled.div`
+  --transform: ${props => `translate3d(0, ${props.y}px, 0)`};
 `;
 
 export default class InfoWindow extends Component {
@@ -69,20 +75,26 @@ export default class InfoWindow extends Component {
 
 
     return (
-      <Wrapper isOpen={isOpen}>
-        { isOpen && <CloseBtn onClick={onClose}>x</CloseBtn> }
-        <div>{name}</div>
-        {
-          ! isOpen ?
-          <div>cliquer pour plus d'infos</div> :
-          <div>
-            <div>{description}</div>
-            <div>{address}</div>
-            <div>surface: {surface}</div>
-            <div>Nb de jardiniers: {nb_users_max}</div>
-          </div>
-        }
-      </Wrapper>
+      <Motion defaultStyle={{ y: 0 }} style={{ y: spring(isOpen ? -10 : 0) }}>
+        { ({ y }) => (
+          <CSSVariables y={ y }>
+            <Wrapper isOpen={isOpen}>
+              { isOpen && <CloseBtn onClick={onClose}>x</CloseBtn> }
+              <div>{name}</div>
+              {
+                ! isOpen ?
+                <div>cliquer pour plus d'infos</div> :
+                <div>
+                  <div>{description}</div>
+                  <div>{address}</div>
+                  <div>surface: {surface}</div>
+                  <div>Nb de jardiniers max: {nb_users_max}</div>
+                </div>
+              }
+            </Wrapper>
+          </CSSVariables>
+        )}
+      </Motion>
     );
   }
 }
