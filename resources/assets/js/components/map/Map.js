@@ -40,7 +40,7 @@ class Map extends Component {
             key={`potager_${potager.id}`}
             lat={potager.latitude}
             lng={potager.longitude}
-            text={potager.name}
+            data={potager}
           />
         );
       })
@@ -54,6 +54,7 @@ class Map extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
           options={createMapOptions}
+          hoverDistance={20}
         >
           {this.renderMarkers()}
         </GoogleMapReact>

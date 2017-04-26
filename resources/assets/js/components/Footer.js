@@ -3,9 +3,12 @@ import styled from 'styled-components';
 
 const Wrapper = styled.footer`
   flex: 0 0 auto;
+  display: flex;
   height: 40px;
-  background-color: #CCFF55;
-  fontFamily: 'Roboto';
+  background-color: #FFF;
+  fontFamily: 'CircularStd-Book';
+  align-items: center;
+  justify-content: center;
 `;
 
 const Footer = () => {

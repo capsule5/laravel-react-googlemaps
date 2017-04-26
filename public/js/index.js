@@ -18753,7 +18753,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers/resources/assets/js/components/Footer.js';
 
-var _templateObject = _taggedTemplateLiteral(['\n  flex: 0 0 auto;\n  height: 40px;\n  background-color: #CCFF55;\n  fontFamily: \'Roboto\';\n'], ['\n  flex: 0 0 auto;\n  height: 40px;\n  background-color: #CCFF55;\n  fontFamily: \'Roboto\';\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  flex: 0 0 auto;\n  display: flex;\n  height: 40px;\n  background-color: #FFF;\n  fontFamily: \'CircularStd-Book\';\n  align-items: center;\n  justify-content: center;\n'], ['\n  flex: 0 0 auto;\n  display: flex;\n  height: 40px;\n  background-color: #FFF;\n  fontFamily: \'CircularStd-Book\';\n  align-items: center;\n  justify-content: center;\n']);
 
 var _react = __webpack_require__(10);
 
@@ -18775,7 +18775,7 @@ var Footer = function Footer() {
     {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13
+        lineNumber: 16
       },
       __self: undefined
     },
@@ -18797,7 +18797,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers/resources/assets/js/components/Header.js';
 
-var _templateObject = _taggedTemplateLiteral(['\n  flex: 0 0 auto;\n  height: 40px;\n  background-color:#000;\n  color:#FFF;\n  fontFamily: \'Circular-Black\';\n'], ['\n  flex: 0 0 auto;\n  height: 40px;\n  background-color:#000;\n  color:#FFF;\n  fontFamily: \'Circular-Black\';\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  flex: 0 0 auto;\n  height: 40px;\n  background-color:#FFF;\n  color:#000;\n  fontFamily: \'Circular-Black\';\n  display: flex;\n  align-items: center;\n  padding: 0 20px;\n'], ['\n  flex: 0 0 auto;\n  height: 40px;\n  background-color:#FFF;\n  color:#000;\n  fontFamily: \'Circular-Black\';\n  display: flex;\n  align-items: center;\n  padding: 0 20px;\n']);
 
 var _react = __webpack_require__(10);
 
@@ -18819,7 +18819,7 @@ var Header = function Header() {
     {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 14
+        lineNumber: 17
       },
       __self: undefined
     },
@@ -18913,7 +18913,7 @@ var Map = function (_Component) {
           key: 'potager_' + potager.id,
           lat: potager.latitude,
           lng: potager.longitude,
-          text: potager.name,
+          data: potager,
           __source: {
             fileName: _jsxFileName,
             lineNumber: 39
@@ -18940,6 +18940,7 @@ var Map = function (_Component) {
             defaultCenter: this.props.center,
             defaultZoom: this.props.zoom,
             options: createMapOptions,
+            hoverDistance: 20,
             __source: {
               fileName: _jsxFileName,
               lineNumber: 53
@@ -18981,65 +18982,95 @@ Object.defineProperty(exports, "__esModule", {
 });
 var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers/resources/assets/js/components/map/Marker.js';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  zIndex: ', ';\n'], ['\n  position: absolute;\n  zIndex: ', ';\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  backgroundColor: ', ';\n  width: ', 'px;\n  height: ', 'px;\n  border-radius: ', 'px;\n  border: 1px solid #FFF;\n  position: absolute;\n  left: -', 'px;\n  top: -', 'px;\n  cursor: pointer;\n'], ['\n  backgroundColor: ', ';\n  width: ', 'px;\n  height: ', 'px;\n  border-radius: ', 'px;\n  border: 1px solid #FFF;\n  position: absolute;\n  left: -', 'px;\n  top: -', 'px;\n  cursor: pointer;\n']);
+
 var _react = __webpack_require__(10);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _styledComponents = __webpack_require__(35);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _InfoWindow = __webpack_require__(274);
+
+var _InfoWindow2 = _interopRequireDefault(_InfoWindow);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var styles = {
-  marker: {
-    backgroundColor: '#FFCC00',
-    width: 20,
-    height: 20,
-    borderRadius: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  text: {
-    color: '#FFFFFF'
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var MARKER_SIZE = 20;
+
+var Wrapper = _styledComponents2.default.div(_templateObject, function (props) {
+  return props.$hover ? 1000 : props.zIndex;
+});
+
+var Icon = _styledComponents2.default.div(_templateObject2, function (props) {
+  return props.$hover ? 'green' : 'lightgreen';
+}, MARKER_SIZE, MARKER_SIZE, MARKER_SIZE, MARKER_SIZE / 2, MARKER_SIZE / 2);
+
+var Marker = function (_Component) {
+  _inherits(Marker, _Component);
+
+  function Marker() {
+    _classCallCheck(this, Marker);
+
+    return _possibleConstructorReturn(this, (Marker.__proto__ || Object.getPrototypeOf(Marker)).apply(this, arguments));
   }
-};
 
-var Marker = function Marker(_ref) {
-  var text = _ref.text;
+  _createClass(Marker, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          $hover = _props.$hover,
+          data = _props.data;
 
-  return _react2.default.createElement(
-    'div',
-    { style: styles.container, __source: {
-        fileName: _jsxFileName,
-        lineNumber: 20
-      },
-      __self: undefined
-    },
-    _react2.default.createElement('div', { style: styles.marker, __source: {
-        fileName: _jsxFileName,
-        lineNumber: 21
-      },
-      __self: undefined
-    }),
-    _react2.default.createElement(
-      'div',
-      { style: styles.text, __source: {
-          fileName: _jsxFileName,
-          lineNumber: 22
+
+      return _react2.default.createElement(
+        Wrapper,
+        { $hover: $hover, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 40
+          },
+          __self: this
         },
-        __self: undefined
-      },
-      text
-    )
-  );
-};
+        _react2.default.createElement(Icon, { $hover: $hover, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 41
+          },
+          __self: this
+        }),
+        $hover && _react2.default.createElement(_InfoWindow2.default, { data: data, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 42
+          },
+          __self: this
+        })
+      );
+    }
+  }]);
 
-Marker.defaultProps = {
-  text: ''
-};
+  return Marker;
+}(_react.Component);
 
 Marker.propTypes = {
-  text: _react2.default.PropTypes.string
+  data: _react2.default.PropTypes.object,
+  $hover: _react2.default.PropTypes.bool
 };
-
+Marker.defaultProps = {
+  data: {},
+  $hover: false
+};
 exports.default = Marker;
 
 /***/ }),
@@ -33921,6 +33952,161 @@ __webpack_require__(99);
 __webpack_require__(100);
 module.exports = __webpack_require__(101);
 
+
+/***/ }),
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers/resources/assets/js/components/map/InfoWindow.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  bottom: ', 'px;\n  backgroundColor: #000;\n  color: #FFF;\n  width: 300px;\n  padding: 10px;\n'], ['\n  position: absolute;\n  bottom: ', 'px;\n  backgroundColor: #000;\n  color: #FFF;\n  width: 300px;\n  padding: 10px;\n']);
+
+var _react = __webpack_require__(10);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = __webpack_require__(35);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var MARKER_SIZE = 20;
+var IW_MARGIN = 10;
+
+var Wrapper = _styledComponents2.default.div(_templateObject, MARKER_SIZE / 2 + IW_MARGIN);
+
+var InfoWindow = function (_Component) {
+  _inherits(InfoWindow, _Component);
+
+  function InfoWindow() {
+    _classCallCheck(this, InfoWindow);
+
+    return _possibleConstructorReturn(this, (InfoWindow.__proto__ || Object.getPrototypeOf(InfoWindow)).apply(this, arguments));
+  }
+
+  _createClass(InfoWindow, [{
+    key: 'render',
+    value: function render() {
+      var _props$data = this.props.data,
+          name = _props$data.name,
+          description = _props$data.description,
+          is_valid = _props$data.is_valid,
+          latitude = _props$data.latitude,
+          longitude = _props$data.longitude,
+          address = _props$data.address,
+          city = _props$data.city,
+          country = _props$data.country,
+          postal_code = _props$data.postal_code,
+          type_address = _props$data.type_address,
+          surface = _props$data.surface,
+          nb_users_max = _props$data.nb_users_max;
+
+
+      return _react2.default.createElement(
+        Wrapper,
+        {
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 43
+          },
+          __self: this
+        },
+        _react2.default.createElement(
+          'div',
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 44
+            },
+            __self: this
+          },
+          name
+        ),
+        _react2.default.createElement(
+          'div',
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 45
+            },
+            __self: this
+          },
+          description
+        ),
+        _react2.default.createElement(
+          'div',
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 46
+            },
+            __self: this
+          },
+          address
+        ),
+        _react2.default.createElement(
+          'div',
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 47
+            },
+            __self: this
+          },
+          'surface: ',
+          surface
+        ),
+        _react2.default.createElement(
+          'div',
+          {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 48
+            },
+            __self: this
+          },
+          'Nb de jardiniers: ',
+          nb_users_max
+        )
+      );
+    }
+  }]);
+
+  return InfoWindow;
+}(_react.Component);
+
+InfoWindow.propTypes = {
+  data: _react2.default.PropTypes.object
+};
+InfoWindow.defaultProps = {
+  data: {}
+};
+exports.default = InfoWindow;
 
 /***/ })
 /******/ ]);
