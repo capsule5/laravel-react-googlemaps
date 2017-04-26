@@ -19073,7 +19073,7 @@ var Marker = function (_Component) {
       this.setState({
         isOpen: !this.state.isOpen
       }, function () {
-        _this2.props.setActivePotager(_this2.state.isOpen ? _this2.props.potager : null);
+        _this2.props.setActivePotager(_this2.state.isOpen ? _this2.props.potager : {});
       });
     }
   }, {

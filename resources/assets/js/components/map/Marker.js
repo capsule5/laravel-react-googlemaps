@@ -64,7 +64,7 @@ export default class Marker extends Component {
     this.setState({
       isOpen: ! this.state.isOpen
     }, () => {
-      this.props.setActivePotager(this.state.isOpen ? this.props.potager : null);
+      this.props.setActivePotager(this.state.isOpen ? this.props.potager : {});
     });
   }
 
