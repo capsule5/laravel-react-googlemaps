@@ -10849,7 +10849,7 @@ var Map = function (_Component) {
           text: potager.name,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 39
           },
           __self: _this2
         });
@@ -10866,7 +10866,7 @@ var Map = function (_Component) {
           options: createMapOptions,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 57
+            lineNumber: 52
           },
           __self: this
         },
@@ -10879,19 +10879,15 @@ var Map = function (_Component) {
 }(_react.Component);
 
 Map.defaultProps = {
+  potagers: [],
   center: { lat: 45.91, lng: 6.85 },
   zoom: 13
 };
 
-
-Map.defaultProps = {
-  potagers: []
-};
-
 Map.propTypes = {
-  potagers: _react.PropTypes.array,
-  center: _react.PropTypes.object,
-  zoom: _react.PropTypes.object
+  potagers: _react2.default.PropTypes.array,
+  center: _react2.default.PropTypes.object,
+  zoom: _react2.default.PropTypes.number
 };
 
 exports.default = Map;
@@ -10964,7 +10960,7 @@ Marker.defaultProps = {
 };
 
 Marker.propTypes = {
-  text: _react.PropTypes.string
+  text: _react2.default.PropTypes.string
 };
 
 exports.default = Marker;

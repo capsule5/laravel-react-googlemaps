@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 import GoogleMapReact from 'google-map-react';
 
@@ -26,11 +26,6 @@ const createMapOptions = function(maps) {
 };
 
 class Map extends Component {
-
-  static defaultProps = {
-    center: { lat: 45.91, lng: 6.85 },
-    zoom: 13
-  };
 
   constructor(props) {
     super(props);
@@ -66,13 +61,15 @@ class Map extends Component {
 }
 
 Map.defaultProps = {
-  potagers: []
+  potagers: [],
+  center: { lat: 45.91, lng: 6.85 },
+  zoom: 13
 };
 
 Map.propTypes = {
-  potagers: PropTypes.array,
-  center: PropTypes.object,
-  zoom: PropTypes.object
+  potagers: React.PropTypes.array,
+  center: React.PropTypes.object,
+  zoom: React.PropTypes.number
 };
 
 export default Map;
