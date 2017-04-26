@@ -10649,10 +10649,11 @@ var _App2 = _interopRequireDefault(_App);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var element = document.getElementById('root');
+
 _reactDom2.default.render(_react2.default.createElement(_App2.default, {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 7
+    lineNumber: 8
   },
   __self: undefined
 }), element);
@@ -10805,7 +10806,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-function createMapOptions(maps) {
+var createMapOptions = function createMapOptions(maps) {
   // next props are exposed at maps
   // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
   // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
@@ -10823,7 +10824,7 @@ function createMapOptions(maps) {
     mapTypeControl: true,
     mapTypeId: google.maps.MapTypeId.SATELLITE
   };
-}
+};
 
 var Map = function (_Component) {
   _inherits(Map, _Component);
@@ -10881,6 +10882,18 @@ Map.defaultProps = {
   center: { lat: 45.91, lng: 6.85 },
   zoom: 13
 };
+
+
+Map.defaultProps = {
+  potagers: []
+};
+
+Map.propTypes = {
+  potagers: _react.PropTypes.array,
+  center: _react.PropTypes.object,
+  zoom: _react.PropTypes.object
+};
+
 exports.default = Map;
 
 /***/ }),
@@ -10944,6 +10957,14 @@ var Marker = function Marker(_ref) {
       text
     )
   );
+};
+
+Marker.defaultProps = {
+  text: ''
+};
+
+Marker.propTypes = {
+  text: _react.PropTypes.string
 };
 
 exports.default = Marker;

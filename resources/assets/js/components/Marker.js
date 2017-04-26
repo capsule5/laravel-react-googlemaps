@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
 const styles = {
   marker: {
@@ -24,5 +24,12 @@ const Marker = ({ text }) => {
   );
 };
 
+Marker.defaultProps = {
+  text: ''
+};
+
+Marker.propTypes = {
+  text: PropTypes.string
+};
 
 export default Marker;

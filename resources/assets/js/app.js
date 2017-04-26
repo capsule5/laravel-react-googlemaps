@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { API } from './utils/api.js'
+import { API } from './utils/api.js';
 import Map from './components/Map';
 
 class App extends Component {
@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   getPotagers() {
-    API('GET','potagers',{},
+    API('GET', 'potagers', {},
       (data) => {
         this.setPotagers(data);
       },
@@ -25,10 +25,10 @@ class App extends Component {
     );
   }
 
-  setPotagers(data){
+  setPotagers(data) {
     this.setState({
       potagers: data
-    })
+    });
   }
 
   render() {

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import GoogleMapReact from 'google-map-react';
 
 import Marker from './Marker';
 
 
-function createMapOptions(maps) {
+const createMapOptions = function(maps) {
   // next props are exposed at maps
   // "Animation", "ControlPosition", "MapTypeControlStyle", "MapTypeId",
   // "NavigationControlStyle", "ScaleControlStyle", "StrokePosition", "SymbolPath", "ZoomControlStyle",
@@ -23,7 +23,7 @@ function createMapOptions(maps) {
     mapTypeControl: true,
     mapTypeId: google.maps.MapTypeId.SATELLITE
   };
-}
+};
 
 class Map extends Component {
 
@@ -64,5 +64,15 @@ class Map extends Component {
     );
   }
 }
+
+Map.defaultProps = {
+  potagers: []
+};
+
+Map.propTypes = {
+  potagers: PropTypes.array,
+  center: PropTypes.object,
+  zoom: PropTypes.object
+};
 
 export default Map;
