@@ -4,6 +4,12 @@ import GoogleMapReact from 'google-map-react';
 
 import Marker from './Marker';
 
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  flex: 1;
+  position: relative;/* need this to position inner content */
+`;
 
 const createMapOptions = function(maps) {
   // next props are exposed at maps
@@ -27,10 +33,6 @@ const createMapOptions = function(maps) {
 
 class Map extends Component {
 
-  constructor(props) {
-    super(props);
-  }  
-
   renderMarkers() {
     return (
       this.props.potagers.map((potager, index) => {
@@ -49,13 +51,15 @@ class Map extends Component {
 
   render() {
     return (
-      <GoogleMapReact
-        defaultCenter={this.props.center}
-        defaultZoom={this.props.zoom}
-        options={createMapOptions}
-      >
-        {this.renderMarkers()}
-      </GoogleMapReact>
+      <Wrapper>
+        <GoogleMapReact
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
+          options={createMapOptions}
+        >
+          {this.renderMarkers()}
+        </GoogleMapReact>
+      </Wrapper>
     );
   }
 }

@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
-import { API } from './utils/api.js';
+import { api } from './utils/api.js';
 import Map from './components/Map';
+import Header from './components/Header';
+import Footer from './components/Footer';
+
+import styled from 'styled-components';
+
+const Wrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
 
 class App extends Component {
 
@@ -17,7 +28,7 @@ class App extends Component {
   }
 
   getPotagers() {
-    API('GET', 'potagers', {},
+    api('GET', 'potagers', {},
       (data) => {
         this.setPotagers(data);
       },
@@ -33,7 +44,11 @@ class App extends Component {
 
   render() {
     return (
-      <Map potagers={this.state.potagers}/>
+      <Wrapper>
+        <Header/>
+        <Map potagers={this.state.potagers}/>
+        <Footer/>
+      </Wrapper>
     );
   }
 }
