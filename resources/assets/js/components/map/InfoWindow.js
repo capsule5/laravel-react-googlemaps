@@ -23,6 +23,10 @@ const Wrapper = styled.div`
   transform: var(--transform);
 `;
 
+const Title = styled.h2`
+  margin: 0 0 5px 0;
+`;
+
 const CloseBtn = styled.div`
   position: absolute;
   top: 0;
@@ -75,7 +79,7 @@ export default class InfoWindow extends PureComponent {
           <Animated {...interpolated} >
             <Wrapper isInfoWindowOpen={isInfoWindowOpen}>
               { isInfoWindowOpen && <CloseBtn onClick={onInfoWindowClose}>x</CloseBtn> }
-              <div>{name}</div>
+              <Title>{name}</Title>
               {
                 ! isInfoWindowOpen ?
                 <div>cliquer pour plus d'infos</div> :

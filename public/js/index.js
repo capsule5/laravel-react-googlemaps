@@ -33641,7 +33641,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _templateObject = _taggedTemplateLiteral(['\n  --transform: ', ';\n'], ['\n  --transform: ', ';\n']),
     _templateObject2 = _taggedTemplateLiteral(['\n  position: absolute;\n  bottom: ', 'px;\n  backgroundColor: ', ';\n  border: 1px solid #333;\n  color: #333;\n  width: ', 'px;\n  padding: 10px;\n  z-index: 999;\n  /* animated */\n  transform: var(--transform);\n'], ['\n  position: absolute;\n  bottom: ', 'px;\n  backgroundColor: ', ';\n  border: 1px solid #333;\n  color: #333;\n  width: ', 'px;\n  padding: 10px;\n  z-index: 999;\n  /* animated */\n  transform: var(--transform);\n']),
-    _templateObject3 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n  right: 0;\n  padding: 5px;\n  color: #333;\n  cursor: pointer;\n  &:hover{\n    opacity:.5;\n  }\n'], ['\n  position: absolute;\n  top: 0;\n  right: 0;\n  padding: 5px;\n  color: #333;\n  cursor: pointer;\n  &:hover{\n    opacity:.5;\n  }\n']);
+    _templateObject3 = _taggedTemplateLiteral(['\n  margin: 0 0 5px 0;\n'], ['\n  margin: 0 0 5px 0;\n']),
+    _templateObject4 = _taggedTemplateLiteral(['\n  position: absolute;\n  top: 0;\n  right: 0;\n  padding: 5px;\n  color: #333;\n  cursor: pointer;\n  &:hover{\n    opacity:.5;\n  }\n'], ['\n  position: absolute;\n  top: 0;\n  right: 0;\n  padding: 5px;\n  color: #333;\n  cursor: pointer;\n  &:hover{\n    opacity:.5;\n  }\n']);
 
 var _react = __webpack_require__(10);
 
@@ -33678,7 +33679,9 @@ var Wrapper = _styledComponents2.default.div(_templateObject2, _constants.MARKER
   return props.isInfoWindowOpen ? 300 : 150;
 });
 
-var CloseBtn = _styledComponents2.default.div(_templateObject3);
+var Title = _styledComponents2.default.h2(_templateObject3);
+
+var CloseBtn = _styledComponents2.default.div(_templateObject4);
 
 var InfoWindow = function (_PureComponent) {
   _inherits(InfoWindow, _PureComponent);
@@ -33717,7 +33720,7 @@ var InfoWindow = function (_PureComponent) {
         _reactMotion.Motion,
         { defaultStyle: { y: 0 }, style: { y: (0, _reactMotion.spring)(-10) }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 73
+            lineNumber: 77
           },
           __self: this
         },
@@ -33727,7 +33730,7 @@ var InfoWindow = function (_PureComponent) {
             Object.assign({}, interpolated, {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 75
+                lineNumber: 79
               },
               __self: _this2
             }),
@@ -33735,7 +33738,7 @@ var InfoWindow = function (_PureComponent) {
               Wrapper,
               { isInfoWindowOpen: isInfoWindowOpen, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 76
+                  lineNumber: 80
                 },
                 __self: _this2
               },
@@ -33743,18 +33746,18 @@ var InfoWindow = function (_PureComponent) {
                 CloseBtn,
                 { onClick: onInfoWindowClose, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 77
+                    lineNumber: 81
                   },
                   __self: _this2
                 },
                 'x'
               ),
               _react2.default.createElement(
-                'div',
+                Title,
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 78
+                    lineNumber: 82
                   },
                   __self: _this2
                 },
@@ -33765,7 +33768,7 @@ var InfoWindow = function (_PureComponent) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 81
+                    lineNumber: 85
                   },
                   __self: _this2
                 },
@@ -33775,7 +33778,7 @@ var InfoWindow = function (_PureComponent) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 82
+                    lineNumber: 86
                   },
                   __self: _this2
                 },
@@ -33784,7 +33787,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 83
+                      lineNumber: 87
                     },
                     __self: _this2
                   },
@@ -33795,7 +33798,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 84
+                      lineNumber: 88
                     },
                     __self: _this2
                   },
@@ -33806,7 +33809,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 85
+                      lineNumber: 89
                     },
                     __self: _this2
                   },
@@ -33818,7 +33821,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 86
+                      lineNumber: 90
                     },
                     __self: _this2
                   },
