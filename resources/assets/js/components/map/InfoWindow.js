@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Motion, spring } from 'react-motion';
+import { MARKER_SIZE } from './constants';
 
-const MARKER_SIZE = 20;
+console.log('MARKER_SIZE', MARKER_SIZE);
 
 // use CSS variables to apply --transform to multiple elmts
 const Animated = styled.div`

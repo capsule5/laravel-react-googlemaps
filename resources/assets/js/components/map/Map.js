@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import Marker from './Marker';
 import styled from 'styled-components';
+import { MARKER_SIZE } from './constants';
 
 const Wrapper = styled.div`
   flex: 1;
@@ -83,7 +84,7 @@ class Map extends Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
           options={createMapOptions}
-          hoverDistance={20}
+          hoverDistance={MARKER_SIZE}
         >
           {this.renderMarkers()}
         </GoogleMapReact>

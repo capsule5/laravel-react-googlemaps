@@ -18855,6 +18855,8 @@ var _styledComponents = __webpack_require__(35);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
+var _constants = __webpack_require__(291);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18925,7 +18927,7 @@ var Map = function (_Component) {
           setActivePotager: _this2.setActivePotager,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 66
+            lineNumber: 67
           },
           __self: _this2
         });
@@ -18939,7 +18941,7 @@ var Map = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 81
+            lineNumber: 82
           },
           __self: this
         },
@@ -18949,10 +18951,10 @@ var Map = function (_Component) {
             defaultCenter: this.props.center,
             defaultZoom: this.props.zoom,
             options: createMapOptions,
-            hoverDistance: 20,
+            hoverDistance: _constants.MARKER_SIZE,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 82
+              lineNumber: 83
             },
             __self: this
           },
@@ -33634,6 +33636,8 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _reactMotion = __webpack_require__(286);
 
+var _constants = __webpack_require__(291);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33644,14 +33648,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var MARKER_SIZE = 20;
+console.log('MARKER_SIZE', _constants.MARKER_SIZE);
 
 // use CSS variables to apply --transform to multiple elmts
 var Animated = _styledComponents2.default.div(_templateObject, function (props) {
   return 'translateY(' + props.y + 'px)';
 });
 
-var Wrapper = _styledComponents2.default.div(_templateObject2, MARKER_SIZE / 2, function (props) {
+var Wrapper = _styledComponents2.default.div(_templateObject2, _constants.MARKER_SIZE / 2, function (props) {
   return props.isInfoWindowOpen ? '#FFF' : '#DDD';
 }, function (props) {
   return props.isInfoWindowOpen ? 300 : 150;
@@ -33696,7 +33700,7 @@ var InfoWindow = function (_PureComponent) {
         _reactMotion.Motion,
         { defaultStyle: { y: 0 }, style: { y: (0, _reactMotion.spring)(-10) }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 72
+            lineNumber: 73
           },
           __self: this
         },
@@ -33706,7 +33710,7 @@ var InfoWindow = function (_PureComponent) {
             Object.assign({}, interpolated, {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 74
+                lineNumber: 75
               },
               __self: _this2
             }),
@@ -33714,7 +33718,7 @@ var InfoWindow = function (_PureComponent) {
               Wrapper,
               { isInfoWindowOpen: isInfoWindowOpen, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 75
+                  lineNumber: 76
                 },
                 __self: _this2
               },
@@ -33722,7 +33726,7 @@ var InfoWindow = function (_PureComponent) {
                 CloseBtn,
                 { onClick: onInfoWindowClose, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 76
+                    lineNumber: 77
                   },
                   __self: _this2
                 },
@@ -33733,7 +33737,7 @@ var InfoWindow = function (_PureComponent) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 77
+                    lineNumber: 78
                   },
                   __self: _this2
                 },
@@ -33744,7 +33748,7 @@ var InfoWindow = function (_PureComponent) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 80
+                    lineNumber: 81
                   },
                   __self: _this2
                 },
@@ -33754,7 +33758,7 @@ var InfoWindow = function (_PureComponent) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 81
+                    lineNumber: 82
                   },
                   __self: _this2
                 },
@@ -33763,7 +33767,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 82
+                      lineNumber: 83
                     },
                     __self: _this2
                   },
@@ -33774,7 +33778,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 83
+                      lineNumber: 84
                     },
                     __self: _this2
                   },
@@ -33785,7 +33789,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 84
+                      lineNumber: 85
                     },
                     __self: _this2
                   },
@@ -33797,7 +33801,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 85
+                      lineNumber: 86
                     },
                     __self: _this2
                   },
@@ -35452,6 +35456,8 @@ var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
 var _reactMotion = __webpack_require__(286);
 
+var _constants = __webpack_require__(291);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35462,11 +35468,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var MARKER_SIZE = 20;
-
 var Wrapper = _styledComponents2.default.div(_templateObject, function (props) {
   return props.$hover ? 'green' : 'lightgreen';
-}, MARKER_SIZE, MARKER_SIZE, MARKER_SIZE, MARKER_SIZE / 2, MARKER_SIZE / 2, function (props) {
+}, _constants.MARKER_SIZE, _constants.MARKER_SIZE, _constants.MARKER_SIZE, _constants.MARKER_SIZE / 2, _constants.MARKER_SIZE / 2, function (props) {
   return props.scale;
 });
 
@@ -35502,7 +35506,7 @@ var Marker = function (_PureComponent) {
         _reactMotion.Motion,
         { defaultStyle: { scale: 1 }, style: { scale: (0, _reactMotion.spring)($hover ? 1.5 : 1) }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 44
+            lineNumber: 43
           },
           __self: this
         },
@@ -35510,7 +35514,7 @@ var Marker = function (_PureComponent) {
           return _react2.default.createElement(Wrapper, Object.assign({ $hover: $hover, onClick: onIconClick }, interpolated, {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 46
+              lineNumber: 45
             },
             __self: _this2
           }));
@@ -35527,6 +35531,18 @@ Marker.propTypes = {
   onIconClick: _react2.default.PropTypes.func.isRequired
 };
 exports.default = Marker;
+
+/***/ }),
+/* 291 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var MARKER_SIZE = exports.MARKER_SIZE = 20;
 
 /***/ })
 /******/ ]);

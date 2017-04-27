@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Motion, spring } from 'react-motion';
-
-const MARKER_SIZE = 20;
+import { MARKER_SIZE } from './constants';
 
 const Wrapper = styled.div`
   backgroundColor: ${props => props.$hover ? 'green' : 'lightgreen'};
