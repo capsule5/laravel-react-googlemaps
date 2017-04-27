@@ -9,12 +9,13 @@ const Wrapper = styled.footer`
   fontFamily: 'CircularStd-Book';
   align-items: center;
   justify-content: center;
+  font-size:12px;
 `;
 
 const Footer = () => {
   return (
     <Wrapper>
-      footer
+      BOUTCH À BOUTCH © 2017
     </Wrapper>
   );
 };
