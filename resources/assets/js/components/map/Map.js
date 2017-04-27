@@ -31,13 +31,12 @@ const createMapOptions = function(maps) {
 class Map extends Component {
 
   static defaultProps = {
-    potagers: [],
     center: { lat: 45.91, lng: 6.85 },
     zoom: 12
   };
 
   static propTypes = {
-    potagers: React.PropTypes.array,
+    potagers: React.PropTypes.array.isRequired,
     center: React.PropTypes.object,
     zoom: React.PropTypes.number
   };

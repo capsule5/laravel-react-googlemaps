@@ -8,6 +8,10 @@ import Footer from './components/Footer';
 import styled from 'styled-components';
 import '../fonts/fonts.css';
 // import './utils/styles.js';
+// Redux
+import { connect } from 'react-redux';
+import { potagersFetchData } from './redux/potagers/potagersActions';
+
 
 injectTapEventPlugin();
 
@@ -32,31 +36,20 @@ const Sidebar = styled.div`
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
+  static defaultProps = {
+    // potagers: [],
+    center: { lat: 45.91, lng: 6.85 },
+    zoom: 12
+  };
 
-    this.state = {
-      potagers: []
-    };
-  }
+  static propTypes = {
+    potagersFetchData: React.PropTypes.func.isRequired,
+    potagers: React.PropTypes.array.isRequired
+  };
 
   componentDidMount() {
-    this.getPotagers();
-  }
-
-  getPotagers() {
-    api('GET', 'potagers', {},
-      (data) => {
-        this.setPotagers(data);
-      },
-      (error) => {}
-    );
-  }
-
-  setPotagers(data) {
-    this.setState({
-      potagers: data
-    });
+    // this.getPotagers();
+    this.props.potagersFetchData();
   }
 
   render() {
@@ -65,7 +58,7 @@ class App extends Component {
         <Wrapper>
           <Header/>
           <Main>
-            <Map potagers={this.state.potagers}/>
+            <Map potagers={this.props.potagers}/>
             <Sidebar>
               <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque veritatis adipisci debitis, dolores vitae expedita architecto consequatur cumque quas ratione cum, similique perspiciatis totam hic! Ipsam error aut a, accusantium!</div>
               <div>Hic blanditiis cumque adipisci! Dolores facere necessitatibus sit natus consectetur magni aperiam eos quos laudantium atque beatae, corporis perferendis, delectus explicabo, suscipit? Explicabo ducimus optio temporibus veritatis repellendus qui labore.</div>
@@ -86,4 +79,19 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    potagers: state.potagers.list,
+    potagersHasErrored: state.potagersHasErrored,
+    potagersIsLoading: state.potagersIsLoading
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    potagersFetchData: () => dispatch(potagersFetchData())
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
