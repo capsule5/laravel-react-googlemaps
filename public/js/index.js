@@ -34075,7 +34075,7 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 var MARKER_SIZE = 20;
 var IW_MARGIN = 10;
 
-var Wrapper = _styledComponents2.default.div(_templateObject, MARKER_SIZE / 2 + IW_MARGIN, function (props) {
+var Wrapper = _styledComponents2.default.div(_templateObject, MARKER_SIZE / 2, function (props) {
   return props.isOpen ? '#FFF' : '#DDD';
 }, function (props) {
   return props.isOpen ? 300 : 150;
@@ -34126,7 +34126,7 @@ var InfoWindow = function (_Component) {
 
       return _react2.default.createElement(
         _reactMotion.Motion,
-        { defaultStyle: { y: 0 }, style: { y: (0, _reactMotion.spring)(isOpen ? -10 : 0) }, __source: {
+        { defaultStyle: { y: 0 }, style: { y: (0, _reactMotion.spring)(-10) }, __source: {
             fileName: _jsxFileName,
             lineNumber: 78
           },

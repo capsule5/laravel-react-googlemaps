@@ -7,7 +7,7 @@ const IW_MARGIN = 10;
 
 const Wrapper = styled.div`
   position: absolute;
-  bottom: ${MARKER_SIZE / 2 + IW_MARGIN}px;
+  bottom: ${MARKER_SIZE / 2}px;
   backgroundColor: ${props => props.isOpen ? '#FFF' : '#DDD'};
   border: 1px solid #333;
   color: #333;
@@ -75,7 +75,7 @@ export default class InfoWindow extends Component {
 
 
     return (
-      <Motion defaultStyle={{ y: 0 }} style={{ y: spring(isOpen ? -10 : 0) }}>
+      <Motion defaultStyle={{ y: 0 }} style={{ y: spring(-10) }}>
         { ({ y }) => (
           <CSSVariables y={ y }>
             <Wrapper isOpen={isOpen}>
