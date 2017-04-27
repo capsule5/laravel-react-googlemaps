@@ -6,7 +6,7 @@ const MARKER_SIZE = 20;
 
 // use CSS variables to apply --transform to multiple elmts
 const Animated = styled.div`
-  --transform: ${props => `translate3d(0, ${props.y}px, 0)`};
+  --transform: ${props => `translateY(${props.y}px)`};
 `;
 
 const Wrapper = styled.div`
@@ -75,7 +75,7 @@ export default class InfoWindow extends Component {
       nb_users_max
     } = potager;
 
-
+    console.log('render IW', name);
 
     return (
       <Motion defaultStyle={{ y: 0 }} style={{ y: spring(-10) }}>

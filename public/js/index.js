@@ -33668,7 +33668,7 @@ var MARKER_SIZE = 20;
 
 // use CSS variables to apply --transform to multiple elmts
 var Animated = _styledComponents2.default.div(_templateObject, function (props) {
-  return 'translate3d(0, ' + props.y + 'px, 0)';
+  return 'translateY(' + props.y + 'px)';
 });
 
 var Wrapper = _styledComponents2.default.div(_templateObject2, MARKER_SIZE / 2, function (props) {
@@ -33715,6 +33715,8 @@ var InfoWindow = function (_Component) {
           surface = potager.surface,
           nb_users_max = potager.nb_users_max;
 
+
+      console.log('render IW', name);
 
       return _react2.default.createElement(
         _reactMotion.Motion,
