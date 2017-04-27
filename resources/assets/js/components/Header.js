@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import PotagerForm from './forms/PotagerForm';
 
 const Wrapper = styled.header`
   flex: 0 0 auto;
@@ -68,7 +69,7 @@ export default class Header extends PureComponent {
             open={this.state.open}
             onRequestClose={this.handleClose}
           >
-            The actions in this window were passed in as an array of React objects.
+            <PotagerForm/>
           </Dialog>
         </div>
       </Wrapper>
