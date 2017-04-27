@@ -18991,8 +18991,7 @@ var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  zIndex: ', ';\n'], ['\n  position: absolute;\n  zIndex: ', ';\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  backgroundColor: ', ';\n  width: ', 'px;\n  height: ', 'px;\n  border-radius: ', 'px;\n  border: 1px solid #FFF;\n  position: absolute;\n  left: -', 'px;\n  top: -', 'px;\n  cursor: pointer;\n  /* animated */\n  transform: scale(', ');\n'], ['\n  backgroundColor: ', ';\n  width: ', 'px;\n  height: ', 'px;\n  border-radius: ', 'px;\n  border: 1px solid #FFF;\n  position: absolute;\n  left: -', 'px;\n  top: -', 'px;\n  cursor: pointer;\n  /* animated */\n  transform: scale(', ');\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  zIndex: ', ';\n'], ['\n  position: absolute;\n  zIndex: ', ';\n']);
 
 var _react = __webpack_require__(10);
 
@@ -19002,11 +19001,13 @@ var _styledComponents = __webpack_require__(35);
 
 var _styledComponents2 = _interopRequireDefault(_styledComponents);
 
-var _reactMotion = __webpack_require__(286);
-
 var _InfoWindow = __webpack_require__(274);
 
 var _InfoWindow2 = _interopRequireDefault(_InfoWindow);
+
+var _Icon = __webpack_require__(290);
+
+var _Icon2 = _interopRequireDefault(_Icon);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19018,16 +19019,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
-var MARKER_SIZE = 20;
-
 var Wrapper = _styledComponents2.default.div(_templateObject, function (props) {
   return props.$hover ? 1000 : props.zIndex;
-});
-
-var Icon = _styledComponents2.default.div(_templateObject2, function (props) {
-  return props.$hover ? 'green' : 'lightgreen';
-}, MARKER_SIZE, MARKER_SIZE, MARKER_SIZE, MARKER_SIZE / 2, MARKER_SIZE / 2, function (props) {
-  return props.scale;
 });
 
 var Marker = function (_PureComponent) {
@@ -19039,11 +19032,11 @@ var Marker = function (_PureComponent) {
     var _this = _possibleConstructorReturn(this, (Marker.__proto__ || Object.getPrototypeOf(Marker)).call(this, props));
 
     _this.state = {
-      isOpen: false
+      isInfoWindowOpen: false
     };
 
-    _this.handleClick = _this.handleClick.bind(_this);
-    _this.onClose = _this.onClose.bind(_this);
+    _this.onIconClick = _this.onIconClick.bind(_this);
+    _this.onInfoWindowClose = _this.onInfoWindowClose.bind(_this);
     return _this;
   }
 
@@ -19051,74 +19044,60 @@ var Marker = function (_PureComponent) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       // close IW if another Marker is activated
-      if (nextProps.activePotager.id !== this.props.potager.id && this.state.isOpen) {
-        this.onClose();
+      if (nextProps.activePotager.id !== this.props.potager.id && this.state.isInfoWindowOpen) {
+        this.onInfoWindowClose();
       }
     }
   }, {
-    key: 'onClose',
-    value: function onClose() {
+    key: 'onInfoWindowClose',
+    value: function onInfoWindowClose() {
       this.setState({
-        isOpen: false
+        isInfoWindowOpen: false
       });
     }
   }, {
-    key: 'handleClick',
-    value: function handleClick() {
+    key: 'onIconClick',
+    value: function onIconClick() {
       var _this2 = this;
 
       console.log('click', this.props.potager.name);
       this.setState({
-        isOpen: !this.state.isOpen
+        isInfoWindowOpen: !this.state.isInfoWindowOpen
       }, function () {
-        _this2.props.setActivePotager(_this2.state.isOpen ? _this2.props.potager : {});
+        _this2.props.setActivePotager(_this2.state.isInfoWindowOpen ? _this2.props.potager : {});
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
-      console.log('this.props', this.props);
+      // console.log('this.props', this.props);
       var _props = this.props,
           $hover = _props.$hover,
           potager = _props.potager;
-      var isOpen = this.state.isOpen;
+      var isInfoWindowOpen = this.state.isInfoWindowOpen;
 
 
       return _react2.default.createElement(
         Wrapper,
         { $hover: $hover, __source: {
             fileName: _jsxFileName,
-            lineNumber: 81
+            lineNumber: 65
           },
           __self: this
         },
-        _react2.default.createElement(
-          _reactMotion.Motion,
-          { defaultStyle: { scale: 1 }, style: { scale: (0, _reactMotion.spring)($hover ? 1.5 : 1) }, __source: {
-              fileName: _jsxFileName,
-              lineNumber: 83
-            },
-            __self: this
+        _react2.default.createElement(_Icon2.default, { $hover: $hover, onIconClick: this.onIconClick, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 67
           },
-          function (interpolated) {
-            return _react2.default.createElement(Icon, Object.assign({ $hover: $hover, onClick: _this3.handleClick }, interpolated, {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 85
-              },
-              __self: _this3
-            }));
-          }
-        ),
-        ($hover || isOpen) && _react2.default.createElement(_InfoWindow2.default, {
+          __self: this
+        }),
+        ($hover || isInfoWindowOpen) && _react2.default.createElement(_InfoWindow2.default, {
           potager: potager,
-          onClose: this.onClose,
-          isOpen: isOpen,
+          onInfoWindowClose: this.onInfoWindowClose,
+          isInfoWindowOpen: isInfoWindowOpen,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 91
+            lineNumber: 71
           },
           __self: this
         })
@@ -33673,9 +33652,9 @@ var Animated = _styledComponents2.default.div(_templateObject, function (props) 
 });
 
 var Wrapper = _styledComponents2.default.div(_templateObject2, MARKER_SIZE / 2, function (props) {
-  return props.isOpen ? '#FFF' : '#DDD';
+  return props.isInfoWindowOpen ? '#FFF' : '#DDD';
 }, function (props) {
-  return props.isOpen ? 300 : 150;
+  return props.isInfoWindowOpen ? 300 : 150;
 });
 
 var CloseBtn = _styledComponents2.default.div(_templateObject3);
@@ -33683,15 +33662,10 @@ var CloseBtn = _styledComponents2.default.div(_templateObject3);
 var InfoWindow = function (_PureComponent) {
   _inherits(InfoWindow, _PureComponent);
 
-  function InfoWindow(props) {
+  function InfoWindow() {
     _classCallCheck(this, InfoWindow);
 
-    var _this = _possibleConstructorReturn(this, (InfoWindow.__proto__ || Object.getPrototypeOf(InfoWindow)).call(this, props));
-
-    _this.state = {
-      isOpen: false
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (InfoWindow.__proto__ || Object.getPrototypeOf(InfoWindow)).apply(this, arguments));
   }
 
   _createClass(InfoWindow, [{
@@ -33700,8 +33674,8 @@ var InfoWindow = function (_PureComponent) {
       var _this2 = this;
 
       var _props = this.props,
-          onClose = _props.onClose,
-          isOpen = _props.isOpen,
+          onInfoWindowClose = _props.onInfoWindowClose,
+          isInfoWindowOpen = _props.isInfoWindowOpen,
           potager = _props.potager;
       var name = potager.name,
           description = potager.description,
@@ -33722,7 +33696,7 @@ var InfoWindow = function (_PureComponent) {
         _reactMotion.Motion,
         { defaultStyle: { y: 0 }, style: { y: (0, _reactMotion.spring)(-10) }, __source: {
             fileName: _jsxFileName,
-            lineNumber: 81
+            lineNumber: 72
           },
           __self: this
         },
@@ -33732,23 +33706,23 @@ var InfoWindow = function (_PureComponent) {
             Object.assign({}, interpolated, {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 83
+                lineNumber: 74
               },
               __self: _this2
             }),
             _react2.default.createElement(
               Wrapper,
-              { isOpen: isOpen, __source: {
+              { isInfoWindowOpen: isInfoWindowOpen, __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 84
+                  lineNumber: 75
                 },
                 __self: _this2
               },
-              isOpen && _react2.default.createElement(
+              isInfoWindowOpen && _react2.default.createElement(
                 CloseBtn,
-                { onClick: onClose, __source: {
+                { onClick: onInfoWindowClose, __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 85
+                    lineNumber: 76
                   },
                   __self: _this2
                 },
@@ -33759,18 +33733,18 @@ var InfoWindow = function (_PureComponent) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 86
+                    lineNumber: 77
                   },
                   __self: _this2
                 },
                 name
               ),
-              !isOpen ? _react2.default.createElement(
+              !isInfoWindowOpen ? _react2.default.createElement(
                 'div',
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 89
+                    lineNumber: 80
                   },
                   __self: _this2
                 },
@@ -33780,7 +33754,7 @@ var InfoWindow = function (_PureComponent) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 90
+                    lineNumber: 81
                   },
                   __self: _this2
                 },
@@ -33789,7 +33763,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 91
+                      lineNumber: 82
                     },
                     __self: _this2
                   },
@@ -33800,7 +33774,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 92
+                      lineNumber: 83
                     },
                     __self: _this2
                   },
@@ -33811,7 +33785,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 93
+                      lineNumber: 84
                     },
                     __self: _this2
                   },
@@ -33823,7 +33797,7 @@ var InfoWindow = function (_PureComponent) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 94
+                      lineNumber: 85
                     },
                     __self: _this2
                   },
@@ -33843,8 +33817,8 @@ var InfoWindow = function (_PureComponent) {
 
 InfoWindow.propTypes = {
   potager: _react2.default.PropTypes.object,
-  onClose: _react2.default.PropTypes.func.isRequired,
-  isOpen: _react2.default.PropTypes.bool.isRequired
+  onInfoWindowClose: _react2.default.PropTypes.func.isRequired,
+  isInfoWindowOpen: _react2.default.PropTypes.bool.isRequired
 };
 InfoWindow.defaultProps = {
   potager: {}
@@ -35451,6 +35425,108 @@ try {
 
 module.exports = g;
 
+
+/***/ }),
+/* 290 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers/resources/assets/js/components/map/Icon.js';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _templateObject = _taggedTemplateLiteral(['\n  backgroundColor: ', ';\n  width: ', 'px;\n  height: ', 'px;\n  border-radius: ', 'px;\n  border: 1px solid #FFF;\n  position: absolute;\n  left: -', 'px;\n  top: -', 'px;\n  cursor: pointer;\n  /* animated */\n  transform: scale(', ');\n'], ['\n  backgroundColor: ', ';\n  width: ', 'px;\n  height: ', 'px;\n  border-radius: ', 'px;\n  border: 1px solid #FFF;\n  position: absolute;\n  left: -', 'px;\n  top: -', 'px;\n  cursor: pointer;\n  /* animated */\n  transform: scale(', ');\n']);
+
+var _react = __webpack_require__(10);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _styledComponents = __webpack_require__(35);
+
+var _styledComponents2 = _interopRequireDefault(_styledComponents);
+
+var _reactMotion = __webpack_require__(286);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var MARKER_SIZE = 20;
+
+var Wrapper = _styledComponents2.default.div(_templateObject, function (props) {
+  return props.$hover ? 'green' : 'lightgreen';
+}, MARKER_SIZE, MARKER_SIZE, MARKER_SIZE, MARKER_SIZE / 2, MARKER_SIZE / 2, function (props) {
+  return props.scale;
+});
+
+var Marker = function (_PureComponent) {
+  _inherits(Marker, _PureComponent);
+
+  function Marker(props) {
+    _classCallCheck(this, Marker);
+
+    var _this = _possibleConstructorReturn(this, (Marker.__proto__ || Object.getPrototypeOf(Marker)).call(this, props));
+
+    _this.state = {
+      isOpen: false
+    };
+
+    // this.handleClick = this.handleClick.bind(this);
+    // this.onClose = this.onClose.bind(this);
+    return _this;
+  }
+
+  _createClass(Marker, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      // console.log('this.props', this.props);
+      var _props = this.props,
+          $hover = _props.$hover,
+          onIconClick = _props.onIconClick;
+
+
+      return _react2.default.createElement(
+        _reactMotion.Motion,
+        { defaultStyle: { scale: 1 }, style: { scale: (0, _reactMotion.spring)($hover ? 1.5 : 1) }, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 44
+          },
+          __self: this
+        },
+        function (interpolated) {
+          return _react2.default.createElement(Wrapper, Object.assign({ $hover: $hover, onClick: onIconClick }, interpolated, {
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 46
+            },
+            __self: _this2
+          }));
+        }
+      );
+    }
+  }]);
+
+  return Marker;
+}(_react.PureComponent);
+
+Marker.propTypes = {
+  $hover: _react2.default.PropTypes.bool.isRequired,
+  onIconClick: _react2.default.PropTypes.func.isRequired
+};
+exports.default = Marker;
 
 /***/ })
 /******/ ]);

@@ -12,10 +12,10 @@ const Animated = styled.div`
 const Wrapper = styled.div`
   position: absolute;
   bottom: ${MARKER_SIZE / 2}px;
-  backgroundColor: ${props => props.isOpen ? '#FFF' : '#DDD'};
+  backgroundColor: ${props => props.isInfoWindowOpen ? '#FFF' : '#DDD'};
   border: 1px solid #333;
   color: #333;
-  width: ${props => props.isOpen ? 300 : 150}px;
+  width: ${props => props.isInfoWindowOpen ? 300 : 150}px;
   padding: 10px;
   z-index: 999;
   /* animated */
@@ -40,26 +40,17 @@ export default class InfoWindow extends PureComponent {
 
   static propTypes = {
     potager: React.PropTypes.object,
-    onClose: React.PropTypes.func.isRequired,
-    isOpen: React.PropTypes.bool.isRequired
+    onInfoWindowClose: React.PropTypes.func.isRequired,
+    isInfoWindowOpen: React.PropTypes.bool.isRequired
   };
 
   static defaultProps = {
     potager: {}
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOpen: false
-    };
-  }
-
-
   render() {
 
-    const { onClose, isOpen, potager } = this.props;
+    const { onInfoWindowClose, isInfoWindowOpen, potager } = this.props;
     const {
       name,
       description,
@@ -81,11 +72,11 @@ export default class InfoWindow extends PureComponent {
       <Motion defaultStyle={{ y: 0 }} style={{ y: spring(-10) }}>
         { interpolated =>
           <Animated {...interpolated} >
-            <Wrapper isOpen={isOpen}>
-              { isOpen && <CloseBtn onClick={onClose}>x</CloseBtn> }
+            <Wrapper isInfoWindowOpen={isInfoWindowOpen}>
+              { isInfoWindowOpen && <CloseBtn onClick={onInfoWindowClose}>x</CloseBtn> }
               <div>{name}</div>
               {
-                ! isOpen ?
+                ! isInfoWindowOpen ?
                 <div>cliquer pour plus d'infos</div> :
                 <div>
                   <div>{description}</div>
