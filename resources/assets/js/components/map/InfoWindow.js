@@ -3,7 +3,11 @@ import styled from 'styled-components';
 import { Motion, spring } from 'react-motion';
 
 const MARKER_SIZE = 20;
-const IW_MARGIN = 10;
+
+// use CSS variables to apply --transform to multiple elmts
+const Animated = styled.div`
+  --transform: ${props => `translate3d(0, ${props.y}px, 0)`};
+`;
 
 const Wrapper = styled.div`
   position: absolute;
@@ -14,6 +18,7 @@ const Wrapper = styled.div`
   width: ${props => props.isOpen ? 300 : 150}px;
   padding: 10px;
   z-index: 999;
+  /* animated */
   transform: var(--transform);
 `;
 
@@ -29,9 +34,7 @@ const CloseBtn = styled.div`
   }
 `;
 
-const CSSVariables = styled.div`
-  --transform: ${props => `translate3d(0, ${props.y}px, 0)`};
-`;
+
 
 export default class InfoWindow extends Component {
 
@@ -76,8 +79,8 @@ export default class InfoWindow extends Component {
 
     return (
       <Motion defaultStyle={{ y: 0 }} style={{ y: spring(-10) }}>
-        { ({ y }) => (
-          <CSSVariables y={ y }>
+        { interpolated =>
+          <Animated {...interpolated} >
             <Wrapper isOpen={isOpen}>
               { isOpen && <CloseBtn onClick={onClose}>x</CloseBtn> }
               <div>{name}</div>
@@ -92,8 +95,8 @@ export default class InfoWindow extends Component {
                 </div>
               }
             </Wrapper>
-          </CSSVariables>
-        )}
+          </Animated>
+        }
       </Motion>
     );
   }

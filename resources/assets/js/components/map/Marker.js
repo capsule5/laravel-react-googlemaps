@@ -20,6 +20,7 @@ const Icon = styled.div`
   left: -${ MARKER_SIZE / 2}px;
   top: -${MARKER_SIZE / 2}px;
   cursor: pointer;
+  /* animated */
   transform: scale(${props => props.scale});
 `;
 
@@ -79,9 +80,9 @@ export default class Marker extends Component {
       <Wrapper $hover={$hover}>
 
         <Motion defaultStyle={{ scale: 1 }} style={{ scale: spring($hover ? 1.5 : 1) }}>
-          { ({ scale }) => (
-            <Icon $hover={$hover} onClick={this.handleClick} scale={scale}/>
-          )}
+          { interpolated =>
+            <Icon $hover={$hover} onClick={this.handleClick} {...interpolated}/>
+          }
         </Motion>
 
         {

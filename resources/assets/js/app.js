@@ -4,7 +4,7 @@ import Map from './components/map/Map';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import styled from 'styled-components';
-import '../fonts/fonts.css';
+// import '../fonts/fonts.css';
 // import './utils/styles.js';
 
 const Wrapper = styled.section`
