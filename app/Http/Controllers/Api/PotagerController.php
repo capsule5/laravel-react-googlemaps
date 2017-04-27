@@ -19,7 +19,8 @@ class PotagerController extends Controller
      */
     public function index()
     {
-        return Potager::with('users', 'users.roles')
+        return Potager::valid()
+        ->with('users', 'users.roles')
         ->orderBy('updated_at', 'desc')
         ->get();
     }

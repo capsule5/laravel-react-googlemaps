@@ -21,6 +21,11 @@ class Potager extends Model
         return $this->belongsToMany('App\User')->withTimestamps();
     }
 
+    public function scopeValid($query) 
+    {
+        $query->where('is_valid',1);
+    }
+
     public function owners() 
     {
         return $this->users()->owners();
