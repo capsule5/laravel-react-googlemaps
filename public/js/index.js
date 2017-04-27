@@ -19030,8 +19030,8 @@ var Icon = _styledComponents2.default.div(_templateObject2, function (props) {
   return props.scale;
 });
 
-var Marker = function (_Component) {
-  _inherits(Marker, _Component);
+var Marker = function (_PureComponent) {
+  _inherits(Marker, _PureComponent);
 
   function Marker(props) {
     _classCallCheck(this, Marker);
@@ -19079,6 +19079,7 @@ var Marker = function (_Component) {
     value: function render() {
       var _this3 = this;
 
+      console.log('this.props', this.props);
       var _props = this.props,
           $hover = _props.$hover,
           potager = _props.potager;
@@ -19089,7 +19090,7 @@ var Marker = function (_Component) {
         Wrapper,
         { $hover: $hover, __source: {
             fileName: _jsxFileName,
-            lineNumber: 80
+            lineNumber: 81
           },
           __self: this
         },
@@ -19097,7 +19098,7 @@ var Marker = function (_Component) {
           _reactMotion.Motion,
           { defaultStyle: { scale: 1 }, style: { scale: (0, _reactMotion.spring)($hover ? 1.5 : 1) }, __source: {
               fileName: _jsxFileName,
-              lineNumber: 82
+              lineNumber: 83
             },
             __self: this
           },
@@ -19105,7 +19106,7 @@ var Marker = function (_Component) {
             return _react2.default.createElement(Icon, Object.assign({ $hover: $hover, onClick: _this3.handleClick }, interpolated, {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 84
+                lineNumber: 85
               },
               __self: _this3
             }));
@@ -19117,7 +19118,7 @@ var Marker = function (_Component) {
           isOpen: isOpen,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 90
+            lineNumber: 91
           },
           __self: this
         })
@@ -19126,7 +19127,7 @@ var Marker = function (_Component) {
   }]);
 
   return Marker;
-}(_react.Component);
+}(_react.PureComponent);
 
 Marker.propTypes = {
   potager: _react2.default.PropTypes.object,
@@ -33679,8 +33680,8 @@ var Wrapper = _styledComponents2.default.div(_templateObject2, MARKER_SIZE / 2, 
 
 var CloseBtn = _styledComponents2.default.div(_templateObject3);
 
-var InfoWindow = function (_Component) {
-  _inherits(InfoWindow, _Component);
+var InfoWindow = function (_PureComponent) {
+  _inherits(InfoWindow, _PureComponent);
 
   function InfoWindow(props) {
     _classCallCheck(this, InfoWindow);
@@ -33715,8 +33716,7 @@ var InfoWindow = function (_Component) {
           surface = potager.surface,
           nb_users_max = potager.nb_users_max;
 
-
-      console.log('render IW', name);
+      // console.log('render IW', name);
 
       return _react2.default.createElement(
         _reactMotion.Motion,
@@ -33839,7 +33839,7 @@ var InfoWindow = function (_Component) {
   }]);
 
   return InfoWindow;
-}(_react.Component);
+}(_react.PureComponent);
 
 InfoWindow.propTypes = {
   potager: _react2.default.PropTypes.object,

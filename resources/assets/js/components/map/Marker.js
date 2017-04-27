@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Motion, spring } from 'react-motion';
 import InfoWindow from './InfoWindow';
@@ -24,7 +24,7 @@ const Icon = styled.div`
   transform: scale(${props => props.scale});
 `;
 
-export default class Marker extends Component {
+export default class Marker extends PureComponent {
 
   static propTypes = {
     potager: React.PropTypes.object,
@@ -72,6 +72,7 @@ export default class Marker extends Component {
   }
 
   render() {
+    console.log('this.props', this.props);
     const { $hover, potager } = this.props;
     const { isOpen } = this.state;
 

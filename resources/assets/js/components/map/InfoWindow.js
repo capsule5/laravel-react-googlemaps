@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Motion, spring } from 'react-motion';
 
@@ -36,7 +36,7 @@ const CloseBtn = styled.div`
 
 
 
-export default class InfoWindow extends Component {
+export default class InfoWindow extends PureComponent {
 
   static propTypes = {
     potager: React.PropTypes.object,
@@ -75,7 +75,7 @@ export default class InfoWindow extends Component {
       nb_users_max
     } = potager;
 
-    console.log('render IW', name);
+    // console.log('render IW', name);
 
     return (
       <Motion defaultStyle={{ y: 0 }} style={{ y: spring(-10) }}>
@@ -92,6 +92,7 @@ export default class InfoWindow extends Component {
                   <div>{address}</div>
                   <div>surface: {surface}</div>
                   <div>Nb de jardiniers max: {nb_users_max}</div>
+
                 </div>
               }
             </Wrapper>
