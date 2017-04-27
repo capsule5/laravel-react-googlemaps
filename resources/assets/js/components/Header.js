@@ -12,10 +12,14 @@ const Wrapper = styled.header`
   padding: 0 20px;
 `;
 
+const Title = styled.h1`
+  font-size: 20px;
+`;
+
 const Header = () => {
   return (
     <Wrapper>
-      Le potager de mon pote agé
+      <Title>Le potager de mon pote agé</Title>
     </Wrapper>
   );
 };

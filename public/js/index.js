@@ -18621,7 +18621,8 @@ var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _templateObject = _taggedTemplateLiteral(['\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow:\'hidden\';\n'], ['\n  display: flex;\n  flex-direction: column;\n  height: 100%;\n  overflow:\'hidden\';\n']),
-    _templateObject2 = _taggedTemplateLiteral(['\n  background-color: #CCC;\n  flex: 1;\n  position: relative;/* need this to position inner content */\n'], ['\n  background-color: #CCC;\n  flex: 1;\n  position: relative;/* need this to position inner content */\n']);
+    _templateObject2 = _taggedTemplateLiteral(['\n  background-color: #FFF;\n  display: flex;\n  flex: 1;\n  position: relative;/* need this to position inner content */\n'], ['\n  background-color: #FFF;\n  display: flex;\n  flex: 1;\n  position: relative;/* need this to position inner content */\n']),
+    _templateObject3 = _taggedTemplateLiteral(['\n  width:400px;\n  overflow-y:auto;\n'], ['\n  width:400px;\n  overflow-y:auto;\n']);
 
 var _react = __webpack_require__(10);
 
@@ -18661,6 +18662,8 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 var Wrapper = _styledComponents2.default.div(_templateObject);
 
 var Main = _styledComponents2.default.div(_templateObject2);
+
+var Sidebar = _styledComponents2.default.div(_templateObject3);
 
 var App = function (_Component) {
   _inherits(App, _Component);
@@ -18705,14 +18708,14 @@ var App = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 54
+            lineNumber: 60
           },
           __self: this
         },
         _react2.default.createElement(_Header2.default, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 55
+            lineNumber: 61
           },
           __self: this
         }),
@@ -18721,21 +18724,141 @@ var App = function (_Component) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 56
+              lineNumber: 62
             },
             __self: this
           },
           _react2.default.createElement(_Map2.default, { potagers: this.state.potagers, __source: {
               fileName: _jsxFileName,
-              lineNumber: 57
+              lineNumber: 63
             },
             __self: this
-          })
+          }),
+          _react2.default.createElement(
+            Sidebar,
+            {
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 64
+              },
+              __self: this
+            },
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 65
+                },
+                __self: this
+              },
+              'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque veritatis adipisci debitis, dolores vitae expedita architecto consequatur cumque quas ratione cum, similique perspiciatis totam hic! Ipsam error aut a, accusantium!'
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 66
+                },
+                __self: this
+              },
+              'Hic blanditiis cumque adipisci! Dolores facere necessitatibus sit natus consectetur magni aperiam eos quos laudantium atque beatae, corporis perferendis, delectus explicabo, suscipit? Explicabo ducimus optio temporibus veritatis repellendus qui labore.'
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 67
+                },
+                __self: this
+              },
+              'Optio veniam, animi, reprehenderit, repellendus reiciendis dignissimos ipsum tempore cum explicabo porro totam tenetur maxime ducimus quisquam beatae unde rem assumenda. Alias odit eius veniam natus voluptatibus porro ullam repellat.'
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 68
+                },
+                __self: this
+              },
+              'Dolor dignissimos, molestiae aut accusantium harum sunt earum dolorem tempore consequatur deserunt quidem ipsam impedit culpa iusto hic totam assumenda quo fuga eaque ab officiis. Molestiae voluptatibus ad nam molestias.'
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 69
+                },
+                __self: this
+              },
+              'Labore porro non praesentium voluptates, tempore rerum mollitia facere incidunt animi ipsa dolorem aliquam sint ipsum voluptatum molestiae, at qui nam! Maxime, dolorem odio. Explicabo modi possimus, consequuntur necessitatibus iure.'
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 70
+                },
+                __self: this
+              },
+              'Quas eos veniam voluptates odio laudantium doloremque temporibus provident recusandae sequi cum praesentium corporis pariatur fuga quisquam, quos vel quam. Esse animi neque consequuntur cum sed dolorem deserunt minus doloremque.'
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 71
+                },
+                __self: this
+              },
+              'Similique culpa pariatur aut eaque est optio sed sapiente, soluta, numquam laudantium hic, voluptatem quod iure placeat. Earum rem dolor delectus officiis repellat quia harum reprehenderit, at sapiente eaque ipsam?'
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 72
+                },
+                __self: this
+              },
+              'Sequi dolor assumenda, rem expedita dolores voluptas quis officiis facere eaque magni aut, repellat blanditiis maxime eligendi asperiores placeat vitae sed aliquam ratione, nulla commodi eveniet. Culpa, ullam commodi laudantium.'
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 73
+                },
+                __self: this
+              },
+              'Alias mollitia voluptatem fuga voluptas quidem accusantium eum minima, illo et harum, placeat vel? Doloremque sapiente placeat doloribus minima iste illo est, quis? Itaque, facere, assumenda fugit odit error aliquid!'
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 74
+                },
+                __self: this
+              },
+              'Laboriosam praesentium ut a, autem accusantium labore distinctio saepe assumenda tempora eaque nesciunt, totam quae odio doloremque placeat numquam obcaecati est? Eum ipsa esse, adipisci labore aspernatur incidunt iure accusamus.'
+            )
+          )
         ),
         _react2.default.createElement(_Footer2.default, {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 59
+            lineNumber: 77
           },
           __self: this
         })
@@ -18804,7 +18927,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers/resources/assets/js/components/Header.js';
 
-var _templateObject = _taggedTemplateLiteral(['\n  flex: 0 0 auto;\n  height: 40px;\n  background-color:#FFF;\n  color:#000;\n  fontFamily: \'Circular-Black\';\n  display: flex;\n  align-items: center;\n  padding: 0 20px;\n'], ['\n  flex: 0 0 auto;\n  height: 40px;\n  background-color:#FFF;\n  color:#000;\n  fontFamily: \'Circular-Black\';\n  display: flex;\n  align-items: center;\n  padding: 0 20px;\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  flex: 0 0 auto;\n  height: 40px;\n  background-color:#FFF;\n  color:#000;\n  fontFamily: \'Circular-Black\';\n  display: flex;\n  align-items: center;\n  padding: 0 20px;\n'], ['\n  flex: 0 0 auto;\n  height: 40px;\n  background-color:#FFF;\n  color:#000;\n  fontFamily: \'Circular-Black\';\n  display: flex;\n  align-items: center;\n  padding: 0 20px;\n']),
+    _templateObject2 = _taggedTemplateLiteral(['\n  font-size: 20px;\n'], ['\n  font-size: 20px;\n']);
 
 var _react = __webpack_require__(10);
 
@@ -18820,17 +18944,29 @@ function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defi
 
 var Wrapper = _styledComponents2.default.header(_templateObject);
 
+var Title = _styledComponents2.default.h1(_templateObject2);
+
 var Header = function Header() {
   return _react2.default.createElement(
     Wrapper,
     {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17
+        lineNumber: 21
       },
       __self: undefined
     },
-    'Le potager de mon pote ag\xE9'
+    _react2.default.createElement(
+      Title,
+      {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 22
+        },
+        __self: undefined
+      },
+      'Le potager de mon pote ag\xE9'
+    )
   );
 };
 
@@ -18850,7 +18986,7 @@ var _jsxFileName = '/Users/sebastienpicot/Dropbox/DP_Sites/sites/boutch/potagers
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _templateObject = _taggedTemplateLiteral(['\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  // fontFamily: \'Circular-Black\';\n'], ['\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  // fontFamily: \'Circular-Black\';\n']);
+var _templateObject = _taggedTemplateLiteral(['\n  flex:1;\n'], ['\n  flex:1;\n']);
 
 var _react = __webpack_require__(10);
 
@@ -18891,7 +19027,7 @@ var createMapOptions = function createMapOptions(maps) {
   // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
   return {
     zoomControlOptions: {
-      position: maps.ControlPosition.LEFT_CENTER,
+      position: maps.ControlPosition.RIGHT_CENTER,
       style: maps.ZoomControlStyle.SMALL
     },
     mapTypeControlOptions: {
@@ -18940,7 +19076,7 @@ var Map = function (_Component) {
           setActivePotager: _this2.setActivePotager,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 68
+            lineNumber: 65
           },
           __self: _this2
         });
@@ -18954,7 +19090,7 @@ var Map = function (_Component) {
         {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 83
+            lineNumber: 80
           },
           __self: this
         },
@@ -18967,7 +19103,7 @@ var Map = function (_Component) {
             hoverDistance: _constants.MARKER_SIZE,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 84
+              lineNumber: 81
             },
             __self: this
           },
