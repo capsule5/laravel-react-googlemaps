@@ -6,10 +6,9 @@ const Wrapper = styled.li`
   padding:10px;
   border-bottom: 1px solid #CCC;
   font-size: 0.9em;
-  fontFamily: 'CircularStd-Book';
 `;
 
-const Title = styled.h2`
+const Title = styled.h3`
   margin: 0 0 5px 0;
 `;
 
