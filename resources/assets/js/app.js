@@ -7,10 +7,17 @@ import styled from 'styled-components';
 // import '../fonts/fonts.css';
 // import './utils/styles.js';
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow:'hidden';
+`;
+
+const Main = styled.div`
+  background-color: #CCC;
+  flex: 1;
+  position: relative;/* need this to position inner content */
 `;
 
 class App extends Component {
@@ -46,7 +53,9 @@ class App extends Component {
     return (
       <Wrapper>
         <Header/>
-        <Map potagers={this.state.potagers}/>
+        <Main>
+          <Map potagers={this.state.potagers}/>
+        </Main>
         <Footer/>
       </Wrapper>
     );

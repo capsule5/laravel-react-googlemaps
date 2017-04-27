@@ -14,6 +14,7 @@
         <title>Le potager de mon pote agé</title>
 
         <style>
+            body{ overflow:hidden; height:100%;}
             #root { width:100%; height:100%; position: absolute; top:0; left:0}
         </style>
     </head>

@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import { MARKER_SIZE } from './constants';
 
 const Wrapper = styled.div`
-  flex: 1;
-  position: relative;/* need this to position inner content */
-  fontFamily: 'Circular-Black';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  // fontFamily: 'Circular-Black';
 `;
 
 const createMapOptions = function(maps) {
@@ -19,13 +20,13 @@ const createMapOptions = function(maps) {
   // "MaxZoomStatus", "StreetViewStatus", "TransitMode", "TransitRoutePreference", "TravelMode", "UnitSystem"
   return {
     zoomControlOptions: {
-      position: maps.ControlPosition.RIGHT_CENTER,
+      position: maps.ControlPosition.LEFT_CENTER,
       style: maps.ZoomControlStyle.SMALL
     },
     mapTypeControlOptions: {
       position: maps.ControlPosition.TOP_RIGHT
     },
-    mapTypeControl: true,
+    mapTypeControl: false,
     mapTypeId: google.maps.MapTypeId.SATELLITE
   };
 };
