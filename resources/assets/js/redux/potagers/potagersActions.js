@@ -1,27 +1,35 @@
 import { api } from '../../utils/api';
 
-export const potagersHasErrored = (bool) => {
+const potagersHasErrored = (bool) => {
   return {
     type: 'POTAGERS_HAS_ERRORED',
     hasErrored: bool
   };
 };
 
-export const potagersIsLoading = (bool) => {
+const potagersIsLoading = (bool) => {
   return {
     type: 'POTAGERS_IS_LOADING',
     isLoading: bool
   };
 };
 
-export const potagersFetchDataSuccess = (potagers) => {
+const potagersFetchDataSuccess = (potagers) => {
   return {
     type: 'POTAGERS_FETCH_DATA_SUCCESS',
     potagers
   };
 };
 
+const potagersStoreSuccess = (data) => {
+  console.log('potagersStoreSuccess', data);
+  return {
+    type: 'POTAGERS_STORE_SUCCESS',
+    data
+  };
+};
 
+// index
 export const potagersFetchData = () => {
   console.log('potagersFetchData');
   return (dispatch) => {
@@ -40,3 +48,24 @@ export const potagersFetchData = () => {
     );
   };
 };
+
+// store
+export const potagersStore = (body) => {
+  console.log('potagersFetchData');
+  return (dispatch) => {
+    dispatch(potagersIsLoading(true));
+
+    api('POST', 'potagerWithUser', body,
+      (data) => {
+        dispatch(potagersIsLoading(false));
+        dispatch(potagersHasErrored(false));
+        dispatch(potagersStoreSuccess(data));
+      },
+      (error) => {
+        dispatch(potagersIsLoading(false));
+        dispatch(potagersHasErrored(true));
+      }
+    );
+  };
+};
+

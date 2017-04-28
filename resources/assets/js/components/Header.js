@@ -30,46 +30,35 @@ export default class Header extends PureComponent {
       open: false
     };
 
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleOpenDialog = this.handleOpenDialog.bind(this);
+    this.handleCloseDialog = this.handleCloseDialog.bind(this);
   }
 
-  handleOpen() {
+  handleOpenDialog() {
     this.setState({ open: true });
   }
 
-  handleClose() {
+  handleCloseDialog() {
     this.setState({ open: false });
   }
 
   render() {
-    const actions = [
-      <FlatButton
-        label='Cancel'
-        primary={true}
-        onTouchTap={this.handleClose}
-      />,
-      <FlatButton
-        label='Submit'
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.handleClose}
-      />
-    ];
 
     return (
       <Wrapper>
         <Title>Le potager de mon pote âgé</Title>
         <div>
-          <RaisedButton label="Ajouter un potager" onTouchTap={this.handleOpen} />
+          <RaisedButton label='Ajouter un potager' onTouchTap={this.handleOpenDialog} />
           <Dialog
-            title="Ajouter un potager"
-            actions={actions}
+            title='Ajouter un potager'
+            // actions={actions}
             modal={false}
             open={this.state.open}
-            onRequestClose={this.handleClose}
+            onRequestClose={this.handleCloseDialog}
           >
-            <PotagerForm/>
+            <PotagerForm
+              closeDialog={this.handleCloseDialog}
+            />
           </Dialog>
         </div>
       </Wrapper>

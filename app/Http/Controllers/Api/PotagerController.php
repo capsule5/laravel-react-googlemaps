@@ -48,6 +48,17 @@ class PotagerController extends Controller
         return response()->json(['success' => true, 'potager_id' => $potager->id]);
     }
 
+    public function storePotagerWithUser(Request $request)
+    {
+        // dd($request->all());
+        // $input = $request->all();
+        // $potager = potager::create($input);
+        
+        return response()->json(['success' => true, 'request' => $request->all()]);
+    }
+
+    
+
     /**
      * Update the specified resource in storage.
      * 
