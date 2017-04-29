@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import { RaisedButton, Dialog } from 'material-ui';
+import JardinierForm from '../forms/JardinierForm';
 
 
 const Wrapper = styled.li`
@@ -18,6 +20,26 @@ export default class Header extends PureComponent {
   static propTypes = {
     potager: React.PropTypes.object.isRequired
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: false
+    };
+
+    this.handleOpenDialog = this.handleOpenDialog.bind(this);
+    this.handleCloseDialog = this.handleCloseDialog.bind(this);
+  }
+
+  handleOpenDialog() {
+    this.setState({ open: true });
+  }
+
+  handleCloseDialog() {
+    this.setState({ open: false });
+  }
+
 
   render() {
     const { potager } = this.props;
@@ -41,6 +63,21 @@ export default class Header extends PureComponent {
         <Title>{name}</Title>
         <div>Surface: {surface}</div>
         <div>Nombre de jardiniers max: { nb_users_max }</div>
+        <RaisedButton
+          fullWidth={true}
+          label='Je souhaite jardiner ici'
+          onTouchTap={this.handleOpenDialog}
+        />
+        <Dialog
+          modal={false}
+          open={this.state.open}
+          onRequestClose={this.handleCloseDialog}
+        >
+          <JardinierForm
+            closeDialog={this.handleCloseDialog}
+            potager={potager}
+          />
+        </Dialog>
       </Wrapper>
     );
   }

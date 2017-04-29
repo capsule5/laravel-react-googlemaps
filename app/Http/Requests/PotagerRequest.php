@@ -34,7 +34,7 @@ class PotagerRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'name' => 'required|min:3|max:20',
+                    'name' => 'required|unique:potagers|min:3|max:20',
                     'address' => 'required|unique:potagers',
                     'city' => 'required',
                     'country' => 'required',
@@ -49,7 +49,7 @@ class PotagerRequest extends FormRequest
             case 'PATCH':
             {
                 return [
-                    'name' => 'required|min:3|max:20',
+                    'name' => ['required','min:3','max:20',Rule::unique('potagers')->ignore($this->route('potager'))],
                     'address' => ['required',Rule::unique('potagers')->ignore($this->route('potager'))],
                     'city' => 'required',
                     'country' => 'required',

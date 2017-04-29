@@ -36,7 +36,7 @@ class UserRequest extends FormRequest
             case 'POST':
             {
                 return [
-                    'name' => 'required|min:3|max:20',
+                    'name' => 'required|unique:users|min:3|max:20',
                     'phone' => 'required',
                     // 'address' => 'required',
                     'email' => 'required|email|unique:users',
@@ -45,7 +45,7 @@ class UserRequest extends FormRequest
             case 'PATCH':
             {
                 return [
-                    'name' => 'required|min:3|max:20',
+                    'name' => ['required','min:3','max:20',Rule::unique('users')->ignore($this->route('user'))],
                     'phone' => 'required',
                     // 'address' => 'required',
                     'email' => ['required','email',Rule::unique('users')->ignore($this->route('user'))],

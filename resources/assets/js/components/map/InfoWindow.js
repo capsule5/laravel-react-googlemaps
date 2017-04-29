@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import { RaisedButton, Dialog } from 'material-ui';
 import { Motion, spring } from 'react-motion';
 import { MARKER_SIZE } from './constants';
+import JardinierForm from '../forms/JardinierForm';
+
 
 console.log('MARKER_SIZE', MARKER_SIZE);
 
@@ -53,10 +56,30 @@ export default class InfoWindow extends PureComponent {
     potager: {}
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open: false
+    };
+
+    this.handleOpenDialog = this.handleOpenDialog.bind(this);
+    this.handleCloseDialog = this.handleCloseDialog.bind(this);
+  }
+
+  handleOpenDialog() {
+    this.setState({ open: true });
+  }
+
+  handleCloseDialog() {
+    this.setState({ open: false });
+  }
+
   render() {
 
     const { onInfoWindowClose, isInfoWindowOpen, potager } = this.props;
     const {
+      id,
       name,
       description,
       is_valid,
@@ -88,7 +111,21 @@ export default class InfoWindow extends PureComponent {
                   <div>{address}</div>
                   <div>surface: {surface}</div>
                   <div>Nb de jardiniers max: {nb_users_max}</div>
-
+                  <RaisedButton
+                    fullWidth={true}
+                    label='Je souhaite jardiner ici'
+                    onTouchTap={this.handleOpenDialog}
+                  />
+                  <Dialog
+                    modal={false}
+                    open={this.state.open}
+                    onRequestClose={this.handleCloseDialog}
+                  >
+                    <JardinierForm
+                      closeDialog={this.handleCloseDialog}
+                      potager={potager}
+                    />
+                  </Dialog>
                 </div>
               }
             </Wrapper>
