@@ -14,7 +14,7 @@ import {
 import { AutoComplete } from 'material-ui';
 // Redux
 import { connect } from 'react-redux';
-import { potagersStore } from '../../redux/potagers/potagersActions';
+// import { potagersStore } from '../../redux/potagers/potagersActions';
 import { api, apiGeocode } from '../../utils/api';
 
 
@@ -64,8 +64,8 @@ const errorMessages = {
 class PotagerForm extends Component {
 
   static propTypes = {
-    closeDialog: React.PropTypes.func.isRequired,
-    potagersStore: React.PropTypes.func.isRequired
+    closeDialog: React.PropTypes.func.isRequired
+    // potagersStore: React.PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -163,7 +163,6 @@ class PotagerForm extends Component {
         if (callback.success) {
           console.log('potager has been destroyed', callback.potager_id);
         } else {
-          // delete potager just created
           this.setState({ error: callback });
         }
       }
@@ -184,9 +183,6 @@ class PotagerForm extends Component {
   }
 
   onUpdatePotagerInputAddress(val) {
-    // if (val.length > 5) {
-    //   this.geocodeAddress(val);
-    // }
     this.geocodeAddress(val);
   }
 
@@ -394,10 +390,12 @@ class PotagerForm extends Component {
 //   };
 // };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    potagersStore: (data) => dispatch(potagersStore(data))
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     potagersStore: (data) => dispatch(potagersStore(data))
+//   };
+// };
 
-export default connect(null, mapDispatchToProps)(PotagerForm);
+// export default connect(null, mapDispatchToProps)(PotagerForm);
+
+export default PotagerForm;
