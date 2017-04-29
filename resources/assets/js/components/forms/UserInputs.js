@@ -1,22 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { FormsyText } from 'formsy-material-ui/lib';
 import { errorMessages } from './constants';
+import { FormGroupStyles } from './styles';
 
-const Wrapper = styled.div`
+const Wrapper = styled.div``;
+const FormGroup = styled.div` ${FormGroupStyles} `;
 
-`;
-
-const FormGroup = styled.div`
-  display: flex;
-  justify-content: ${props => props.actions ? 'flex-end' : 'flex-start'};
-  margin-top: ${props => props.actions ? '40' : '0'}px;
-
-  .inline{ margin-right: 80px;}
-  .inline:last-child{ margin-right: 0;}
-`;
-
-class UserInputs extends Component {
+class UserInputs extends PureComponent {
 
   render() {
     return (
