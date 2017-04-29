@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { FlatButton, RaisedButton, MenuItem } from 'material-ui';
 import {
-  FormsyCheckbox,
-  FormsyDate,
-  FormsyRadio,
-  FormsyRadioGroup,
+  // FormsyCheckbox,
+  // FormsyDate,
+  // FormsyRadio,
+  // FormsyRadioGroup,
+  // FormsyTime,
+  // FormsyToggle
   FormsySelect,
-  FormsyText,
-  FormsyTime,
-  FormsyToggle,
-  FormsyAutoComplete
+  FormsyText
 } from 'formsy-material-ui/lib';
+import { AutoComplete } from 'material-ui';
 // Redux
 import { connect } from 'react-redux';
 import { potagersStore } from '../../redux/potagers/potagersActions';
-import { api } from '../../utils/api';
+import { api, apiGeocode } from '../../utils/api';
 
 
 const Wrapper = styled.div`
@@ -74,13 +74,27 @@ class PotagerForm extends Component {
     this.state = {
       canSubmit: false,
       error: null,
-      success: false
+      success: false,
+      potagerAddressSource: []
+    };
+
+    this.potagerAddress = {
+      type_address: '',
+      formatted_address: '',
+      latitude: '',
+      longitude: '',
+      city: '',
+      postal_code: '',
+      country: ''
     };
 
     this.enableButton = this.enableButton.bind(this);
     this.disableButton = this.disableButton.bind(this);
     this.submitForm = this.submitForm.bind(this);
     this.notifyFormError = this.notifyFormError.bind(this);
+    this.onUpdatePotagerInputAddress = this.onUpdatePotagerInputAddress.bind(this);
+
+    this.geocoder = new google.maps.Geocoder();
   }
 
   getInitialState() {
@@ -109,14 +123,13 @@ class PotagerForm extends Component {
   }
 
   storePotager(data) {
-    // TEMP hack
-    data.potager.address = '116 Rue du Dr Paccard, 74400 Chamonix-Mont-Blanc, France';
-    data.potager.city = 'Chamonix';
-    data.potager.country = 'France';
-    data.potager.postal_code = '74400';
-    data.potager.type_address = 'street_address';
-    data.potager.latitude = '45.9221766';
-    data.potager.longitude = '6.868387299999999';
+    data.potager.address = this.potagerAddress.formatted_address;
+    data.potager.city = this.potagerAddress.city;
+    data.potager.country = this.potagerAddress.country;
+    data.potager.postal_code = this.potagerAddress.postal_code;
+    data.potager.type_address = this.potagerAddress.type_address;
+    data.potager.latitude = this.potagerAddress.latitude;
+    data.potager.longitude = this.potagerAddress.longitude;
 
     api('POST', 'potagers', data.potager,
       (callback) => {
@@ -134,8 +147,23 @@ class PotagerForm extends Component {
     api('POST', 'users', data.user,
       (callback) => {
         if (callback.success) {
-          this.setState({ success: true });
+          this.setState({ success: true, error: null });
         } else {
+          // delete potager just created
+          this.destroyPotager(data.user.potager_id);
+          this.setState({ error: callback });
+        }
+      }
+    );
+  }
+
+  destroyPotager(id) {
+    api('DELETE', 'potagers/' + id, {},
+      (callback) => {
+        if (callback.success) {
+          console.log('potager has been destroyed', callback.potager_id);
+        } else {
+          // delete potager just created
           this.setState({ error: callback });
         }
       }
@@ -144,6 +172,78 @@ class PotagerForm extends Component {
 
   notifyFormError(data) {
     console.error('Form error:', data);
+  }
+
+  renderSelectNbJardiniers(max) {
+    const rows = [];
+
+    for (let i = 1;i <= max;i++) {
+      rows.push(<MenuItem key={i} value={i} primaryText={i} />);
+    }
+    return rows;
+  }
+
+  onUpdatePotagerInputAddress(val) {
+    // if (val.length > 5) {
+    //   this.geocodeAddress(val);
+    // }
+    this.geocodeAddress(val);
+  }
+
+  geocodeAddress(address) {
+    console.log('geocodeAddress', address);
+    const potagerAddressSource = [];
+
+    /*apiGeocode(address, (data) => {
+      const { results, status } = data;
+
+      console.log('results', data.results, data.status);
+      if (status === 'OK') {
+
+        results.map((result, index) => {
+          potagerAddressSource.push(result.formatted_address);
+        });
+
+        this.setState({ potagerAddressSource });
+      }
+    });*/
+
+    this.geocoder.geocode({
+      address,
+      componentRestrictions: {
+        country: 'FRANCE'
+      }
+    }, (results, status) => {
+      if (status === 'OK') {
+        console.log('results', results, status);
+        results.map((result, index) => {
+          if (result.types[0] === 'street_address') {
+            potagerAddressSource.push(result.formatted_address);
+          }
+        });
+        this.setState({ potagerAddressSource });
+
+        if (results.length === 1) {
+          this.potagerAddress.formatted_address = results[0].formatted_address;
+          this.potagerAddress.latitude = results[0].geometry.location.lat();
+          this.potagerAddress.longitude = results[0].geometry.location.lng();
+          this.potagerAddress.type_address = results[0].types[0];
+          for (const component of results[0].address_components) {
+            if (component.types[0] === 'locality') {
+			        this.potagerAddress.city = component.long_name;
+			      } else if (component.types[0] === 'country') {
+			        this.potagerAddress.country = component.long_name;
+			      } else if (component.types[0] === 'postal_code') {
+			        this.potagerAddress.postal_code = component.long_name;
+			      }
+          }
+
+          console.log('location found:', this.potagerAddress);
+        }
+
+
+      }
+    });
   }
 
   render() {
@@ -176,15 +276,15 @@ class PotagerForm extends Component {
           <FormGroup inline>
             <FormsySelect
               className='inline'
-              name="potager.nb_users_max"
+              name='potager.nb_users_max'
               required
               fullWidth={true}
-              floatingLabelText="Combien peut-il accueillir de jardiniers?"
+              floatingLabelText='Combien peut-il accueillir de jardiniers?'
               value={2}
+              // menuStyle={{ width: 100 }}
+              // maxHeight={210}
             >
-              <MenuItem value={1} primaryText="1" />
-              <MenuItem value={2} primaryText="2" />
-              <MenuItem value={3} primaryText="3" />
+              { this.renderSelectNbJardiniers(10)}
             </FormsySelect>
 
             <FormsyText
@@ -199,14 +299,14 @@ class PotagerForm extends Component {
               value={30}
             />
           </FormGroup>
-          <FormsyText
+          <AutoComplete
             name='potager.address'
-            // validations='isWords'
-            // validationError={errorMessages.wordsError}
-            required
             hintText='Entrer l’adresse exacte de votre potager'
             floatingLabelText='Adresse *'
             fullWidth={true}
+            filter={(searchText: string, key: string) => true}
+            dataSource={this.state.potagerAddressSource}
+            onUpdateInput = {this.onUpdatePotagerInputAddress}
           />
 
 

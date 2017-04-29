@@ -70,6 +70,6 @@ class PotagerController extends Controller
         $potager = Potager::findOrFail($id);
         $potager->users()->detach();
         $potager->delete();
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'potager_id' => $id]);
     }
 }

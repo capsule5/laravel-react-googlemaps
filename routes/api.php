@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::resource('potagers', 'Api\PotagerController', array('except' => array('create','edit','destroy')));
+Route::resource('potagers', 'Api\PotagerController', array('except' => array('create','edit')));
 //Route::post('potagerWithUser', 'Api\PotagerController@storePotagerWithUser')->name('potagers.storeWithUser');
 Route::resource('users', 'Api\UserController', array('only' => array('store')));
