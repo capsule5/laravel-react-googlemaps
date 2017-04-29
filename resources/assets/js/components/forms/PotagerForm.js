@@ -1,72 +1,19 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { FlatButton, RaisedButton, MenuItem } from 'material-ui';
-import {
-  // FormsyCheckbox,
-  // FormsyDate,
-  // FormsyRadio,
-  // FormsyRadioGroup,
-  // FormsyTime,
-  // FormsyToggle
-  FormsySelect,
-  FormsyText
-} from 'formsy-material-ui/lib';
-import { AutoComplete } from 'material-ui';
-// Redux
-import { connect } from 'react-redux';
-// import { potagersStore } from '../../redux/potagers/potagersActions';
-import { api, apiGeocode } from '../../utils/api';
+import { RaisedButton } from 'material-ui';
+import { api } from '../../utils/api';
+import UserInputs from './UserInputs';
+import PotagerInputs from './PotagerInputs';
+import Errors from './Errors';
+import Success from './Success';
+import { TitleStyles, FormGroupStyles } from './styles';
 
+const Wrapper = styled.div``;
+const Title = styled.h2` ${TitleStyles} `;
+const FormGroup = styled.div` ${FormGroupStyles} `;
 
-const Wrapper = styled.div`
-
-`;
-
-const Title = styled.h2`
-  margin-top: ${props => props.mt ? '40' : '0'}px;
-  margin-bottom: 0;
-  font-size: 26px;
-  font-weight: normal;
-  color:#333;
-`;
-
-const FormGroup = styled.div`
-  display: flex;
-  justify-content: ${props => props.actions ? 'flex-end' : 'flex-start'};
-  margin-top: ${props => props.actions ? '40' : '0'}px;
-
-  .inline{ margin-right: 80px;}
-  .inline:last-child{ margin-right: 0;}
-`;
-
-const Error = styled.div`
-  color: red;
-  font-size: 12px;
-  ul {
-     list-style-position: inside;
-     padding: 0;
-     margin: 10px 0 0 0;
-  }
-`;
-
-const Success = styled.div`
-  color: green;
-`;
-
-
-const errorMessages = {
-  wordsError: 'Please only use letters',
-  numericError: 'Please provide a number',
-  urlError: 'Please provide a valid URL',
-  emailError: 'Please provide a valid email'
-};
 
 class PotagerForm extends Component {
-
-  static propTypes = {
-    closeDialog: React.PropTypes.func.isRequired
-    // potagersStore: React.PropTypes.func.isRequired
-  };
 
   constructor(props) {
     super(props);
@@ -115,6 +62,10 @@ class PotagerForm extends Component {
     });
   }
 
+  notifyFormError(data) {
+    console.error('Form error:', data);
+  }
+
   submitForm(data) {
 
     console.log('submitForm', this.state, JSON.stringify(data, null, 4));
@@ -143,6 +94,7 @@ class PotagerForm extends Component {
       }
     );
   }
+
   storeUser(data) {
     api('POST', 'users', data.user,
       (callback) => {
@@ -169,19 +121,6 @@ class PotagerForm extends Component {
     );
   }
 
-  notifyFormError(data) {
-    console.error('Form error:', data);
-  }
-
-  renderSelectNbJardiniers(max) {
-    const rows = [];
-
-    for (let i = 1;i <= max;i++) {
-      rows.push(<MenuItem key={i} value={i} primaryText={i} />);
-    }
-    return rows;
-  }
-
   onUpdatePotagerInputAddress(val) {
     this.geocodeAddress(val);
   }
@@ -189,20 +128,6 @@ class PotagerForm extends Component {
   geocodeAddress(address) {
     console.log('geocodeAddress', address);
     const potagerAddressSource = [];
-
-    /*apiGeocode(address, (data) => {
-      const { results, status } = data;
-
-      console.log('results', data.results, data.status);
-      if (status === 'OK') {
-
-        results.map((result, index) => {
-          potagerAddressSource.push(result.formatted_address);
-        });
-
-        this.setState({ potagerAddressSource });
-      }
-    });*/
 
     this.geocoder.geocode({
       address,
@@ -236,23 +161,17 @@ class PotagerForm extends Component {
 
           console.log('location found:', this.potagerAddress);
         }
-
-
       }
     });
   }
 
   render() {
 
-    const { closeDialog } = this.props;
-
     return (
       <Wrapper>
         {
         this.state.success ?
-        <Success>
-          Félicitations! Un membre de l'association prendra contact avec vous très prochainement
-        </Success> :
+        <Success/> :
         <Formsy.Form
           onValid={this.enableButton}
           onInvalid={this.disableButton}
@@ -260,100 +179,14 @@ class PotagerForm extends Component {
           onInvalidSubmit={this.notifyFormError}
         >
           <Title>Votre potager</Title>
-          <FormsyText
-            name='potager.name'
-            // validations='isWords'
-            // validationError={errorMessages.wordsError}
-            required
-            hintText='Entrer le nom de votre potager'
-            floatingLabelText='Nom *'
-            fullWidth={true}
+          <PotagerInputs
+            potagerAddressSource={this.state.potagerAddressSource}
+            onUpdatePotagerInputAddress={this.onUpdatePotagerInputAddress}
           />
-          <FormGroup inline>
-            <FormsySelect
-              className='inline'
-              name='potager.nb_users_max'
-              required
-              fullWidth={true}
-              floatingLabelText='Combien peut-il accueillir de jardiniers?'
-              // value={2}
-              // menuStyle={{ width: 100 }}
-              // maxHeight={210}
-            >
-              { this.renderSelectNbJardiniers(10)}
-            </FormsySelect>
-
-            <FormsyText
-              className='inline'
-              name='potager.surface'
-              validations='isNumeric'
-              validationError={errorMessages.numericError}
-              required
-              hintText='De combien de surface disposez-vous?'
-              floatingLabelText='Surface (m2) *'
-              fullWidth={true}
-              // value={30}
-            />
-          </FormGroup>
-          <AutoComplete
-            name='potager.address'
-            hintText='Entrer l’adresse exacte de votre potager'
-            floatingLabelText='Adresse *'
-            fullWidth={true}
-            filter={(searchText: string, key: string) => true}
-            dataSource={this.state.potagerAddressSource}
-            onUpdateInput = {this.onUpdatePotagerInputAddress}
-          />
-
 
           <Title mt>Vos informations</Title>
-          
-          <FormGroup inline>
-            <FormsyText
-              className='inline'
-              name='user.email'
-              validations='isEmail'
-              validationError={errorMessages.emailError}
-              required
-              hintText='Entrer votre email'
-              floatingLabelText='Email *'
-              fullWidth={true}
-            />
-            <FormsyText
-              className='inline'
-              name='user.password'
-              // validations='isNumeric'
-              // validationError={errorMessages.numericError}
-              required
-              hintText='Entrer votre mot de passe'
-              floatingLabelText='Mot de passe *'
-              fullWidth={true}
-              // value={'password'}
-            />
-          </FormGroup>
-          <FormGroup inline>
-            <FormsyText
-              className='inline'
-              name='user.name'
-              validations='isWords'
-              validationError={errorMessages.wordsError}
-              required
-              hintText='Entrer votre pseudo'
-              floatingLabelText='Pseudo *'
-              fullWidth={true}
-            />
-            <FormsyText
-              className='inline'
-              name='user.phone'
-              validations='isNumeric'
-              validationError={errorMessages.numericError}
-              required
-              hintText='Entrer votre numéro de téléphone'
-              floatingLabelText='Téléphone *'
-              fullWidth={true}
-            />
-          </FormGroup>
-
+          <UserInputs/>
+  
           <FormGroup actions>
             <RaisedButton
               type='submit'
@@ -363,39 +196,11 @@ class PotagerForm extends Component {
           </FormGroup>
         </Formsy.Form>
         }
-        { this.state.error &&
-          <Error>
-            Une erreur est survenue lors de l'enregistrement:
-            <ul>
-              {
-                Object.keys(this.state.error).map((key, index) => {
-                  return <li key={index} value={key}>{this.state.error[key]}</li>;
-                })
-              }
-            </ul>
-          </Error>
-        }
+        { this.state.error && <Errors error={this.state.error} /> }
       </Wrapper>
 
     );
   }
 }
-
-
-// const mapStateToProps = (state) => {
-//   return {
-//     potagers: state.potagers.list,
-//     potagersHasErrored: state.potagersHasErrored,
-//     potagersIsLoading: state.potagersIsLoading
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     potagersStore: (data) => dispatch(potagersStore(data))
-//   };
-// };
-
-// export default connect(null, mapDispatchToProps)(PotagerForm);
 
 export default PotagerForm;
