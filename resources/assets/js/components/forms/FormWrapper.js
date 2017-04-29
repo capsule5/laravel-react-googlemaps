@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { RaisedButton } from 'material-ui';
-import UserInputs from './UserInputs';
-import { api } from '../../utils/api';
-import Errors from './Errors';
-import Success from './Success';
-import { TitleStyles, FormGroupStyles } from './styles';
+import { FormGroupStyles } from './styles';
 
 const Wrapper = styled.div``;
-const Title = styled.h2` ${TitleStyles} `;
 const FormGroup = styled.div` ${FormGroupStyles} `;
 
-class JardinierForm extends Component {
-
-  static propTypes = {
-    potager: React.PropTypes.object.isRequired
-  };
+class FormWrapper extends Component {
 
   constructor(props) {
     super(props);
@@ -50,32 +40,11 @@ class JardinierForm extends Component {
     });
   }
 
-  notifyFormError(data) {
-    console.error('Form error:', data);
-  }
-
-  submitForm(data) {
-
-    console.log('submitForm', this.state, JSON.stringify(data, null, 4));
-    data.user.potager_id = this.props.potager.id;
-    data.user.role = 'gardener';
-    this.storeUser(data);
-  }
-
-  storeUser(data) {
-    api('POST', 'users', data.user,
-      (callback) => {
-        if (callback.success) {
-          this.setState({ success: true, error: null });
-        } else {
-          this.setState({ error: callback });
-        }
-      }
-    );
+  submitForm() {
+    
   }
 
   render() {
-
     return (
       <Wrapper>
         {
@@ -87,8 +56,9 @@ class JardinierForm extends Component {
           onValidSubmit={this.submitForm}
           onInvalidSubmit={this.notifyFormError}
         >
-          <Title>Vos informations</Title>
-          <UserInputs/>
+
+          {this.props.children}
+
           <FormGroup actions>
             <RaisedButton
               type='submit'
@@ -100,9 +70,7 @@ class JardinierForm extends Component {
         }
         { this.state.error && <Errors error={this.state.error} /> }
       </Wrapper>
-
     );
   }
 }
-
-export default JardinierForm;
+export default FormWrapper;
