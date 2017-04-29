@@ -54,8 +54,6 @@ class UserController extends Controller
         if($request->input('potager_id') && $request->input('potager_id') !==''){
             $user->potagers()->sync($request->input('potager_id'));
         }
-        // $user->potagers()->sync($request->input('potager_id'));
-
 
         $route = 'admin/'.$request->input('role').'s';
         return redirect($route); //->with('ok', $input); // ->withInput();

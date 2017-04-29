@@ -50,7 +50,7 @@ export default class Header extends PureComponent {
         <div>
           <RaisedButton label='Ajouter un potager' onTouchTap={this.handleOpenDialog} />
           <Dialog
-            title='Ajouter un potager'
+            // title='Ajouter un potager'
             // actions={actions}
             modal={false}
             open={this.state.open}

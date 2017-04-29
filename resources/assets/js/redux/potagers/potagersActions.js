@@ -51,7 +51,7 @@ export const potagersFetchData = () => {
 
 // store
 export const potagersStore = (body) => {
-  console.log('potagersFetchData');
+  console.log('potagersStore');
   return (dispatch) => {
     dispatch(potagersIsLoading(true));
 

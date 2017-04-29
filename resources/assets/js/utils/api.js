@@ -4,7 +4,7 @@ const API_URL = 'http://127.0.0.1:8000/api/';
 
 export const api = (method, path, body, onSuccess, onFailure) => {
 
-  console.log('Api', method, path, body);
+  console.log('API', method, path, body);
 
   const reqOpts = {
     method,
@@ -23,11 +23,11 @@ export const api = (method, path, body, onSuccess, onFailure) => {
       return response.json();
     })
     .then((response) => {
-      console.log('API Success', path);
+      console.log('API Success', path, response);
       onSuccess(response);
     })
     .catch((error) => {
-      console.log('Api error', error);
+      console.log('API error', path, error);
       onFailure(error);
     });
 

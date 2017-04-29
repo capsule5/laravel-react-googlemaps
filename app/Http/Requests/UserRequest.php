@@ -18,7 +18,8 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->isAdmin();
+        // return Auth::user()->isAdmin();
+        return true;
     }
 
     /**
@@ -29,6 +30,7 @@ class UserRequest extends FormRequest
     public function rules()
     {
         //dd($this->route('user'));
+        
         switch($this->method())
         {
             case 'POST':
@@ -36,7 +38,7 @@ class UserRequest extends FormRequest
                 return [
                     'name' => 'required|min:3|max:20',
                     'phone' => 'required',
-                    'address' => 'required',
+                    // 'address' => 'required',
                     'email' => 'required|email|unique:users',
                 ];
             }
@@ -45,7 +47,7 @@ class UserRequest extends FormRequest
                 return [
                     'name' => 'required|min:3|max:20',
                     'phone' => 'required',
-                    'address' => 'required',
+                    // 'address' => 'required',
                     'email' => ['required','email',Rule::unique('users')->ignore($this->route('user'))],
                 ];
             }

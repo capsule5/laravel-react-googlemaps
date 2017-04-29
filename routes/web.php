@@ -17,8 +17,8 @@ use App\Potager;
 
 Route::get('/', function () {
 
-    /*// create roles
-    $admin = Role::create(['name' => 'admin']);
+    // create roles
+    /*$admin = Role::create(['name' => 'admin']);
     $owner = Role::create(['name' => 'owner']);
     $gardener = Role::create(['name' => 'gardener']);
 
@@ -28,9 +28,9 @@ Route::get('/', function () {
         'name' => 'admin',
         'password' => bcrypt('pdmpa74chx')
     ]);
-    $admin->assignRole('admin');
+    $admin->assignRole('admin');*/
 
-    // create owner
+    /*// create owner
     $owner = User::create([
         'email' => 'owner@test.com',
         'name' => 'owner',
@@ -87,6 +87,7 @@ Route::get('/', function () {
     $gardeners = User::gardeners()->get();
 
     return Response::json(compact('roles', 'users', 'potagers', 'owners', 'gardeners', 'potager_owner', 'potager_gardener', 'potagerRemaining'));*/
+    // return Response::json(compact('roles', 'users'));
     
     return view('welcome', compact('users', 'roles'));
 });

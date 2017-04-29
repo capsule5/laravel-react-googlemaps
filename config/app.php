@@ -181,6 +181,7 @@ return [
         /*
          * Addons providers
          */
+        Barryvdh\Debugbar\ServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
@@ -234,7 +235,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Form' => 'Collective\Html\FormFacade',
-            'Html' => 'Collective\Html\HtmlFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 
