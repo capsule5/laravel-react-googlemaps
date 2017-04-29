@@ -30,8 +30,8 @@ Route::get('/', function () {
     ]);
     $admin->assignRole('admin');*/
 
-    /*// create owner
-    $owner = User::create([
+    // create owner
+    /*$owner = User::create([
         'email' => 'owner@test.com',
         'name' => 'owner',
         'password' => bcrypt('pass')

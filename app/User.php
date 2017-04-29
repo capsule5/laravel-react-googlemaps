@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Potager')->withTimestamps();
     }
 
+    public function setPasswordAttribute($pass){
+
+        $this->attributes['password'] = bcrypt($pass);
+
+    }
 
 
     public function assignRole($role)

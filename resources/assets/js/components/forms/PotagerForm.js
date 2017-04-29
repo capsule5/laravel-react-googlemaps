@@ -276,7 +276,7 @@ class PotagerForm extends Component {
               required
               fullWidth={true}
               floatingLabelText='Combien peut-il accueillir de jardiniers?'
-              value={2}
+              // value={2}
               // menuStyle={{ width: 100 }}
               // maxHeight={210}
             >
@@ -292,7 +292,7 @@ class PotagerForm extends Component {
               hintText='De combien de surface disposez-vous?'
               floatingLabelText='Surface (m2) *'
               fullWidth={true}
-              value={30}
+              // value={30}
             />
           </FormGroup>
           <AutoComplete
@@ -328,7 +328,7 @@ class PotagerForm extends Component {
               hintText='Entrer votre mot de passe'
               floatingLabelText='Mot de passe *'
               fullWidth={true}
-              value={'password'}
+              // value={'password'}
             />
           </FormGroup>
           <FormGroup inline>
