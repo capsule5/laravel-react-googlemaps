@@ -10,6 +10,7 @@ use App\Http\Requests\PotagerRequest;
 use App\User;
 use App\Potager;
 
+
 class PotagerController extends Controller
 {
     /**

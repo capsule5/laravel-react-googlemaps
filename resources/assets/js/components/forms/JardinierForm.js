@@ -32,12 +32,6 @@ class JardinierForm extends Component {
     this.notifyFormError = this.notifyFormError.bind(this);
   }
 
-  getInitialState() {
-    return {
-      canSubmit: false
-    };
-  }
-
   enableButton() {
     this.setState({
       canSubmit: true

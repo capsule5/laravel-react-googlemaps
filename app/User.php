@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -37,13 +38,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Potager')->withTimestamps();
     }
 
-    public function setPasswordAttribute($pass){
-
-        $this->attributes['password'] = bcrypt($pass);
-
-    }
-
-
+    // ROLE
     public function assignRole($role)
     {
         return $this->roles()->save(
@@ -61,8 +56,18 @@ class User extends Authenticatable
         return $this->hasRole('admin');
     }
 
+    // MUTATORS
+    public function setPasswordAttribute($pass){
 
+        $this->attributes['password'] = bcrypt($pass);
 
+    }
+
+    //QUERY SCOPES
+    public function validated($query) 
+    {
+
+    }
     public function scopeOwners($query) 
     {
         //$query->whereRole('owner');
@@ -81,9 +86,15 @@ class User extends Authenticatable
         });
     }
 
+    // METHODS
     public function hasPotager() 
     {
         return $this->potagers->count() > 0;
+    }
+
+    public function updatedFromNow() 
+    {
+        return $this->updated_at->diffForHumans(Carbon::now());
     }
 
 

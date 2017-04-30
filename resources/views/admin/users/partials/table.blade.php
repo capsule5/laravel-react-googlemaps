@@ -27,7 +27,7 @@
           <a href="{{ route('admin.potagers.edit', array($potager->id)) }}">{{$potager->name}}</a>
           @endif
         </td>
-        <td>{{ $user->created_at }}</td>
+        <td>{{ $user->updatedFromNow() }}</td>
         <td>
           {!! link_to_route('admin.users.edit', 'update', array($user->id,'role'=>$user->roles->first()->name), array('class' => 'btn btn-warning btn-block')) !!}
         </td>

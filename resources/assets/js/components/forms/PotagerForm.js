@@ -44,12 +44,6 @@ class PotagerForm extends Component {
     this.geocoder = new google.maps.Geocoder();
   }
 
-  getInitialState() {
-    return {
-      canSubmit: false
-    };
-  }
-
   enableButton() {
     this.setState({
       canSubmit: true

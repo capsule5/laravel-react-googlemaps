@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
 class Potager extends Model
 {
 
@@ -21,11 +23,6 @@ class Potager extends Model
         return $this->belongsToMany('App\User')->withTimestamps();
     }
 
-    public function scopeValid($query) 
-    {
-        $query->where('is_valid',1);
-    }
-
     public function owners() 
     {
         return $this->users()->owners();
@@ -36,6 +33,13 @@ class Potager extends Model
         return $this->users()->gardeners();
     }
 
+    // QUERY SCOPES
+    public function scopeValid($query) 
+    {
+        $query->where('is_valid',1);
+    }
+    
+    //METHODS
     public function nbGardeners() 
     {
         return $this->gardeners()->count();
@@ -45,6 +49,7 @@ class Potager extends Model
     {
         return $this->nb_users_max - $this->nbGardeners();
     }
+
     public function remainingGardenersText($format) 
     {
         $count = $this->nb_users_max - $this->nbGardeners();
@@ -56,6 +61,11 @@ class Potager extends Model
         } 
         
        return ($format==='short') ? $count.' pl. disp.' : $count.' places disponibles';
+    }
+
+    public function updatedFromNow() 
+    {
+        return $this->updated_at->diffForHumans(Carbon::now());
     }
 
 }

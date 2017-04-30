@@ -16,7 +16,7 @@
         <th>Status</th>
         <th>Propriétaire</th>
         <th>Jardiniers</th>
-        <th>Créé le</th>
+        <th>Mis à jour</th>
         <th>Online</th>
         <th></th>
         <th></th>
@@ -43,7 +43,7 @@
           @endforeach
           </ul>
         </td>
-        <td>{{ $potager->created_at }}</td>
+        <td>{{ $potager->updatedFromNow() }}</td>
         <td>
           @if($potager->is_valid)
             <div class="status-circle green"></div>
