@@ -55,21 +55,21 @@ export default class PotagersListItem extends PureComponent {
       surface,
       nb_users_max,
       owners,
-      gardeners_count
+      gardeners_count,
+      is_full,
+      remaining_gardeners
     } = potager;
 
-    const nbAvailablePlaces = nb_users_max - gardeners_count;
-    const isFull = nbAvailablePlaces <= 0;
 
     return (
       <Wrapper>
         <Title>{name}</Title>
         <div>Surface: {surface} m²</div>
-        <div>owner: {owners[0].name}</div>
-        <div>Nombre de jardiniers max: { nb_users_max }</div>
-        <div>place(s) disponible(s): { isFull ? 'COMPLET' : `${nbAvailablePlaces} places disponibles` }</div>
+        <div>Propriétaire: {owners[0].name}</div>
+        <div>Nombre de jardiniers: { gardeners_count }</div>
+        <div>{ is_full ? 'COMPLET' : `${remaining_gardeners} places disponibles` }</div>
         {
-          ! isFull &&
+          ! is_full &&
           <div>
             <RaisedButton
               fullWidth={true}
