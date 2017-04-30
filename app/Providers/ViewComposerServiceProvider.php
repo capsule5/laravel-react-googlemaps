@@ -26,8 +26,16 @@ class ViewComposerServiceProvider extends ServiceProvider
 
     private function composeUserForm()
     {
-        view()->composer('admin.users.partials.form', function($view){
-            $view->with('potagers',Potager::pluck('name','id'));
+        // THIS IS BAD!
+        $potagers = Potager::withCount('gardeners')->get();
+        $potagersAvailables = $potagers->filter(function($potager, $key){
+            return $potager->nb_users_max > $potager->gardeners_count;
+        });
+
+        view()->composer('admin.users.partials.form', function($view) use($potagersAvailables){
+            $view
+            ->with('potagers',Potager::latest())
+            ->with('potagersAvailables',$potagersAvailables);
         });
     }
 }

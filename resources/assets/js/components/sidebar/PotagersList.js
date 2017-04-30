@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import PotagersListItem from './PotagersListItem';
+import PotagerItem from '../shared/PotagerItem';
 
 const Wrapper = styled.ul`
   list-style: none;
   margin:0;
   padding:0;
   fontFamily: 'CircularStd-Book';
+`;
+
+const ListItem = styled.li`
+  padding:20px 20px;
+  border-bottom: 1px solid #CCC;
+  font-size: 0.9em;
 `;
 
 class PotagersList extends Component {
@@ -23,10 +29,11 @@ class PotagersList extends Component {
         {
           this.props.potagers.map((potager, index) => {
             return (
-              <PotagersListItem
-                key={`potager_list_${potager.id}`}
-                potager={potager}
-              />
+              <ListItem key={`potager_list_${potager.id}`}>
+                <PotagerItem
+                  potager={potager}
+                />
+              </ListItem>
             );
           })
         }

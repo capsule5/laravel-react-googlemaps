@@ -4,10 +4,8 @@ import { RaisedButton, Dialog } from 'material-ui';
 import JardinierForm from '../forms/JardinierForm';
 
 
-const Wrapper = styled.li`
-  padding:10px;
-  border-bottom: 1px solid #CCC;
-  font-size: 0.9em;
+const Wrapper = styled.div`
+
 `;
 
 const Title = styled.h3`
@@ -15,7 +13,7 @@ const Title = styled.h3`
 `;
 
 
-export default class Header extends PureComponent {
+export default class PotagersListItem extends PureComponent {
 
   static propTypes = {
     potager: React.PropTypes.object.isRequired
@@ -55,29 +53,41 @@ export default class Header extends PureComponent {
       postal_code,
       type_address,
       surface,
-      nb_users_max
+      nb_users_max,
+      owners,
+      gardeners_count
     } = potager;
+
+    const nbAvailablePlaces = nb_users_max - gardeners_count;
+    const isFull = nbAvailablePlaces <= 0;
 
     return (
       <Wrapper>
         <Title>{name}</Title>
-        <div>Surface: {surface}</div>
+        <div>Surface: {surface} m²</div>
+        <div>owner: {owners[0].name}</div>
         <div>Nombre de jardiniers max: { nb_users_max }</div>
-        <RaisedButton
-          fullWidth={true}
-          label='Je souhaite jardiner ici'
-          onTouchTap={this.handleOpenDialog}
-        />
-        <Dialog
-          modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleCloseDialog}
-        >
-          <JardinierForm
-            closeDialog={this.handleCloseDialog}
-            potager={potager}
-          />
-        </Dialog>
+        <div>place(s) disponible(s): { isFull ? 'COMPLET' : `${nbAvailablePlaces} places disponibles` }</div>
+        {
+          ! isFull &&
+          <div>
+            <RaisedButton
+              fullWidth={true}
+              label='Je souhaite jardiner ici'
+              onTouchTap={this.handleOpenDialog}
+            />
+            <Dialog
+              modal={false}
+              open={this.state.open}
+              onRequestClose={this.handleCloseDialog}
+            >
+              <JardinierForm
+                closeDialog={this.handleCloseDialog}
+                potager={potager}
+              />
+            </Dialog>
+          </div>
+        }
       </Wrapper>
     );
   }

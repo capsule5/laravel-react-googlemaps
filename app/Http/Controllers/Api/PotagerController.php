@@ -20,9 +20,11 @@ class PotagerController extends Controller
     public function index()
     {
         return Potager::valid()
-        ->with('users', 'users.roles')
+        ->with('owners', 'gardeners')
+        ->withCount('gardeners')
         ->orderBy('updated_at', 'desc')
         ->get();
+
     }
 
     /**

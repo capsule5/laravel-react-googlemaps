@@ -13,11 +13,11 @@
         <th>Surface</th>
         <th>Address</th>
         <th>City</th>
-        <th>Status</th>
         <th>Propriétaire</th>
         <th>Jardiniers</th>
-        <th>Mis à jour</th>
+        <th>Status</th>
         <th>Online</th>
+        <th>Mis à jour</th>
         <th></th>
         <th></th>
       </tr>
@@ -30,7 +30,7 @@
         <td>{{ $potager->surface }}</td>
         <td>{{ str_limit($potager->address, $limit = 30, $end = '...') }}</td>
         <td>{{ $potager->city }}</td>
-        <td>{{ $potager->remainingGardenersText('short') }}</td>
+        
         <td>
           @foreach($potager->owners()->get() as $owner)
             <a href="{{ route('admin.users.edit', array($owner->id,'role'=>$owner->roles->first()->name)) }}">{{$owner->name}}</a>
@@ -43,7 +43,8 @@
           @endforeach
           </ul>
         </td>
-        <td>{{ $potager->updatedFromNow() }}</td>
+        
+        <td>{{ $potager->remainingGardenersText('short') }} ({{ $potager->nbGardeners() }}/{{ $potager->nb_users_max }})</td>
         <td>
           @if($potager->is_valid)
             <div class="status-circle green"></div>
@@ -51,6 +52,7 @@
             <div class="status-circle orange"></div>
           @endif
         </td>
+        <td>{{ $potager->updatedFromNow() }}</td>
         <td>
           {!! link_to_route('admin.potagers.edit', 'update', array($potager->id), array('class' => 'btn btn-warning btn-block')) !!}
         </td>

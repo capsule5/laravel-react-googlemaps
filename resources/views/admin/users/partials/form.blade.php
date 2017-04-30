@@ -48,12 +48,31 @@
     </div>
 </div>
 
+<!--<ul>
+  @foreach($potagersAvailables as $potager)
+    <li>{{$potager->name}}, {{$potager->nbGardeners()}}/{{$potager->nb_users_max}}, {{ $potager->remainingGardeners() }} </li>
+  @endforeach
+</ul>-->
 
 
 <div class="form-group" style='margin-top:30px'>
     {!! Form::label('Potager:',null,['class' => 'control-label col-md-4']) !!}
     <div class="col-md-6">
-      {!! Form::select('potager_id', array('0' => 'Please Select') + $potagers->toArray(), ! empty($user) && $user->hasPotager() ? $user->potagers->first()->id : null, array('class' => 'form-control')) !!}
+      @if($role === 'gardener')
+        {!! Form::select(
+              'potager_id', 
+              array('0' => 'Please Select') + $potagersAvailables->pluck('name','id')->toArray(), 
+              ! empty($user) && $user->hasPotager() ? $user->potagers->first()->id : null, 
+              array('class' => 'form-control')) 
+        !!}
+      @elseif($role === 'owner')
+        {!! Form::select(
+              'potager_id', 
+              array('0' => 'Please Select') + $potagers->pluck('name','id')->toArray(), 
+              ! empty($user) && $user->hasPotager() ? $user->potagers->first()->id : null, 
+              array('class' => 'form-control')) 
+        !!}
+      @endif
     </div>
 </div>
 
