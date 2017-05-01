@@ -105,6 +105,11 @@ class Potager extends Model
        return ($format==='short') ? $count.' pl. disp.' : $count.' places disponibles';
     }
 
+    public function hasOwner() 
+    {
+        return $this->owners()->count() > 0;
+    }
+
     // mis à jour depuis x en texte
     public function updatedFromNow() 
     {

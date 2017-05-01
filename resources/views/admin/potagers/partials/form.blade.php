@@ -1,10 +1,11 @@
 <div class="form-group">
     <label class="control-label col-md-4" for="status">ONLINE:</label>
     <div class="col-md-6">
-        <label class="radio-inline">{!! Form::radio('is_valid', 1, ($potager->is_valid==1) ? true : false, array('class' => '')) !!} YES</label>
+        @php ($isDisabled = ! $potager->hasOwner() ? 'disabled' : '')
+        <label class="radio-inline" title="Le potager doit avoir un propriétaire pour passer online">{!! Form::radio('is_valid', 1, ($potager->is_valid==1) ? true : false, array('class' => '', $isDisabled )) !!} YES</label>
         <label class="radio-inline">{!! Form::radio('is_valid', 0, ($potager->is_valid==0) ? true : false, array('class' => '')) !!} NO</label>
     </div>
-    <div class="col-md-6 col-md-offset-4"><small>WARNING: Online seulement si le potager à un propriétaire</small></div>
+    <!--<div class="col-md-6 col-md-offset-4"><small>Le potager doit avoir un propriétaire pour passer online</small></div>-->
 </div>
 
 <div class="col-md-8 col-md-offset-4"><small class="text-danger">{{ $errors->first('name') }}</small></div>
