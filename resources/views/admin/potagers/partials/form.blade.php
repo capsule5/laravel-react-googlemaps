@@ -2,8 +2,9 @@
     <label class="control-label col-md-4" for="status">ONLINE:</label>
     <div class="col-md-6">
         <label class="radio-inline">{!! Form::radio('is_valid', 1, ($potager->is_valid==1) ? true : false, array('class' => '')) !!} YES</label>
-    <label class="radio-inline">{!! Form::radio('is_valid', 0, ($potager->is_valid==0) ? true : false, array('class' => '')) !!} NO</label>
+        <label class="radio-inline">{!! Form::radio('is_valid', 0, ($potager->is_valid==0) ? true : false, array('class' => '')) !!} NO</label>
     </div>
+    <div class="col-md-6 col-md-offset-4"><small>WARNING: Online seulement si le potager à un propriétaire</small></div>
 </div>
 
 <div class="col-md-8 col-md-offset-4"><small class="text-danger">{{ $errors->first('name') }}</small></div>

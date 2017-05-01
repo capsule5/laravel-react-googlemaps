@@ -68,7 +68,7 @@
       @elseif($role === 'owner')
         {!! Form::select(
               'potager_id', 
-              array('0' => 'Please Select') + $potagers->pluck('name','id')->toArray(), 
+              array('0' => 'Please Select') + $potagersWithNoOwner->pluck('name','id')->toArray(), 
               ! empty($user) && $user->hasPotager() ? $user->potagers->first()->id : null, 
               array('class' => 'form-control')) 
         !!}
