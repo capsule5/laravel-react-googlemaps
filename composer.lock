@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "931a491dc1c9b59ff85d0b7c8472de75",
-    "content-hash": "6671dee75df573b6766e688cd16abff0",
+    "hash": "a13a0b9873c2f54fb5a99693a3f4af4b",
+    "content-hash": "187b5c07fc97699c05e4e436dd33e4a6",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -60,6 +60,46 @@
                 "webprofiler"
             ],
             "time": "2017-01-19 08:19:49"
+        },
+        {
+            "name": "caouecs/laravel-lang",
+            "version": "3.0.25",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caouecs/Laravel-lang.git",
+                "reference": "4787a876ec8234f5e8fa8c0b2aee400d5732d631"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caouecs/Laravel-lang/zipball/4787a876ec8234f5e8fa8c0b2aee400d5732d631",
+                "reference": "4787a876ec8234f5e8fa8c0b2aee400d5732d631",
+                "shasum": ""
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^1.10"
+            },
+            "suggest": {
+                "overtrue/laravel-lang": "Command to add languages in your project"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "caouecs",
+                    "email": "caouecs@caouecs.net"
+                }
+            ],
+            "description": "Languages for Laravel",
+            "keywords": [
+                "lang",
+                "languages",
+                "laravel",
+                "lpm"
+            ],
+            "time": "2017-03-22 16:40:16"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
