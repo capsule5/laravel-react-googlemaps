@@ -9,11 +9,15 @@ use App\Http\Requests\UserRequest;
 
 use App\User;
 use App\Potager;
+use App\Http\Controllers\Traits\UserTrait;
+
 
 use \Redirect;
 
 class UserController extends Controller
 {
+    use UserTrait;
+
     /**
      * Display a listing of the resource.
      * 
@@ -46,17 +50,10 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $input = $request->all();
+        $this->storeUser($request);
+        $role = $request->input('role');
 
-        $user = User::create($input);
-        $user->assignRole($request->input('role'));
-
-        if($request->input('potager_id') && $request->input('potager_id') !==''){
-            $user->potagers()->sync($request->input('potager_id'));
-        }
-
-        $route = 'admin/'.$request->input('role').'s';
-        return redirect($route); //->with('ok', $input); // ->withInput();
+        return redirect('admin/'.$role.'s'); //->with('ok', $input); // ->withInput();
     }
 	
 	/**

@@ -1,5 +1,15 @@
 {!! Form::hidden('role',$role) !!}
 
+@if($role === 'gardener')
+<div class="form-group">
+    <label class="control-label col-md-4" for="status">VALIDATED:</label>
+    <div class="col-md-6">
+        <label class="radio-inline">{!! Form::radio('is_valid', 1, ($user->is_valid==1) ? true : false, array('class' => '')) !!} YES</label>
+        <label class="radio-inline">{!! Form::radio('is_valid', 0, ($user->is_valid==0) ? true : false, array('class' => '')) !!} NO</label>
+    </div>
+</div>
+@endif
+
 <div class="col-md-8 col-md-offset-4"><small class="text-danger">{{ $errors->first('name') }}</small></div>
 <div class="form-group">
     {!! Form::label('*name:',null,['class' => 'control-label col-md-4']) !!}

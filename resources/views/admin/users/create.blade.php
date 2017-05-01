@@ -20,7 +20,7 @@
       <div class="panel panel-default">
        
         <div class="panel-body">
-          {!! Form::model($item = new \App\User, ['url' => 'admin/users','class' => 'form-horizontal','files' => true, 'id' => 'userform']) !!}
+          {!! Form::model($user = new \App\User, ['url' => 'admin/users','class' => 'form-horizontal','files' => true, 'id' => 'userform']) !!}
           
             @include('admin.users.partials.form', ['submitButtonText' => 'Ajouter', 'role'])
 

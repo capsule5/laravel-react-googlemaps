@@ -34,7 +34,8 @@ class DatabaseSeeder extends Seeder
         $owner = User::create([
             'email' => 'owner@test.com',
             'name' => 'owner',
-            'password' => bcrypt('pass')
+            'password' => bcrypt('pass'),
+            'is_valid' => 1
         ]);
         $owner->assignRole('owner');
 
@@ -60,7 +61,8 @@ class DatabaseSeeder extends Seeder
         $gardener1 = User::create([
             'email' => 'gardener1@test.com',
             'name' => 'gardener1',
-            'password' => bcrypt('pass')
+            'password' => bcrypt('pass'),
+            'is_valid' => 1,
         ]);
         $gardener1->assignRole('gardener');
         $gardener1->potagers()->sync($potager);
@@ -68,7 +70,8 @@ class DatabaseSeeder extends Seeder
         $gardener2 = User::create([
             'email' => 'gardener2@test.com',
             'name' => 'gardener2',
-            'password' => bcrypt('pass')
+            'password' => bcrypt('pass'),
+            'is_valid' => 0,
         ]);
         $gardener2->assignRole('gardener');
         $gardener2->potagers()->attach($potager);

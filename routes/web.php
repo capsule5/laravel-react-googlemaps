@@ -12,11 +12,7 @@
 */
 
 
-
 Route::get('/', function () {
-    // return Response::json(compact('roles', 'users', 'potagers', 'owners', 'gardeners', 'potager_owner', 'potager_gardener', 'potagerRemaining'));
-    // return Response::json(compact('roles', 'users'));
-    
     return view('welcome');
 });
 
