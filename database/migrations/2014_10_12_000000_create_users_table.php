@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('lastname')->nullable();
             $table->string('phone');
             $table->string('address');
+            $table->integer('is_valid')->default(0);
             $table->timestamps();
         });
 
