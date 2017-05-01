@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   color: #333;
   width: ${props => props.isInfoWindowOpen ? 300 : 150}px;
   padding: 10px;
-  z-index: 999;
+  z-index: 2000;
   /* animated */
   transform: var(--transform);
 `;
@@ -47,7 +47,7 @@ export default class InfoWindow extends PureComponent {
 
   static propTypes = {
     potager: React.PropTypes.object,
-    onInfoWindowClose: React.PropTypes.func.isRequired,
+    toggleInfoWindow: React.PropTypes.func.isRequired,
     isInfoWindowOpen: React.PropTypes.bool.isRequired
   };
 
@@ -55,28 +55,9 @@ export default class InfoWindow extends PureComponent {
     potager: {}
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      open: false
-    };
-
-    this.handleOpenDialog = this.handleOpenDialog.bind(this);
-    this.handleCloseDialog = this.handleCloseDialog.bind(this);
-  }
-
-  handleOpenDialog() {
-    this.setState({ open: true });
-  }
-
-  handleCloseDialog() {
-    this.setState({ open: false });
-  }
-
   render() {
 
-    const { onInfoWindowClose, isInfoWindowOpen, potager } = this.props;
+    const { toggleInfoWindow, isInfoWindowOpen, potager } = this.props;
 
     // console.log('render IW', name);
 
@@ -85,7 +66,7 @@ export default class InfoWindow extends PureComponent {
         { interpolated =>
           <Animated {...interpolated} >
             <Wrapper isInfoWindowOpen={isInfoWindowOpen}>
-              { isInfoWindowOpen && <CloseBtn onClick={onInfoWindowClose}>x</CloseBtn> }
+              { isInfoWindowOpen && <CloseBtn onClick={toggleInfoWindow}>x</CloseBtn> }
               <Title>Potager {potager.name}</Title>
               {
                 ! isInfoWindowOpen ?

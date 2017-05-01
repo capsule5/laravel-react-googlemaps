@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { RaisedButton, Dialog } from 'material-ui';
+import { FlatButton, RaisedButton, Dialog } from 'material-ui';
 import JardinierForm from '../forms/JardinierForm';
 
 
@@ -18,11 +18,18 @@ const ButtonWrapper = styled.div`
 `;
 
 
-export default class PotagersListItem extends PureComponent {
+export default class PotagerItem extends PureComponent {
+
+  static defaultProps = {
+    setActivePotager: () => {},
+    setMapCenter: () => {}
+  };
 
   static propTypes = {
     potager: React.PropTypes.object.isRequired,
-    parent: React.PropTypes.string.isRequired
+    parent: React.PropTypes.string.isRequired,
+    setActivePotager: React.PropTypes.func,
+    setMapCenter: React.PropTypes.func
   };
 
   constructor(props) {
@@ -34,6 +41,7 @@ export default class PotagersListItem extends PureComponent {
 
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
+    this.lookAtMap = this.lookAtMap.bind(this);
   }
 
   handleOpenDialog() {
@@ -44,6 +52,15 @@ export default class PotagersListItem extends PureComponent {
     this.setState({ open: false });
   }
 
+  lookAtMap() {
+    const { potager } = this.props;
+    const center = { lat: parseFloat(potager.latitude), lng: parseFloat(potager.longitude) };
+
+    console.log('lookAtMap', center);
+
+    this.props.setActivePotager(potager);
+    this.props.setMapCenter(center);
+  }
 
   render() {
     const { potager, parent } = this.props;
@@ -74,6 +91,12 @@ export default class PotagersListItem extends PureComponent {
         <div>Propriétaire: {owners[0].name}</div>
         <div>Nombre de jardiniers: { gardeners_count }</div>
         <div>{ is_full ? 'COMPLET' : `${remaining_gardeners} places disponibles` }</div>
+        { parent !== 'InfoWindow' &&
+          <FlatButton
+            label='voir sur la carte'
+            onTouchTap={ this.lookAtMap }
+          />
+         }
         {
           ! is_full &&
           <ButtonWrapper>

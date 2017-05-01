@@ -26,52 +26,64 @@ export default class Marker extends PureComponent {
     super(props);
 
     this.state = {
-      isInfoWindowOpen: false
+      isActive: false
     };
 
-    this.onIconClick = this.onIconClick.bind(this);
-    this.onInfoWindowClose = this.onInfoWindowClose.bind(this);
+    this.toggleInfoWindow = this.toggleInfoWindow.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     // close IW if another Marker is activated
-    if (nextProps.activePotager.id !== this.props.potager.id && this.state.isInfoWindowOpen) {
-      this.onInfoWindowClose();
+    if (nextProps.activePotager.id === this.props.potager.id) {
+      this.openInfoWindow();
+    } else {
+      this.closeInfoWindow();
     }
   }
 
-  onInfoWindowClose() {
+  closeInfoWindow() {
     this.setState({
-      isInfoWindowOpen: false
+      isActive: false
     });
   }
 
-  onIconClick() {
-    console.log('click', this.props.potager.name);
+  openInfoWindow() {
     this.setState({
-      isInfoWindowOpen: ! this.state.isInfoWindowOpen
-    }, () => {
-      this.props.setActivePotager(this.state.isInfoWindowOpen ? this.props.potager : {});
+      isActive: true
     });
+  }
+
+
+  toggleInfoWindow() {
+    console.log('click', this.props.potager.name);
+    if (this.state.isActive) {
+      this.props.setActivePotager({});
+    } else {
+      this.props.setActivePotager(this.props.potager);
+    }
   }
 
   render() {
     // console.log('this.props', this.props);
     const { $hover, potager } = this.props;
-    const { isInfoWindowOpen } = this.state;
+    const { isActive } = this.state;
 
     return (
 
       <Wrapper $hover={$hover}>
 
-        <Icon $hover={$hover} onIconClick={this.onIconClick}/>
+        <Icon
+          $hover={$hover}
+          isActive={isActive}
+          onIconClick={this.toggleInfoWindow}
+        />
 
         {
-          ($hover || isInfoWindowOpen) &&
+          ($hover || isActive) &&
           <InfoWindow
             potager={potager}
-            onInfoWindowClose={this.onInfoWindowClose}
-            isInfoWindowOpen={isInfoWindowOpen}
+            toggleInfoWindow={this.toggleInfoWindow}
+            isInfoWindowOpen={isActive}
           />
         }
       </Wrapper>

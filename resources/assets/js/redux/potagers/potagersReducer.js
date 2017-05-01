@@ -1,7 +1,8 @@
 const initialState = {
   list: [],
   isLoading: false,
-  hasErrored: false
+  hasErrored: false,
+  active: {}
 };
 
 const potagers = (state = initialState, action) => {
@@ -20,6 +21,11 @@ const potagers = (state = initialState, action) => {
       return {
         ...state,
         hasErrored: action.hasErrored
+      };
+    case 'SET_ACTIVE_POTAGER':
+      return {
+        ...state,
+        active: action.potager
       };
     default:
       return state;

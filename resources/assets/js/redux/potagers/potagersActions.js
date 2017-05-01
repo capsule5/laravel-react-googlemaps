@@ -29,6 +29,14 @@ const potagersStoreSuccess = (data) => {
   };
 };
 
+export const setActivePotager = (potager) => {
+  console.log('setActivePotager', potager);
+  return {
+    type: 'SET_ACTIVE_POTAGER',
+    potager
+  };
+};
+
 // index
 export const potagersFetchData = () => {
   console.log('potagersFetchData');

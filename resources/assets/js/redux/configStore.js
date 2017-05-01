@@ -5,9 +5,11 @@ import { createLogger } from 'redux-logger';
 const loggerMiddleware = createLogger();
 
 import potagers from './potagers/potagersReducer';
+import map from './map/mapReducer';
 
 const rootReducer = combineReducers({
-  potagers
+  potagers,
+  map
 });
 
 export default function configureStore(initialState) {

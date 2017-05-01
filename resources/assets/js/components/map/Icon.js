@@ -4,7 +4,7 @@ import { Motion, spring } from 'react-motion';
 import { MARKER_SIZE } from './constants';
 
 const Wrapper = styled.div`
-  backgroundColor: ${props => props.$hover ? 'green' : 'lightgreen'};
+  backgroundColor: ${props => props.$hover || props.isActive ? 'green' : 'lightgreen'};
   width: ${MARKER_SIZE}px;
   height: ${MARKER_SIZE}px;
   border-radius: ${MARKER_SIZE}px;
@@ -21,6 +21,7 @@ export default class Marker extends PureComponent {
 
   static propTypes = {
     $hover: React.PropTypes.bool.isRequired,
+    isActive: React.PropTypes.bool.isRequired,
     onIconClick: React.PropTypes.func.isRequired
   };
 
@@ -30,19 +31,16 @@ export default class Marker extends PureComponent {
     this.state = {
       isOpen: false
     };
-
-    // this.handleClick = this.handleClick.bind(this);
-    // this.onClose = this.onClose.bind(this);
   }
 
   render() {
     // console.log('this.props', this.props);
-    const { $hover, onIconClick } = this.props;
+    const { $hover, isActive, onIconClick } = this.props;
 
     return (
-      <Motion defaultStyle={{ scale: 1 }} style={{ scale: spring($hover ? 1.5 : 1) }}>
+      <Motion defaultStyle={{ scale: 1 }} style={{ scale: spring(($hover || isActive) ? 1.5 : 1) }}>
         { interpolated =>
-          <Wrapper $hover={$hover} onClick={onIconClick} {...interpolated}/>
+          <Wrapper $hover={$hover} isActive={isActive} onClick={onIconClick} {...interpolated}/>
         }
       </Motion>
     );

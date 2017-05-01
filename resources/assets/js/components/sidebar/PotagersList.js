@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import PotagerItem from '../shared/PotagerItem';
+
+import { connect } from 'react-redux';
+import { setActivePotager } from '../../redux/potagers/potagersActions';
+import { setMapCenter } from '../../redux/map/mapActions';
+
 
 const Wrapper = styled.ul`
   list-style: none;
@@ -19,8 +23,27 @@ const ListItem = styled.li`
 class PotagersList extends Component {
 
   static propTypes = {
-    potagers: React.PropTypes.array.isRequired
+    potagers: React.PropTypes.array.isRequired,
+    setActivePotager: React.PropTypes.func.isRequired,
+    activePotager: React.PropTypes.object.isRequired,
+    setMapCenter: React.PropTypes.func.isRequired
   };
+
+  constructor(props) {
+    super(props);
+    this.setActivePotager = this.setActivePotager.bind(this);
+    this.setMapCenter = this.setMapCenter.bind(this);
+  }
+
+  setActivePotager(potager) {
+    console.log('setActivePotager', potager);
+    this.props.setActivePotager(potager);
+  }
+
+  setMapCenter(center) {
+    console.log('setMapCenter', center);
+    this.props.setMapCenter(center);
+  }
 
   render() {
 
@@ -33,6 +56,9 @@ class PotagersList extends Component {
                 <PotagerItem
                   potager={potager}
                   parent={'PotagersList'}
+                  activePotager={this.props.activePotager}
+                  setActivePotager={this.setActivePotager}
+                  setMapCenter={this.setMapCenter}
                 />
               </ListItem>
             );
@@ -47,13 +73,17 @@ class PotagersList extends Component {
 const mapStateToProps = (state) => {
   return {
     potagers: state.potagers.list,
+    activePotager: state.potagers.active,
     potagersHasErrored: state.potagersHasErrored,
     potagersIsLoading: state.potagersIsLoading
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {};
-// };
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setActivePotager: (potager) => dispatch(setActivePotager(potager)),
+    setMapCenter: (center) => dispatch(setMapCenter(center))
+  };
+};
 
-export default connect(mapStateToProps, null)(PotagersList);
+export default connect(mapStateToProps, mapDispatchToProps)(PotagersList);

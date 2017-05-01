@@ -4,6 +4,9 @@ import Marker from './Marker';
 import styled from 'styled-components';
 import { MARKER_SIZE } from './constants';
 
+import { connect } from 'react-redux';
+import { setActivePotager } from '../../redux/potagers/potagersActions';
+
 const Wrapper = styled.div`
   flex:1;
 `;
@@ -31,29 +34,26 @@ const createMapOptions = function(maps) {
 class Map extends Component {
 
   static defaultProps = {
-    center: { lat: 45.91, lng: 6.85 },
     zoom: 12
   };
 
   static propTypes = {
     potagers: React.PropTypes.array.isRequired,
-    center: React.PropTypes.object,
-    zoom: React.PropTypes.number
+    zoom: React.PropTypes.number.isRequired,
+    setActivePotager: React.PropTypes.func.isRequired,
+    activePotager: React.PropTypes.object.isRequired,
+    mapCenter: React.PropTypes.object.isRequired
   };
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      activePotager: {}
-    };
-
     this.setActivePotager = this.setActivePotager.bind(this);
   }
+  
 
   setActivePotager(potager) {
     console.log('setActivePotager', potager);
-    this.setState({ activePotager: potager });
+    this.props.setActivePotager(potager);
   }
 
   renderMarkers() {
@@ -66,7 +66,7 @@ class Map extends Component {
             lat={potager.latitude}
             lng={potager.longitude}
             potager={potager}
-            activePotager={this.state.activePotager}
+            activePotager={this.props.activePotager}
             setActivePotager={this.setActivePotager}
           />
         );
@@ -75,11 +75,12 @@ class Map extends Component {
   }
 
   render() {
+
     return (
       <Wrapper>
         <GoogleMapReact
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
+          center={this.props.mapCenter}
+          zoom={this.props.zoom}
           options={createMapOptions}
           hoverDistance={MARKER_SIZE}
         >
@@ -90,4 +91,18 @@ class Map extends Component {
   }
 }
 
-export default Map;
+const mapStateToProps = (state) => {
+  return {
+    potagers: state.potagers.list,
+    activePotager: state.potagers.active,
+    mapCenter: state.map.center
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setActivePotager: (potager) => dispatch(setActivePotager(potager))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
