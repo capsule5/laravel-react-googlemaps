@@ -86,12 +86,13 @@ export default class InfoWindow extends PureComponent {
           <Animated {...interpolated} >
             <Wrapper isInfoWindowOpen={isInfoWindowOpen}>
               { isInfoWindowOpen && <CloseBtn onClick={onInfoWindowClose}>x</CloseBtn> }
-              <Title>{potager.name}</Title>
+              <Title>Potager {potager.name}</Title>
               {
                 ! isInfoWindowOpen ?
                 <div>cliquer pour plus d'infos</div> :
                 <PotagerItem
                   potager={potager}
+                  parent={'InfoWindow'}
                 />
               }
             </Wrapper>

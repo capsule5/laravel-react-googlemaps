@@ -63,11 +63,13 @@ class User extends Authenticatable
 
     }
 
-    //QUERY SCOPES
-    public function validated($query) 
+    // QUERY SCOPES
+    //------------------------
+    public function scopeValid($query) 
     {
-
+        $query->where('is_valid',1);
     }
+
     public function scopeOwners($query) 
     {
         //$query->whereRole('owner');

@@ -111,6 +111,8 @@ body {
     list-style-position: inside;
     margin:0;
     padding:0;
+    
+    li{ display: flex; align-items: center;}
   }
 }
 
@@ -121,4 +123,9 @@ body {
   &.green{ background-color: green;}
   &.orange{ background-color: orange;}
   &.red{ background-color: red;}
+  &.small{ 
+    width:8px;
+    height: 8px;
+    margin-right:5px; 
+  }
 }

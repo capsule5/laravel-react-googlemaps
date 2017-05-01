@@ -13,10 +13,16 @@ const Title = styled.h3`
 `;
 
 
+const ButtonWrapper = styled.div`
+  margin: 10px 0 0 0;
+`;
+
+
 export default class PotagersListItem extends PureComponent {
 
   static propTypes = {
-    potager: React.PropTypes.object.isRequired
+    potager: React.PropTypes.object.isRequired,
+    parent: React.PropTypes.string.isRequired
   };
 
   constructor(props) {
@@ -40,7 +46,7 @@ export default class PotagersListItem extends PureComponent {
 
 
   render() {
-    const { potager } = this.props;
+    const { potager, parent } = this.props;
     const {
       name,
       description,
@@ -63,14 +69,14 @@ export default class PotagersListItem extends PureComponent {
 
     return (
       <Wrapper>
-        <Title>{name}</Title>
+        { parent !== 'InfoWindow' && <Title>Potager {name}</Title> }
         <div>Surface: {surface} m²</div>
         <div>Propriétaire: {owners[0].name}</div>
         <div>Nombre de jardiniers: { gardeners_count }</div>
         <div>{ is_full ? 'COMPLET' : `${remaining_gardeners} places disponibles` }</div>
         {
           ! is_full &&
-          <div>
+          <ButtonWrapper>
             <RaisedButton
               fullWidth={true}
               label='Je souhaite jardiner ici'
@@ -86,7 +92,7 @@ export default class PotagersListItem extends PureComponent {
                 potager={potager}
               />
             </Dialog>
-          </div>
+          </ButtonWrapper>
         }
       </Wrapper>
     );

@@ -8,6 +8,7 @@
         <th>Phone</th>
         <th>Address</th>
         <th>Potager</th>
+        <th>Validé</th>
         <th>Mis à jour</th>
         <th></th>
         <th></th>
@@ -25,6 +26,13 @@
           @if($user->hasPotager())
           @php ($potager = $user->potagers->first())
           <a href="{{ route('admin.potagers.edit', array($potager->id)) }}">{{$potager->name}}</a>
+          @endif
+        </td>
+        <td>
+          @if($user->is_valid)
+            <div class="status-circle green"></div>
+          @else
+            <div class="status-circle orange"></div>
           @endif
         </td>
         <td>{{ $user->updatedFromNow() }}</td>

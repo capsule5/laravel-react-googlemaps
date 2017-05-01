@@ -73,6 +73,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, $id)
     {   
+        // return $request->all();
         $input = $request->all();
         $user = User::findOrFail($id);
         $user->update($input);
@@ -82,8 +83,6 @@ class UserController extends Controller
             $user->potagers()->sync($request->input('potager_id'));
         }
         
-
-        //return redirect()->action('UserController@show', [$item->slug]);
         $route = 'admin/'.$request->input('role').'s';
         return redirect($route);
     }

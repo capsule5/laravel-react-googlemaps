@@ -15,7 +15,7 @@
         <th>City</th>
         <th>Propriétaire</th>
         <th>Jardiniers</th>
-        <th>Status</th>
+        <th>Capacité</th>
         <th>Online</th>
         <th>Mis à jour</th>
         <th></th>
@@ -39,12 +39,19 @@
         <td>
           <ul>
           @foreach($potager->gardeners()->get() as $gardener)
-            <li><a href="{{ route('admin.users.edit', array($gardener->id,'role'=>$gardener->roles->first()->name)) }}">{{$gardener->name}}</a></li>
+            <li>
+              @if($gardener->is_valid)
+                <div class="status-circle green small"></div>
+              @else
+                <div class="status-circle orange small"></div>
+              @endif
+              <a href="{{ route('admin.users.edit', array($gardener->id,'role'=>$gardener->roles->first()->name)) }}">{{$gardener->name}}</a>
+            </li>
           @endforeach
           </ul>
         </td>
         
-        <td>{{ $potager->remainingGardenersText('short') }} ({{ $potager->nbGardeners() }}/{{ $potager->nb_users_max }})</td>
+        <td>{{ $potager->remainingGardenersText('short') }} ({{ $potager->nbValidGardeners() }}/{{ $potager->nb_users_max }})</td>
         <td>
           @if($potager->is_valid)
             <div class="status-circle green"></div>

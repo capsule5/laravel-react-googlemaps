@@ -32,6 +32,7 @@ class PotagersList extends Component {
               <ListItem key={`potager_list_${potager.id}`}>
                 <PotagerItem
                   potager={potager}
+                  parent={'PotagersList'}
                 />
               </ListItem>
             );

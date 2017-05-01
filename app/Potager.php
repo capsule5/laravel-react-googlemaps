@@ -18,7 +18,7 @@ class Potager extends Model
         'name', 'description', 'is_valid', 'latitude', 'longitude', 'address', 'city', 'country', 'postal_code', 'type_address', 'surface', 'nb_users_max'
     ];
 
-    protected $appends = ['is_full', 'remaining_gardeners'];
+    protected $appends = ['is_full', 'remaining_gardeners', 'gardeners_count'];
 
     // RELATIONS
     //------------------------
@@ -69,36 +69,26 @@ class Potager extends Model
         return $this->attributes['name'] = $this->remainingGardeners();
     }
 
-
-    // potagers avec capacité supérieure au nb de jardiniers
-    public function scopeAvailables($query) 
+    public function getGardenersCountAttribute()
     {
-        //$query->where('nb_users_max','>',$this->nbGardeners());
-        // $query->whereHas('gardeners', function($q) {
-        //     $q->where('nb_users_max','>',$q->gardeners()->count());
-        // });
-        //$query->has('gardeners', '<', 'nb_users_max');
-        $query->withCount('gardeners')->where('nb_users_max', '>', 'gardeners_count');
+        return $this->attributes['name'] = $this->nbValidGardeners();
     }
 
-    public function getAvailables()
-    {
-        $potagers = $this->withCount('gardeners')->get();
-        return $potagers->filter(function($potager, $key){
-            return $potager->nb_users_max > $potager->gardeners_count;
-        });
-    }
 
     // nb de jardiniers
     public function nbGardeners() 
     {
         return $this->gardeners()->count();
     }
+    public function nbValidGardeners() 
+    {
+        return $this->gardeners()->valid()->count();
+    }
 
     //places de jardiniers restantes
     public function remainingGardeners() 
     {
-        return $this->nb_users_max - $this->nbGardeners();
+        return $this->nb_users_max - $this->nbValidGardeners();
     }
 
     // places de jardiniers restantes en texte

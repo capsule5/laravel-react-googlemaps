@@ -21,7 +21,7 @@ class PotagerController extends Controller
     {
         return Potager::valid()
         ->with('owners', 'gardeners')
-        ->withCount('gardeners')
+        // ->withCount('gardeners')
         ->orderBy('updated_at', 'desc')
         ->get();
 
